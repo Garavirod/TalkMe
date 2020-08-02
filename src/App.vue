@@ -1,32 +1,49 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+
+    <!-- App.vue -->
+
+<v-app>
+  <v-navigation-drawer app v-if="false">
+    <h1>CHAT</h1>
+  </v-navigation-drawer>
+
+  <v-app-bar 
+    app
+    absolute
+    color="#7fdbda"
+    elevate-on-scroll
+    scroll-target="#scrolling-techniques-7"
+  >
+     <v-toolbar-title><h1 class="fontTitle">TalkMe</h1></v-toolbar-title>
+     <!-- <v-img id="iconTalkme" src="@/assets/talkme.png"></v-img> -->
+     <v-spacer></v-spacer>
+      <v-btn depressed color="#ade498">Login</v-btn>          
+  </v-app-bar>
+
+  <!-- Sizes your content based upon application components -->
+  <v-main>
+    <!-- Provides the application the proper gutter -->
+    <v-container fluid  class="ma-0 pa-0">
+      <!-- If using vue-router -->
+      <router-view></router-view>
+    </v-container>
+  </v-main>
+
+  <v-footer app>
+    <!-- -->
+  </v-footer>
+</v-app>
+  
 </template>
 
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  .fontTitle{
+    font-family: 'Anton', sans-serif;
+    color: #424242;
+  }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  #iconTalkme{
+    width: 50px;
+  }
 </style>
