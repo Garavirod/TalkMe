@@ -506,9 +506,12 @@ footer {
 
 <script>
 // @ is an alias to /src
-export default {
+
+export default {  
   name: "Home",
-  components: {},
+  components: {
+    
+  },
   data: ()=>({
     sections :[
       {
