@@ -1,0 +1,77 @@
+<template>
+  <v-container>
+    <v-alert border="left" colored-border color="#febf63" elevation="2">
+      <v-row class="headerSections ma-4">
+        <v-col cols="12">
+          <h2>Sections</h2>
+        </v-col>
+        <v-col cols="12" class="welcome">
+          <h3>wellcome: @User</h3>
+        </v-col>
+        <v-col>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic debitis labore velit numquam sit eveniet praesentium harum vel ratione nemo possimus incidunt, officia doloribus voluptatibus animi optio reiciendis! Ipsa, beatae.</p>
+        </v-col>
+      </v-row>
+    </v-alert>
+    <v-row
+      class="section rounded-md ma-2 pa-2"
+      justify="space-around"
+      v-for="sec in sections"
+      :key="sec.id"
+    >
+      <v-col class="col-16">
+        <div>
+          <v-img :src="sec.img" aspect-ratio="1.7"></v-img>
+        </div>
+      </v-col>
+      <v-col class="col-6">
+        <h4 class="titleSection">{{sec.name}}</h4>
+        <hr class="ma-3 divider" />
+        <p>
+          <span>
+            <v-icon>mdi-checkbox-multiple-blank-circle</v-icon>
+          </span> ipsum dolor sit amet, consectetur adipisicing elit. Veritatis magnam quibusdam, illo ut ad, ea amet officia sed, pariatur tempora voluptatem iure sapiente reiciendis eum earum fugiat? Corrupti, magni recusandae!
+        </p>
+        <p>
+          <span>
+            <v-icon>mdi-checkbox-multiple-blank-circle</v-icon>
+          </span> {{sec.description}}
+        </p>
+        <div class="my-2">
+          <v-btn large color="#ede682">Go</v-btn>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<style>
+.section {
+  background-color: #7fdbda;
+}
+
+.titleSection {
+  font-size: 30px;
+  color: #424242;
+}
+
+.divider {
+  border-style: none;
+  height: 5px;
+  background-color: #febf63;
+}
+</style>
+
+<script>
+import { mapState } from "vuex";
+export default {
+  name: "Sections",
+  computed: {
+    ...mapState(["sections"])
+  },
+  components: {},
+  data() {
+    return {};
+  }
+};
+</script>

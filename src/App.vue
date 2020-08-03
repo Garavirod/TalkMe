@@ -1,7 +1,7 @@
 <template>
 <v-app>
-  <v-navigation-drawer app v-if="false">
-    <h1>CHAT</h1>
+  <v-navigation-drawer app v-if="true">
+    <ChatList/>
   </v-navigation-drawer>
   <Navbar/>
   <v-main>
@@ -19,9 +19,11 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import ChatList from "@/components/ChatList.vue";
 export default {
   components:{
     Navbar,
+    ChatList,
   }
 }
 </script>
