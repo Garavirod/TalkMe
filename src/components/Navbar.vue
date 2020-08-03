@@ -86,10 +86,10 @@
             <v-container>
               <v-row>
                 <v-col cols="12">
-                  <v-text-field label="Username or Email" required></v-text-field>
+                  <v-text-field label="Username or Email" required v-model="loginUser"></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field label="Password*" type="password" required></v-text-field>
+                  <v-text-field label="Password*" type="password" v-model="loginPass" required></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
@@ -97,7 +97,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="#febf63" @click="dialogLogin = false">Close</v-btn>
-            <v-btn color="#ade498" @click="dialogLogin = false" :disabled="!valid2">Log in</v-btn>
+            <v-btn color="#ade498" @click="dialogLogin = false" :disabled="isEmptyForm">Log in</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -125,7 +125,6 @@ export default {
     dialogLogin: false,
     languages: ["Méxio", "Turky", "UK", "Colombia", "Brazil", "China", "Japan"],
     valid: true,
-    valid2:true,
     name: "",
     nameRules: [
       v => !!v || "Name is required",
@@ -140,6 +139,8 @@ export default {
     show1: false,
     password: "Password1",
     password2:"Password2",
+    loginUser:"",
+    loginPass:"",
     rules: {
       required: value => !!value || "Required.",
       min: v => v.length >= 8 || "Min 8 characters",
@@ -152,6 +153,14 @@ export default {
       this.$refs.form.validate();
     },
     
+  },
+  computed:{
+    isEmptyForm(){
+      if(this.loginUser != "" && this.loginPass != "")
+        return false;
+      else
+        return true;
+    }
   }
 };
 </script>
