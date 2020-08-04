@@ -50,6 +50,10 @@
   background-color: #7fdbda;
 }
 
+.containerSections{
+  background-color: #424242;
+}
+
 .titleSection {
   font-size: 30px;
   color: #424242;

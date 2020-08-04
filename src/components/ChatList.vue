@@ -1,7 +1,7 @@
 <template>
-  <v-card class="mx-auto" max-width="400">
+  <v-card class="mx-auto white--text" max-width="400" color="#424242">
     <div color="#7fdbda">
-      <v-card-title class="blak--text font-weight-black">New chat</v-card-title>
+      <v-card-title class="white--text font-weight-black">New chat</v-card-title>
       <v-card-text class="pt-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</v-card-text>
     </div>
 
@@ -15,7 +15,7 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.user }}</v-list-item-title>
+            <v-list-item-title class="white--text">{{ item.user }}</v-list-item-title>
           </v-list-item-content>
 
           <v-list-item-action>

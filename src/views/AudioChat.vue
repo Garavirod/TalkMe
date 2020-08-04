@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row class="containerAudioChat pa-2 ma-1">
       <v-col class="col-6">
         <h1>Audio chat</h1>
         <v-row color="red">
@@ -17,7 +17,7 @@
           </v-col>
           <v-col class="col-12">
             <v-btn color="#ede682">
-              chenge
+              change
               <v-icon class="ma-1">mdi-reload</v-icon>
             </v-btn>
           </v-col>
@@ -33,9 +33,9 @@
         </v-row>
       </v-col>
       <v-col>
-        <h1>Messages</h1>
+        <!-- <h1>Messages</h1> -->
         <v-card class="mx-auto" max-width="500">
-          <v-card-title class="white--text orange darken-4">
+          <v-card-title class="white--text">
             <v-col class="col-12 text-center">
               <v-btn class="mr-2" color="#febf63" fab x-small dark>
                 <v-icon>mdi-near-me</v-icon>
@@ -51,43 +51,116 @@
 
           <v-card-text
             class="pt-4"
-          >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi nobis a at voluptates culpa optio amet! Inventore deserunt voluptatem maxime a veniam placeat, eos impedit nulla quos? Officiis, aperiam ducimus.</v-card-text>
+          >Lorem ipsum dolor sit, amet Inventore deserunt voluptatem maxime a veniam placeat, eos impedit nulla quos? Officiis, aperiam ducimus.</v-card-text>
 
           <v-divider></v-divider>
 
-          <v-virtual-scroll :items="items" :item-height="50" height="300">
+          <v-virtual-scroll :items="items" :item-height="80" height="300">
             <template v-slot="{ item }">
               <v-list-item>
                 <v-list-item-avatar>
-                  <v-avatar :color="item.color" size="56" class="white--text">{{ item.initials }}</v-avatar>
+                  <v-img :src="item.avatar"></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
-                  <v-list-item-title>{{ item.fullName }}</v-list-item-title>
+                  <audio src="audio.ogg" controls autoplay loop class="ml-2">
+                    <p>Tu navegador no implementa el elemento audio</p>
+                  </audio>
                 </v-list-item-content>
-
-                <v-list-item-action>
-                  <v-btn depressed small>
-                    View User
-                    <v-icon color="orange darken-4" right>mdi-open-in-new</v-icon>
-                  </v-btn>
-                </v-list-item-action>
               </v-list-item>
             </template>
           </v-virtual-scroll>
         </v-card>
-        <!-- <v-col>
-                <audio src="audio.ogg" controls autoplay loop class="ml-2">
-                  <p>Tu navegador no implementa el elemento audio</p>
-                </audio>
-        </v-col>-->
       </v-col>
     </v-row>
   </v-container>
 </template>
 
+<style>
+    .containerAudioChat{
+        background-color: #7fdbda;
+        border-radius: 10px;
+    }
+</style>
+
 <script>
 export default {
-  name: "AudioChat"
+  name: "AudioChat",
+  data() {
+    return {
+      items: [
+        {
+          user: "Julian",
+          active: true,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
+        },
+        {
+          user: "Julian",
+          active: false,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
+        },
+        {
+          user: "Julian",
+          active: true,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
+        },
+        {
+          user: "Julian",
+          active: false,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
+        },
+        {
+          user: "Julian",
+          active: true,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
+        },
+        {
+          user: "Julian",
+          active: false,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
+        },
+        {
+          user: "Julian",
+          active: true,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
+        },
+        {
+          user: "Julian",
+          active: false,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
+        },
+        {
+          user: "Julian",
+          active: true,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
+        },
+        {
+          user: "Julian",
+          active: false,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
+        },
+        {
+          user: "Julian",
+          active: true,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
+        },
+        {
+          user: "Julian",
+          active: false,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
+        },
+        {
+          user: "Julian",
+          active: true,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
+        },
+        {
+          user: "Julian",
+          active: false,
+          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
+        }
+      ]
+    };
+  }
 };
 </script>
