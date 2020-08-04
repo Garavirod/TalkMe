@@ -7,9 +7,8 @@
       <router-view></router-view>
     </v-container>
   </v-main>
-  <v-footer app>
-    <!-- -->
-  </v-footer>
+  <!-- <v-footer app v-if="false">
+  </v-footer> -->
 </v-app>
   
 </template>

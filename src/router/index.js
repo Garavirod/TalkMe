@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Sections from '../views/Sections'
 import AudioChat from '../views/AudioChat'
+import DescribePic from '../views/DescribePic';
+
 
 Vue.use(VueRouter)
 
@@ -20,6 +22,11 @@ const routes = [{
         path: '/audio-chat',
         name: 'AudioChat',
         component: AudioChat
+    },
+    {
+        path: '/describe-pictures',
+        name: 'DescribePic',
+        component: DescribePic
     }
 
 ]
