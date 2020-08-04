@@ -1,6 +1,7 @@
 <template>
-  <v-container>
-    <v-row class="containerAudioChat pa-2 ma-1">
+  <v-container class="containerAudioChat">
+    <v-row class="pa-2 ma-0 sectionControls">
+      <!-- Instructions -->
       <v-col class="col-6">
         <h1>Audio chat</h1>
         <v-row color="red">
@@ -32,8 +33,8 @@
           </v-col>
         </v-row>
       </v-col>
+      <!-- Audio messages -->
       <v-col>
-        <!-- <h1>Messages</h1> -->
         <v-card class="mx-auto" max-width="500">
           <v-card-title class="white--text">
             <v-col class="col-12 text-center">
@@ -55,7 +56,7 @@
 
           <v-divider></v-divider>
 
-          <v-virtual-scroll :items="items" :item-height="80" height="300">
+          <v-virtual-scroll :items="messages" :item-height="80" height="300">
             <template v-slot="{ item }">
               <v-list-item>
                 <v-list-item-avatar>
@@ -78,17 +79,22 @@
 
 <style>
     .containerAudioChat{
-        background-color: #7fdbda;
-        border-radius: 10px;
+        background-color: #424242;
+        /* border-radius: 10px; */
+    }
+
+    .sectionControls{
+      background-color: #ffff;
     }
 </style>
 
 <script>
+import {mapMutations, mapState} from 'vuex';
 export default {
   name: "AudioChat",
   data() {
     return {
-      items: [
+      messages: [
         {
           user: "Julian",
           active: true,
@@ -161,6 +167,22 @@ export default {
         }
       ]
     };
-  }
+  },
+  computed: {
+    ...mapState(['chatList'])
+  },
+  methods:{
+    ...mapMutations(["setChatList"]),
+  },
+  mounted() {
+    this.setChatList(true);    
+    console.log(this.chatList);
+    
+  },
+  beforeDestroy() {
+    this.setChatList(false);
+    console.log(this.chatList);
+    
+  },
 };
 </script>

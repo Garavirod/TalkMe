@@ -12,7 +12,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn depressed color="#febf63" class="ma-2" @click.prevent="dialog=!dialog">Register</v-btn>
-      <v-btn depressed color="#ade498" @click.prevent="dialogLogin=!dialogLogin">Login</v-btn>
+      <v-btn depressed color="#ade498" @click.prevent="dialogLogin=!dialogLogin">Login</v-btn>      
     </v-app-bar>
     <!-- MODAL -->
     <v-row justify="center">
@@ -23,11 +23,8 @@
           </v-card-title>
           <v-card-text>
             <v-container>
-              <v-form ref="form" v-model="valid" :lazy-validation="lazy">
-                <v-text-field                 
-                  label="Username"
-                  required
-                ></v-text-field>
+              <v-form ref="form" v-model="valid">
+                <v-text-field label="Username" required></v-text-field>
 
                 <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
 
@@ -43,7 +40,7 @@
                   @click:append="show1 = !show1"
                 ></v-text-field>
 
-                 <v-text-field
+                <v-text-field
                   v-model="password2"
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                   :rules="[rules.required, rules.min]"
@@ -53,14 +50,14 @@
                   hint="At least 8 characters"
                   counter
                   @click:append="show1 = !show1"
-                ></v-text-field>                
+                ></v-text-field>
 
                 <v-checkbox
                   v-model="checkbox"
                   :rules="[v => !!v || 'You must agree to continue!']"
                   label="Do you agree?"
                   required
-                ></v-checkbox>                
+                ></v-checkbox>
               </v-form>
             </v-container>
             <small>*indicates required field</small>
@@ -138,9 +135,9 @@ export default {
     checkbox: false,
     show1: false,
     password: "Password1",
-    password2:"Password2",
-    loginUser:"",
-    loginPass:"",
+    password2: "Password2",
+    loginUser: "",
+    loginPass: "",
     rules: {
       required: value => !!value || "Required.",
       min: v => v.length >= 8 || "Min 8 characters",
@@ -151,15 +148,12 @@ export default {
     validate() {
       this.dialog = false;
       this.$refs.form.validate();
-    },
-    
+    }
   },
-  computed:{
-    isEmptyForm(){
-      if(this.loginUser != "" && this.loginPass != "")
-        return false;
-      else
-        return true;
+  computed: {
+    isEmptyForm() {
+      if (this.loginUser != "" && this.loginPass != "") return false;
+      else return true;
     }
   }
 };

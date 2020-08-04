@@ -1,13 +1,15 @@
 <template>
-  <v-card class="mx-auto white--text" max-width="400" color="#424242">
+<v-navigation-drawer app>
+    <v-card class="mx-auto white--text" max-width="400" color="#424242">
     <div color="#7fdbda">
-      <v-card-title class="white--text font-weight-black">New chat</v-card-title>
-      <v-card-text class="pt-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</v-card-text>
+      <v-card-title class="white--text font-weight-black">People active</v-card-title>
+      <!-- <v-card-text class="pt-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</v-card-text> -->
+      <v-btn to="/sections" class="ma-2" depressed color="#ade498">Back to sections</v-btn>
     </div>
 
     <v-divider></v-divider>
 
-    <v-virtual-scroll :items="items" :item-height="50" height="500">
+    <v-virtual-scroll :items="actives" :item-height="50" height="500">
       <template v-slot="{ item }">
         <v-list-item>
           <v-list-item-avatar>
@@ -19,7 +21,7 @@
           </v-list-item-content>
 
           <v-list-item-action>
-            <v-btn depressed small>
+            <v-btn depressed icon>
               <v-icon :color="item.active ? '#ade498' : 'grey'">mdi-message</v-icon>
             </v-btn>
           </v-list-item-action>
@@ -27,12 +29,14 @@
       </template>
     </v-virtual-scroll>
   </v-card>
+</v-navigation-drawer> 
+
 </template>
 
 <script>
 export default {
   data: () => ({
-    items: [
+    actives: [
       {
         user: "Julian",
         active: false,

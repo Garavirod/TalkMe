@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-alert border="left" colored-border color="#febf63" elevation="2">
+  <v-container fluid class="ma-0 pa-4 containerSection">
+    <v-alert border="left" colored-border color="#febf63" elevation="2" class="ma-3">
       <v-row class="headerSections ma-4">
         <v-col cols="12">
           <h2>Sections</h2>
@@ -14,14 +14,14 @@
       </v-row>
     </v-alert>
     <v-row
-      class="section rounded-md ma-2 pa-2"
+      class="section rounded-md ma-4 pa-2"
       justify="space-around"
       v-for="sec in sections"
       :key="sec.id"
     >
-      <v-col class="col-16">
+      <v-col class="col-4">
         <div>
-          <v-img :src="sec.img" aspect-ratio="1.7"></v-img>
+          <v-img :src="sec.img" aspect-ratio="1.7" class="rounded-lg"></v-img>
         </div>
       </v-col>
       <v-col class="col-6">
@@ -38,7 +38,7 @@
           </span> {{sec.description}}
         </p>
         <div class="my-2">
-          <v-btn large color="#ede682">Go</v-btn>
+          <v-btn large color="#ede682" :to="sec.path">Go</v-btn>
         </div>
       </v-col>
     </v-row>
@@ -47,10 +47,11 @@
 
 <style>
 .section {
-  background-color: #7fdbda;
+  background: rgb(255,255,255);
+background: linear-gradient(141deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 48%, rgba(127,219,218,1) 48%);
 }
 
-.containerSections{
+.containerSection{
   background-color: #424242;
 }
 
