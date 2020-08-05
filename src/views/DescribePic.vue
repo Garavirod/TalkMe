@@ -1,9 +1,9 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col class="col-4">
+  <v-container class="ma-0 pa-0 containerDescription" fluid>
+    <v-row class="sectionDescribe ma-2">
+      <v-col class="col-4 instructions pa-3">
         <h3>Describe pictures</h3>
-        <v-row color="red">
+        <v-row >
           <v-col class="col-12">
             <p>
               <span>
@@ -15,8 +15,8 @@
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente dolore veritatis quibusdam, molestias similique blanditiis? Sint atque dolores magni possimus, porro laudantium. Laborum cupiditate, dolorum vero distinctio quas alias modi!</p>
             </div>
           </v-col>
-          <h3>Notes</h3>
           <v-col class="col-12">
+          <h3>Notes</h3>
             <p>
               <span>
                 <v-icon>mdi-grease-pencil</v-icon>
@@ -27,11 +27,15 @@
           </v-col>
         </v-row>
       </v-col>
-      <!-- Pcture -->
-      <v-col class="col-5">
-        <h3>Picture</h3>
+      <!-- Pcture section -->
+      <v-col class="col-8">
+        <h3>Picture</h3>        
+        <!-- Audio controls -->
         <v-row>
-          <v-col class="col-6 text-center">
+          <v-col class="col-3">
+            <v-btn to="/sections" class="ma-2" depressed color="#ade498">Back to sections</v-btn>
+          </v-col>
+          <v-col class="col-3 text-center">
             <v-btn class="mr-2" color="#febf63" fab x-small dark>
               <v-icon>mdi-stop</v-icon>
             </v-btn>
@@ -48,6 +52,7 @@
             </audio>
           </v-col>
         </v-row>
+        <!-- Image -->
         <v-row align="center" justify="center">
           <v-img
             src="https://bad.src/not/valid"
@@ -55,7 +60,7 @@
             aspect-ratio="1"
             class="grey lighten-2"
             max-width="800"
-            max-height="300"
+            max-height="320"
           >
             <template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
@@ -68,6 +73,14 @@
     </v-row>
   </v-container>
 </template>
+
+
+<style>
+  .instructions{
+    background-color: #7fdbda;
+    border-radius: 5px;
+  }
+</style>
 
 <script>
 export default {
