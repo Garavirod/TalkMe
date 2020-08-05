@@ -5,6 +5,7 @@ import Sections from '../views/Sections'
 import AudioChat from '../views/AudioChat'
 import DescribePic from '../views/DescribePic';
 import Reading from '../views/ReadingLoud';
+import SpeakingFight from '../views/SpeakingFight';
 
 
 Vue.use(VueRouter)
@@ -33,6 +34,11 @@ const routes = [{
         path: '/reading',
         name: 'ReadingLoud',
         component: Reading
+    },
+    {
+        path: '/speaking-fight',
+        name: 'SpeakingFight',
+        component: SpeakingFight
     }
 
 ]

@@ -1,36 +1,35 @@
 <template>
-<v-navigation-drawer app>
+  <v-navigation-drawer app>
     <v-card class="mx-auto white--text" max-width="400" color="#424242">
-    <div color="#7fdbda">
-      <v-card-title class="white--text font-weight-black">People active</v-card-title>
-      <!-- <v-card-text class="pt-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</v-card-text> -->
-            <v-btn to="/sections" small depressed color="#ade498">Back to sections</v-btn>
-    </div>
+      <div color="#7fdbda">
+        <v-card-title class="white--text font-weight-black">People active</v-card-title>
+        <!-- <v-card-text class="pt-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</v-card-text> -->
+        <v-btn to="/sections" small depressed color="#ade498">Back to sections</v-btn>
+      </div>
 
-    <v-divider></v-divider>
+      <v-divider></v-divider>
 
-    <v-virtual-scroll :items="actives" :item-height="50" height="500">
-      <template v-slot="{ item }">
-        <v-list-item>
-          <v-list-item-avatar>
-            <v-img :src="item.avatar"></v-img>
-          </v-list-item-avatar>
+      <v-virtual-scroll :items="actives" :item-height="50" height="500">
+        <template v-slot="{ item }">
+          <v-list-item>
+            <v-list-item-avatar>
+              <v-img :src="item.avatar"></v-img>
+            </v-list-item-avatar>
 
-          <v-list-item-content>
-            <v-list-item-title class="white--text">{{ item.user }}</v-list-item-title>
-          </v-list-item-content>
+            <v-list-item-content>
+              <v-list-item-title class="white--text">{{ item.user }}</v-list-item-title>
+            </v-list-item-content>
 
-          <v-list-item-action>
-            <v-btn depressed icon>
-              <v-icon :color="item.active ? '#ade498' : 'grey'">mdi-message</v-icon>
-            </v-btn>
-          </v-list-item-action>
-        </v-list-item>
-      </template>
-    </v-virtual-scroll>
-  </v-card>
-</v-navigation-drawer> 
-
+            <v-list-item-action>
+              <v-btn depressed icon>
+                <v-icon :color="item.active ? '#ade498' : 'grey'">mdi-message</v-icon>
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item>
+        </template>
+      </v-virtual-scroll>
+    </v-card>
+  </v-navigation-drawer>
 </template>
 
 <script>
