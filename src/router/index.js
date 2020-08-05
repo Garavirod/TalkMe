@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Sections from '../views/Sections'
 import AudioChat from '../views/AudioChat'
 import DescribePic from '../views/DescribePic';
+import Reading from '../views/ReadingLoud';
 
 
 Vue.use(VueRouter)
@@ -27,6 +28,11 @@ const routes = [{
         path: '/describe-pictures',
         name: 'DescribePic',
         component: DescribePic
+    },
+    {
+        path: '/reading',
+        name: 'ReadingLoud',
+        component: Reading
     }
 
 ]
