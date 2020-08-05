@@ -33,7 +33,7 @@
         <!-- Audio controls -->
         <v-row>
           <v-col class="col-3">
-            <v-btn to="/sections" class="ma-2" depressed color="#ade498">Back to sections</v-btn>
+            <v-btn to="/sections" small depressed color="#ade498">Back to sections</v-btn>
           </v-col>
           <v-col class="col-3 text-center">
             <v-btn class="mr-2" color="#febf63" fab x-small dark>

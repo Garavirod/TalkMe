@@ -15,13 +15,7 @@
             <div>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente dolore veritatis quibusdam, molestias similique blanditiis? Sint atque dolores magni possimus, porro laudantium. Laborum cupiditate, dolorum vero distinctio quas alias modi!</p>
             </div>
-          </v-col>
-          <v-col class="col-12">
-            <v-btn color="#ede682">
-              change
-              <v-icon class="ma-1">mdi-reload</v-icon>
-            </v-btn>
-          </v-col>
+          </v-col>          
           <v-col class="col-12">
             <p>
               <span>
@@ -79,7 +73,7 @@
 
 <style>
     .containerAudioChat{
-        background-color: #424242;
+        background-color: #ffff;
         /* border-radius: 10px; */
     }
 

@@ -4,7 +4,7 @@
     <div color="#7fdbda">
       <v-card-title class="white--text font-weight-black">People active</v-card-title>
       <!-- <v-card-text class="pt-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</v-card-text> -->
-      <v-btn to="/sections" class="ma-2" depressed color="#ade498">Back to sections</v-btn>
+            <v-btn to="/sections" small depressed color="#ade498">Back to sections</v-btn>
     </div>
 
     <v-divider></v-divider>
