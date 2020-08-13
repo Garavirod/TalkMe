@@ -1,60 +1,9 @@
 <template>
-  <v-container class="ma-0 pa-0 containerDescription" fluid>
-    <v-row class="sectionDescribe ma-2">
-      <v-col class="col-4 instructions pa-3">
-        <h3>Describe pictures</h3>
-        <v-row >
-          <v-col class="col-12">
-            <p>
-              <span>
-                <v-icon>mdi-checkbox-multiple-blank-circle</v-icon>
-              </span>
-              Conversation topic
-            </p>
-            <div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente dolore veritatis quibusdam, molestias similique blanditiis? Sint atque dolores magni possimus, porro laudantium. Laborum cupiditate, dolorum vero distinctio quas alias modi!</p>
-            </div>
-          </v-col>
-          <v-col class="col-12">
-          <h3>Notes</h3>
-            <p>
-              <span>
-                <v-icon>mdi-grease-pencil</v-icon>
-              </span>
-              Write your notes before speaking
-            </p>
-            <v-textarea solo auto-grow name="input-7-4" label="Notes"></v-textarea>
-          </v-col>
-        </v-row>
-      </v-col>
-      <!-- Pcture section -->
-      <v-col class="col-8">
-        <h3>Picture</h3>        
-        <!-- Audio controls -->
-        <v-row>
-          <v-col class="col-3">
-            <v-btn to="/sections" small depressed color="#ade498">Back to sections</v-btn>
-          </v-col>
-          <v-col class="col-3 text-center">
-            <v-btn class="mr-2" color="#febf63" fab x-small dark>
-              <v-icon>mdi-stop</v-icon>
-            </v-btn>
-            <v-btn color="error" fab x-small dark class="mr-2">
-              <v-icon>mdi-microphone-settings</v-icon>
-            </v-btn>
-            <v-btn color="#febf63" fab x-small dark>
-              <v-icon>mdi-reload</v-icon>
-            </v-btn>
-          </v-col>
-          <v-col class="col-6 text-center">
-            <audio src="audio.ogg" controls autoplay loop class="ml-2">
-              <p>Tu navegador no implementa el elemento audio</p>
-            </audio>
-          </v-col>
-        </v-row>
-        <!-- Image -->
-        <v-row align="center" justify="center">
-          <v-img
+<SectionCard :nameSection="sectionName" :notes="true" :instructions="instructions">
+    <template v-slot:contentSection>
+       <v-row align="center" justify="center">
+         <v-col class="col-12 ma-2">
+            <v-img
             src="https://bad.src/not/valid"
             lazy-src="https://picsum.photos/id/11/100/60"
             aspect-ratio="1"
@@ -68,22 +17,33 @@
               </v-row>
             </template>
           </v-img>
+         </v-col>
         </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
+    </template>
+    <template v-slot:extract>
+      <p>{{extract}}</p>
+    </template>
+  </SectionCard>
 </template>
 
 
 <style>
-  .instructions{
-    background-color: #7fdbda;
-    border-radius: 5px;
-  }
 </style>
 
 <script>
+import SectionCard from "../components/SectionCard";
 export default {
-  name: "DescribePic"
+  name: "DescribePic",
+  components: {
+    SectionCard
+  },
+  data: () => ({
+    sectionName: "Describing pictures",
+    extract:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
+    instructions:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
+    
+  })
 };
 </script>

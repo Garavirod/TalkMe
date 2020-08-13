@@ -23,37 +23,37 @@
             <!-- Sections Left -->
             <v-col class="col-7 section2">
               <v-row class="headerSection2 ma-1">
-                <v-col class="col-6 text-center">
-                  <v-btn class="mr-2" color="#febf63" fab x-small dark>
+                <v-col class="col-12 text-center">
+                  <v-btn class="mr-2" color="#febf63" fab small dark>
                     <v-icon>mdi-near-me</v-icon>
                   </v-btn>
-                  <v-btn color="error" fab x-small dark class="mr-2">
+                  <v-btn color="error" fab small dark class="mr-2">
                     <v-icon>mdi-microphone-settings</v-icon>
                   </v-btn>
-                  <v-btn color="#febf63" fab x-small dark>
+                  <v-btn color="#febf63" fab small dark>
                     <v-icon>mdi-ear-hearing</v-icon>
                   </v-btn>
                 </v-col>
-                <v-col class="col-6 text-center">
+                <!-- <v-col class="col-6 text-center">
                   <audio src="audio.ogg" controls autoplay loop class="ml-2">
                     <p>Tu navegador no implementa el elemento audio</p>
                   </audio>
-                </v-col>
+                </v-col> -->
               </v-row>
               <slot name="contentSection"></slot>
             </v-col>
             <!-- Section Right -->
             <v-col class="col-5 section1 pa-5">
               <v-row>
-                <!-- EXTRACT SECTION -->
+                <!-- RUBRIC SECTION -->
                 <v-col class="col-12">
                   <p>
                     <span>
                       <v-icon>mdi-comment-text-outline</v-icon>
                     </span>
-                    Extract
+                    Rubric
                   </p>
-                  <v-btn class="mt-2 mb-3" color="#ede682" small>Change extract</v-btn>
+                  <v-btn class="mt-2 mb-3" color="#ede682" small>Change</v-btn>
                   <v-col class="col-12 Extract">
                     <slot name="extract"></slot>
                   </v-col>
@@ -111,7 +111,7 @@
 
 .Extract {
   background-color: #ffff;
-  overflow: scroll;
+  /* overflow: scroll; */
   max-height: 450px;
 }
 

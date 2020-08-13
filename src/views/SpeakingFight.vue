@@ -1,8 +1,5 @@
 <template>
-  <SectionCard 
-    :nameSection="sectionName" 
-    :notes="true"
-    :instructions="instructions">
+  <SectionCard :nameSection="sectionName" :notes="true" :instructions="instructions">
     <template v-slot:contentSection>
       <BoxMessages />
     </template>
@@ -24,8 +21,10 @@ export default {
   data() {
     return {
       sectionName: "Speaking Fight",
-      extract :'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.',
-      instructions :'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.',
+      extract:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
+      instructions:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae."
     };
   }
 };
