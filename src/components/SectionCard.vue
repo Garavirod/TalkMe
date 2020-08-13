@@ -20,7 +20,7 @@
       <v-card-text class="cardSection">
         <v-sheet max-width="95%" height="100vh" class="mx-auto">
           <v-row>
-            <!-- Sections 2 -->
+            <!-- Sections Left -->
             <v-col class="col-7 section2">
               <v-row class="headerSection2 ma-1">
                 <v-col class="col-6 text-center">
@@ -40,10 +40,12 @@
                   </audio>
                 </v-col>
               </v-row>
+              <slot name="contentSection"></slot>
             </v-col>
-            <!-- Section 1 -->
+            <!-- Section Right -->
             <v-col class="col-5 section1 pa-5">
               <v-row>
+                <!-- EXTRACT SECTION -->
                 <v-col class="col-12">
                   <p>
                     <span>
@@ -51,10 +53,13 @@
                     </span>
                     Extract
                   </p>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod possimus itaque culpa maxime, optio est voluptatibus exercitationem assumenda similique, voluptatum quis enim at cumque temporibus pariatur illum, harum sequi quaerat magni libero incidunt. Sunt quos deserunt quia nostrum labore debitis.</p>
-                  <v-btn color="#ede682" small>Change extract</v-btn>
+                  <v-btn class="mt-2 mb-3" color="#ede682" small>Change extract</v-btn>
+                  <v-col class="col-12 Extract">
+                    <slot name="extract"></slot>
+                  </v-col>
                 </v-col>
-                <v-col class="col-12">
+                <!-- WRITE SECTION -->
+                <v-col class="col-12" v-if="notes">
                   <p>
                     <span>
                       <v-icon>mdi-grease-pencil</v-icon>
@@ -73,10 +78,8 @@
     <v-row justify="center">
       <v-dialog v-model="dialog" persistent max-width="400">
         <v-card>
-          <v-card-title class="headline">Instrucions for speaking fight</v-card-title>
-          <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
-          <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
-          <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
+          <v-card-title class="headline">Instrucions</v-card-title>
+          <v-card-text>{{instructions}}</v-card-text>         
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="green darken-1" text @click="dialog = false">Agree</v-btn>
@@ -106,6 +109,12 @@
   background-color: #fff;
 }
 
+.Extract {
+  background-color: #ffff;
+  overflow: scroll;
+  max-height: 450px;
+}
+
 /* .headerSection2{
     background-color: #ade498;
 } */
@@ -114,10 +123,10 @@
 <script>
 export default {
   name: "SectionCard",
-  props: ["nameSection"],
+  props: ["nameSection","notes","instructions"],
   data() {
     return {
-      dialog: false
+      dialog: false,
     };
   }
 };
