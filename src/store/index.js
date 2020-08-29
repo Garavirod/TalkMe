@@ -41,12 +41,33 @@ export default new Vuex.Store({
                 component: ''
             }
         ],
-        chatList: false,
+        // Chatlist visible
+        chatList: false,        
+        // Data progress user
+        progress : [
+            {
+                tag:'Victories',
+                img : require('../assets/victories.png'),
+                addsup : 0
+
+            },
+            {
+                tag:'Fails',
+                img : require('../assets/fails.png'),
+                addsup : 0
+            },
+            {
+                tag:'Medals',
+                img : require('../assets/medals.png'),
+                addsup : 0
+            },
+        ]
     },
     mutations: {
         setChatList(state, value) {
             state.chatList = value;
         },
+
     },
     actions: {},
     modules: {}
