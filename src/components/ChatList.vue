@@ -1,132 +1,143 @@
 <template>
-  <v-navigation-drawer app>
-    <v-card class="mx-auto white--text" max-width="400" color="#424242">
-      <div color="#7fdbda">
-        <v-card-title class="white--text font-weight-black">People active</v-card-title>
-        <!-- <v-card-text class="pt-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</v-card-text> -->
-        <v-btn to="/sections" small depressed color="#ade498">Back to sections</v-btn>
-      </div>
+<v-navigation-drawer app>
+    <v-card class="mx-auto" max-width="400">
+        <div color="#7fdbda" class="text-center">
+            <v-card-title class="black--text ">People active now</v-card-title>
+        </div>
 
-      <v-divider></v-divider>
+        <v-divider></v-divider>
+        <div id="ListActives">
+            <v-list v-for="item in actives" :key="item.id">
+                <v-list-item id="itemActive" class="mt-0">
+                    <v-list-item-avatar>
+                        <v-img :src="item.avatar"></v-img>
+                    </v-list-item-avatar>
 
-      <v-virtual-scroll :items="actives" :item-height="50" height="500">
-        <template v-slot="{ item }">
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img :src="item.avatar"></v-img>
-            </v-list-item-avatar>
+                    <v-list-item-content>
+                        <v-list-item-title class="black--text">{{
+                item.user
+              }}</v-list-item-title>
+                    </v-list-item-content>
 
-            <v-list-item-content>
-              <v-list-item-title class="white--text">{{ item.user }}</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>
-              <v-btn depressed icon>
-                <v-icon :color="item.active ? '#ade498' : 'grey'">mdi-message</v-icon>
-              </v-btn>
-            </v-list-item-action>
-          </v-list-item>
-        </template>
-      </v-virtual-scroll>
+                    <v-list-item-action>
+                        <v-icon :color="item.active ? '#ade498' : 'grey'">mdi-message</v-icon>
+                    </v-list-item-action>
+                </v-list-item>
+            </v-list>
+        </div>
     </v-card>
-  </v-navigation-drawer>
+</v-navigation-drawer>
 </template>
+
+<style>
+#itemActive:hover {
+    background-color: rgb(221, 224, 214);
+    cursor: pointer;
+}
+
+#itemActive:active {
+    background-color: rgb(135, 221, 236);
+}
+</style>
 
 <script>
 export default {
-  data: () => ({
-    actives: [
-      {
-        user: "Julian",
-        active: false,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg"
-      },
-      {
-        user: "Julian",
-        active: true,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg"
-      },
-      {
-        user: "Julian",
-        active: false,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg"
-      },
-      {
-        user: "Julian",
-        active: false,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
-      },
-      {
-        user: "Julian",
-        active: true,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
-      },
-      {
-        user: "Julian",
-        active: false,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg"
-      },
-      {
-        user: "Julian",
-        active: false,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
-      },
-      {
-        user: "Julian",
-        active: true,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
-      },
-      {
-        user: "Julian",
-        active: false,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
-      },
-      {
-        user: "Julian",
-        active: true,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
-      },
-      {
-        user: "Julian",
-        active: false,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
-      },
-      {
-        user: "Julian",
-        active: true,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg"
-      },
-      {
-        user: "Julian",
-        active: false,
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg"
-      }
-    ]
-  }),
+    data: () => ({
+        actives: [{
+                user: "Julian",
+                active: false,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+            },
+            {
+                user: "Julian",
+                active: true,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+            },
+            {
+                user: "Julian",
+                active: false,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
+            },
+            {
+                user: "Julian",
+                active: false,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+            },
+            {
+                user: "Julian",
+                active: true,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+            },
+            {
+                user: "Julian",
+                active: false,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+            },
+            {
+                user: "Julian",
+                active: false,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+            },
+            {
+                user: "Julian",
+                active: true,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+            },
+            {
+                user: "Julian",
+                active: false,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+            },
+            {
+                user: "Julian",
+                active: true,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+            },
+            {
+                user: "Julian",
+                active: false,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+            },
+            {
+                user: "Julian",
+                active: true,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+            },
+            {
+                user: "Julian",
+                active: false,
+                avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+            },
+        ],
+    }),
 
-  computed: {
-    items() {
-      const namesLength = this.names.length;
-      const surnamesLength = this.surnames.length;
-      const colorsLength = this.colors.length;
+    computed: {
+        items() {
+            const namesLength = this.names.length;
+            const surnamesLength = this.surnames.length;
+            const colorsLength = this.colors.length;
 
-      return Array.from({ length: 10000 }, () => {
-        const name = this.names[this.genRandomIndex(namesLength)];
-        const surname = this.surnames[this.genRandomIndex(surnamesLength)];
+            return Array.from({
+                    length: 10000,
+                },
+                () => {
+                    const name = this.names[this.genRandomIndex(namesLength)];
+                    const surname = this.surnames[this.genRandomIndex(surnamesLength)];
 
-        return {
-          color: this.colors[this.genRandomIndex(colorsLength)],
-          fullName: `${name} ${surname}`,
-          initials: `${name[0]} ${surname[0]}`
-        };
-      });
-    }
-  },
+                    return {
+                        color: this.colors[this.genRandomIndex(colorsLength)],
+                        fullName: `${name} ${surname}`,
+                        initials: `${name[0]} ${surname[0]}`,
+                    };
+                }
+            );
+        },
+    },
 
-  methods: {
-    genRandomIndex(length) {
-      return Math.ceil(Math.random() * (length - 1));
-    }
-  }
+    methods: {
+        genRandomIndex(length) {
+            return Math.ceil(Math.random() * (length - 1));
+        },
+    },
 };
 </script>

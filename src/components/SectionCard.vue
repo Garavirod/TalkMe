@@ -12,13 +12,7 @@
             </div>
         </v-toolbar>
         <v-banner single-line>
-            <v-row v-for="p in progress" :key="p.id">>
-                <v-col class="col-3">
-                    <v-img :src="p.img" aspect-ratio="1"></v-img>
-                    {{ p.addsup }}
-                    {{ p.tag }}
-                </v-col>
-            </v-row>
+            New features
             <template v-slot:actions>
                 <v-btn color="#ede682" small @click="dialog = !dialog">Read instructions</v-btn>
             </template>
@@ -52,11 +46,15 @@
                                     <span>
                                         <v-icon>mdi-comment-text-outline</v-icon>
                                     </span>
-                                    Rubric
+                                    Topic
                                 </p>
-                                <v-btn class="mt-2 mb-3" color="#ede682" small>Change</v-btn>
                                 <v-col class="col-12 Extract">
                                     <slot name="extract"></slot>
+                                    <v-row class="text-center">
+                                        <v-col>
+                                            <v-btn class="mt-2 mb-3 text-center" color="#ede682" small>Change</v-btn>
+                                        </v-col>
+                                    </v-row>
                                 </v-col>
                             </v-col>
                             <!-- WRITE SECTION -->

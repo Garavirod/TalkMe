@@ -48,18 +48,18 @@ export default new Vuex.Store({
             {
                 tag:'Victories',
                 img : require('../assets/victories.png'),
-                addsup : 0
+                score : 0
 
             },
             {
                 tag:'Fails',
                 img : require('../assets/fails.png'),
-                addsup : 0
+                score : 0
             },
             {
                 tag:'Medals',
                 img : require('../assets/medals.png'),
-                addsup : 0
+                score : 0
             },
         ]
     },
