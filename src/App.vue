@@ -1,30 +1,30 @@
 <template>
 <v-app>
-  <ChatList app v-if="chatList"/>
-  <Navbar/>
-  <v-main>
-    <v-container fluid  class="ma-0 pa-0">
-      <router-view></router-view>
-    </v-container>
-  </v-main>
-  <!-- <v-footer app v-if="false">
+    <ChatList app v-if="chatList" class="ma-0 pa-0" />
+    <Navbar />
+    <v-main>
+        <v-container fluid class="ma-0 pa-0">
+            <router-view></router-view>
+        </v-container>
+    </v-main>
+    <!-- <v-footer app v-if="false">
   </v-footer> -->
 </v-app>
-  
 </template>
 
 <script>
-
 import Navbar from "@/components/Navbar.vue";
 import ChatList from "@/components/ChatList.vue";
-import { mapState } from 'vuex';
+import {
+    mapState
+} from 'vuex';
 export default {
-  components:{
-    Navbar,
-    ChatList,
-  },
-  computed:{
-    ...mapState(["chatList"]),
-  }
+    components: {
+        Navbar,
+        ChatList,
+    },
+    computed: {
+        ...mapState(["chatList"]),
+    }
 }
 </script>

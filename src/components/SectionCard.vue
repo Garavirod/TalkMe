@@ -12,13 +12,13 @@
             </div>
         </v-toolbar>
         <v-banner single-line>
-            New features
+            Enjoy to learn
             <template v-slot:actions>
-                <v-btn color="#ede682" small @click="dialog = !dialog">Read instructions</v-btn>
+                <v-btn color="#ede682" small depressed @click="dialog = !dialog">Read instructions</v-btn>
             </template>
         </v-banner>
         <v-card-text class="cardSection">
-            <v-sheet max-width="100%" height="100vh" class="mx-auto">
+            <v-sheet max-width="100%" class="mx-auto">
                 <slot name="SectionContent"></slot>
             </v-sheet>
         </v-card-text>

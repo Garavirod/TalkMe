@@ -1,31 +1,29 @@
 <template>
 <v-navigation-drawer app>
-    <v-card class="mx-auto" max-width="400">
+    <v-card max-width="500" class="mx-auto">
         <div color="#7fdbda" class="text-center">
             <v-card-title class="black--text ">People active now</v-card-title>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, est. Quas, officiis similique!</p>
+            <hr>
         </div>
 
-        <v-divider></v-divider>
-        <div id="ListActives">
-            <v-list v-for="item in actives" :key="item.id">
-                <v-list-item id="itemActive" class="mt-0">
-                    <v-list-item-avatar>
-                        <v-img :src="item.avatar"></v-img>
-                    </v-list-item-avatar>
+        <v-list>
+            <v-list-item v-for="item in actives" :key="item.id" id="itemActive">
+                <v-list-item-icon>
+                    <v-icon v-if="item.active" color="lime">mdi-message</v-icon>
+                </v-list-item-icon>
 
-                    <v-list-item-content>
-                        <v-list-item-title class="black--text">{{
-                item.user
-              }}</v-list-item-title>
-                    </v-list-item-content>
+                <v-list-item-content>
+                    <v-list-item-title v-text="item.user"></v-list-item-title>
+                </v-list-item-content>
 
-                    <v-list-item-action>
-                        <v-icon :color="item.active ? '#ade498' : 'grey'">mdi-message</v-icon>
-                    </v-list-item-action>
-                </v-list-item>
-            </v-list>
-        </div>
+                <v-list-item-avatar>
+                    <v-img :src="item.avatar"></v-img>
+                </v-list-item-avatar>
+            </v-list-item>
+        </v-list>
     </v-card>
+
 </v-navigation-drawer>
 </template>
 

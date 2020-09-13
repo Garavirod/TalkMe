@@ -7,7 +7,30 @@
                     <BoxMessages />
                 </v-col>
                 <v-col cols="12" lg="6">
-                    <h1>Topics</h1>
+                    <!--TOPIC CONVERASTION-->
+                    <v-row>
+                        <h3><span>
+                                <v-icon>mdi-lightbulb-on</v-icon>
+                            </span> Conversation topics</h3>
+                        <v-col cols="12">
+                            <v-card elevation="1" class="pa-3">
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim velit commodi dolorum delectus iusto eum dicta corrupti beatae. Quo facilis nemo eum, nesciunt similique ducimus eligendi nam perferendis vero molestiae.
+                            </v-card>
+                            <v-row class="text-center">
+                                <v-col cols="12">
+                                    <v-btn color="primary">change</v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <h3><span>
+                                <v-icon>mdi-pencil-box</v-icon>
+                            </span> Write your notes</h3>
+                        <v-col cols="12">
+                            <v-textarea solo name="input-7-4" label="write your ideas..."></v-textarea>
+                        </v-col>
+                    </v-row>
                 </v-col>
             </v-row>
         </v-container>
