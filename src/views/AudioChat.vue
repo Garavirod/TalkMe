@@ -3,10 +3,11 @@
     <template v-slot:SectionContent>
         <v-container fluid>
             <v-row>
-                <v-col cols="12" lg="6">
-                    <BoxMessages />
+                <v-col cols="12" lg="6" md="6" sm="12" xs="12">
+                    <List />
+                    <BoxMessages :speaker="speaker" />
                 </v-col>
-                <v-col cols="12" lg="6">
+                <v-col cols="12" lg="6" md="6" sm="12" xs="12">
                     <!--TOPIC CONVERASTION-->
                     <v-row>
                         <h3><span>
@@ -52,36 +53,39 @@
 <script>
 import SectionCard from "../components/SectionCard";
 import BoxMessages from "../components/BoxMessages";
-import {
-    mapMutations,
-    mapState
-} from "vuex";
+import List from "../components/List";
+// import {
+//     mapMutations,
+//     mapState
+// } from "vuex";
 export default {
     name: "AudioChat",
     components: {
         BoxMessages,
-        SectionCard
+        SectionCard,
+        List
     },
     data() {
         return {
             sectionName: "Audio chat",
             extract: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
-            instructions: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae."
+            instructions: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
+            speaker: "Rodrigo"
         };
     },
     computed: {
-        ...mapState(["chatList"])
+        // ...mapState(["chatList"])
     },
     methods: {
-        ...mapMutations(["setChatList"])
+        // ...mapMutations(["setChatList"])
     },
-    mounted() {
-        this.setChatList(true);
-        console.log(this.chatList);
-    },
-    beforeDestroy() {
-        this.setChatList(false);
-        console.log(this.chatList);
-    }
+    // mounted() {
+    //     this.setChatList(true);
+    //     console.log(this.chatList);
+    // },
+    // beforeDestroy() {
+    //     this.setChatList(false);
+    //     console.log(this.chatList);
+    // }
 };
 </script>

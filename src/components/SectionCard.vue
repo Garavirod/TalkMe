@@ -1,24 +1,20 @@
 <template>
 <v-container fluid class="containerSections">
-    <v-card class="ma-5">
-        <v-system-bar></v-system-bar>
-        <v-toolbar flat>
-            <v-toolbar-title>
-                <h2>{{ nameSection }}</h2>
-            </v-toolbar-title>
-            <v-spacer></v-spacer>
-            <div>
-                <v-btn to="/sections" small depressed color="#ade498">Back to sections</v-btn>
-            </div>
-        </v-toolbar>
-        <v-banner single-line>
-            Enjoy to learn
-            <template v-slot:actions>
-                <v-btn color="#ede682" small depressed @click="dialog = !dialog">Read instructions</v-btn>
-            </template>
-        </v-banner>
-        <v-card-text class="cardSection">
-            <v-sheet max-width="100%" class="mx-auto">
+    <v-card>
+        <!-- HEAD SECTION-->
+        <v-system-bar class="pa-3" height="70">
+            <v-row class="ma-3">
+                <v-col>
+                    <h1>{{ nameSection }}</h1>
+                </v-col>
+                <v-col>
+                    <v-btn color="#ede682" small depressed @click="dialog = !dialog">Read instructions</v-btn>
+                </v-col>
+            </v-row>
+        </v-system-bar>
+        <!--HERE GOES THE COMPONENT-->
+        <v-card-text>
+            <v-sheet max-width="100%">
                 <slot name="SectionContent"></slot>
             </v-sheet>
         </v-card-text>
@@ -49,6 +45,10 @@
 .section1 {
     background-color: aliceblue;
     height: 100vh;
+}
+
+.cardSection {
+    margin: auto;
 }
 
 /* .headerSection2{
