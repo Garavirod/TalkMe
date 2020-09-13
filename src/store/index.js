@@ -43,25 +43,16 @@ export default new Vuex.Store({
         ],
         // Chatlist visible
         chatList: false,        
-        // Data progress user
-        progress : [
-            {
-                tag:'Victories',
-                img : require('../assets/victories.png'),
-                score : 0
+        // Data progress user        
 
-            },
-            {
-                tag:'Fails',
-                img : require('../assets/fails.png'),
-                score : 0
-            },
-            {
-                tag:'Medals',
-                img : require('../assets/medals.png'),
-                score : 0
-            },
-        ]
+        userInfo:{
+            id:1,
+            username:'RodrigoGA',
+            age: 23,
+            country:'Mexico',
+            Choosen_lengages:['English','French'],
+            progress_app: {victories:23,fails:3,medals:5}
+        }
     },
     mutations: {
         setChatList(state, value) {

@@ -1,37 +1,29 @@
 <template>
 <v-container fluid class="ma-0 pa-4 containerSection">
-    <v-alert border="left" colored-border color="#febf63" elevation="2" class="ma-3">
-        <v-row class="headerSections ma-4">
-            <v-col cols="12">
-                <h2>Sections</h2>
-            </v-col>
-            <v-col cols="12" class="welcome">
-                <h3>wellcome: @User</h3>
-            </v-col>
-            <v-col>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic debitis labore velit numquam sit eveniet praesentium harum vel ratione nemo possimus incidunt, officia doloribus voluptatibus animi optio reiciendis! Ipsa, beatae.</p>
-            </v-col>
-        </v-row>
-    </v-alert>
+    <UserInformationVue />
     <v-row class="section rounded-md ma-4 pa-2" justify="space-around" v-for="sec in sections" :key="sec.id">
         <v-col class="col-4">
             <div>
                 <v-img :src="sec.img" aspect-ratio="1.7" class="rounded-lg"></v-img>
             </div>
-
         </v-col>
         <v-col class="col-6">
-            <h4 class="titleSection">{{sec.name}}</h4>
+            <h4 class="titleSection">{{ sec.name }}</h4>
             <hr class="ma-3 divider" />
             <p>
                 <span>
                     <v-icon>mdi-checkbox-multiple-blank-circle</v-icon>
-                </span> ipsum dolor sit amet, consectetur adipisicing elit. Veritatis magnam quibusdam, illo ut ad, ea amet officia sed, pariatur tempora voluptatem iure sapiente reiciendis eum earum fugiat? Corrupti, magni recusandae!
+                </span>
+                ipsum dolor sit amet, consectetur adipisicing elit. Veritatis magnam
+                quibusdam, illo ut ad, ea amet officia sed, pariatur tempora
+                voluptatem iure sapiente reiciendis eum earum fugiat? Corrupti, magni
+                recusandae!
             </p>
             <p>
                 <span>
                     <v-icon>mdi-checkbox-multiple-blank-circle</v-icon>
-                </span> {{sec.description}}
+                </span>
+                {{ sec.description }}
             </p>
             <div class="my-2">
                 <v-btn large color="#ede682" :to="sec.path">Go</v-btn>
@@ -44,7 +36,10 @@
 <style>
 .section {
     background: rgb(255, 255, 255);
-    background: linear-gradient(141deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 48%, rgba(127, 219, 218, 1) 48%);
+    background: linear-gradient(141deg,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 1) 48%,
+            rgba(127, 219, 218, 1) 48%);
 }
 
 .containerSection {
@@ -60,7 +55,6 @@
     border-style: none;
     height: 5px;
     background-color: #febf63;
-
 }
 </style>
 
@@ -68,14 +62,18 @@
 import {
     mapState
 } from "vuex";
+import UserInformationVue from '../components/UserInformation.vue';
+
 export default {
     name: "Sections",
     computed: {
-        ...mapState(["sections"])
+        ...mapState(["sections"]),
     },
-    components: {},
+    components: {
+        UserInformationVue,
+    },
     data() {
         return {};
-    }
+    },
 };
 </script>
