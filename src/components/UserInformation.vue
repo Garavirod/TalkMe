@@ -1,5 +1,5 @@
 <template>
-<v-alert border="left" colored-border color="#febf63" elevation="2" class="ma-3">
+<v-card elevation="2" class="ma-3">
     <v-container fluid>
         <v-row class="headerSections ma-4">
             <!--PERSONAL INFORMATION-->
@@ -82,10 +82,12 @@
                         <v-card class="ma-2">
                             <v-row class="text-center" v-for="it in progress" :key="it.tag">
                                 <v-col cols="12" sm="4" lg="4" xs="12">
-                                    <p>{{ it.tag }}</p>
+                                    <v-row align="center" justify="center">
+                                        <v-img :src="it.img" max-height="32" max-width="32" aspect-ratio="1"></v-img>
+                                    </v-row>
                                 </v-col>
                                 <v-col cols="12" sm="4" lg="4" xs="12">
-                                    <v-img :src="it.img" :width="32" :height="32" position="center"></v-img>
+                                    <p>{{ it.tag }}</p>
                                 </v-col>
                                 <v-col cols="12" sm="4" lg="4" xs="12">{{ it.score }}</v-col>
                             </v-row>
@@ -118,7 +120,7 @@
             </v-col>
         </v-row>
     </v-container>
-</v-alert>
+</v-card>
 </template>
 
 <script>

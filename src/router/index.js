@@ -6,6 +6,7 @@ import AudioChat from '../views/AudioChat'
 import DescribePic from '../views/DescribePic';
 import Reading from '../views/ReadingLoud';
 import SpeakingFight from '../views/SpeakingFight';
+import Welcome from '../views/Welcome'
 
 
 Vue.use(VueRouter)
@@ -39,6 +40,11 @@ const routes = [{
         path: '/speaking-fight',
         name: 'SpeakingFight',
         component: SpeakingFight
+    },
+    {
+        path: '/welcome',
+        name:'Welcome',
+        component:Welcome
     }
 
 ]

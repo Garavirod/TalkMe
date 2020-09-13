@@ -2,12 +2,12 @@
 <v-container fluid class="ma-0 pa-4 containerSection">
     <UserInformationVue />
     <v-row class="section rounded-md ma-4 pa-2" justify="space-around" v-for="sec in sections" :key="sec.id">
-        <v-col class="col-4">
+        <v-col cols="12" lg="4" sm="12">
             <div>
                 <v-img :src="sec.img" aspect-ratio="1.7" class="rounded-lg"></v-img>
             </div>
         </v-col>
-        <v-col class="col-6">
+        <v-col cols="12" lg="8" sm="12">
             <h4 class="titleSection">{{ sec.name }}</h4>
             <hr class="ma-3 divider" />
             <p>
