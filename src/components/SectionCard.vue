@@ -18,58 +18,8 @@
             </template>
         </v-banner>
         <v-card-text class="cardSection">
-            <v-sheet max-width="95%" height="100vh" class="mx-auto">
-                <v-row>
-                    <!-- Sections Left -->
-                    <v-col class="col-7 section2">
-                        <v-row class="headerSection2 ma-1">
-                            <v-col class="col-12 text-center">
-                                <v-btn class="mr-2" color="#febf63" fab small dark>
-                                    <v-icon>mdi-near-me</v-icon>
-                                </v-btn>
-                                <v-btn color="error" fab small dark class="mr-2">
-                                    <v-icon>mdi-microphone-settings</v-icon>
-                                </v-btn>
-                                <v-btn color="#febf63" fab small dark>
-                                    <v-icon>mdi-ear-hearing</v-icon>
-                                </v-btn>
-                            </v-col>
-                        </v-row>
-                        <slot name="contentSection"></slot>
-                    </v-col>
-                    <!-- Section Right -->
-                    <v-col class="col-5 section1 pa-5">
-                        <v-row>
-                            <!-- RUBRIC SECTION -->
-                            <v-col class="col-12">
-                                <p>
-                                    <span>
-                                        <v-icon>mdi-comment-text-outline</v-icon>
-                                    </span>
-                                    Topic
-                                </p>
-                                <v-col class="col-12 Extract">
-                                    <slot name="extract"></slot>
-                                    <v-row class="text-center">
-                                        <v-col>
-                                            <v-btn class="mt-2 mb-3 text-center" color="#ede682" small>Change</v-btn>
-                                        </v-col>
-                                    </v-row>
-                                </v-col>
-                            </v-col>
-                            <!-- WRITE SECTION -->
-                            <v-col class="col-12" v-if="notes">
-                                <p>
-                                    <span>
-                                        <v-icon>mdi-grease-pencil</v-icon>
-                                    </span>
-                                    Write your notes before speaking
-                                </p>
-                                <v-textarea solo auto-grow name="input-7-4" label="Notes"></v-textarea>
-                            </v-col>
-                        </v-row>
-                    </v-col>
-                </v-row>
+            <v-sheet max-width="100%" height="100vh" class="mx-auto">
+                <slot name="SectionContent"></slot>
             </v-sheet>
         </v-card-text>
     </v-card>
@@ -92,26 +42,13 @@
 
 <style>
 .containerSections {
-    background-color: #424242;
-}
-
-.cardSection {
-    background-color: #7fdbda;
+    background: rgb(34, 193, 195);
+    background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 223, 45, 1) 100%);
 }
 
 .section1 {
     background-color: aliceblue;
     height: 100vh;
-}
-
-.section2 {
-    background-color: #fff;
-}
-
-.Extract {
-    background-color: #ffff;
-    /* overflow: scroll; */
-    max-height: 450px;
 }
 
 /* .headerSection2{

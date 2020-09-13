@@ -1,5 +1,5 @@
 <template>
-<v-card elevation="2" class="ma-3">
+<v-card elevation="2">
     <v-container fluid>
         <v-row class="headerSections ma-4">
             <!--PERSONAL INFORMATION-->

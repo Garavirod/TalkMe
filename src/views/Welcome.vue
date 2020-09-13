@@ -1,9 +1,32 @@
 <template>
 <v-container fluid class="ma-0 pa-0" id="welcomeBackground">
-    <v-card class="ma-3">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum laudantium id assumenda porro culpa, pariatur atque odio accusantium, nostrum voluptas soluta aspernatur? Tempore expedita obcaecati praesentium dolorum veritatis placeat accusantium?</p>
-    </v-card>
-    <UserInfromationVue />
+    <v-row class="ma-3">
+        <!--WELCOME-->
+        <v-col cols="12" lg="12">
+            <v-alert border="left" colored-border color="deep-purple accent-4" elevation="2">
+                <v-row class="text-center">
+                    <v-col>
+                        <h1>Welcome to nameApp</h1>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos illum, dignissimos accusantium, quasi alias expedita nulla repellat iure eligendi corrupti aut natus nemo! Quia, modi excepturi! Labore dicta a corporis.</p>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi obcaecati animi eos accusamus alias ut, mollitia in ullam nobis sit porro nulla voluptates doloremque dignissimos, molestiae voluptatibus est exercitationem itaque!</p>
+                    </v-col>
+                </v-row>
+                <v-row class="text-center">
+                    <v-col cols="12">
+                        <v-btn large color="primary" to="/sections">Get start</v-btn>
+                    </v-col>
+                </v-row>
+            </v-alert>
+        </v-col>
+        <!--PERSONAL INFROMATION-->
+        <v-col cols="12" lg="12">
+            <UserInfromationVue />
+        </v-col>
+    </v-row>
 </v-container>
 </template>
 

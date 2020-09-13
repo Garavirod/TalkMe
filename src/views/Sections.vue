@@ -1,13 +1,12 @@
 <template>
 <v-container fluid class="ma-0 pa-4 containerSection">
-    <UserInformationVue />
     <v-row class="section rounded-md ma-4 pa-2" justify="space-around" v-for="sec in sections" :key="sec.id">
-        <v-col cols="12" lg="4" sm="12">
+        <v-col cols="12" lg="4" sm="6" xs="12" md="6">
             <div>
                 <v-img :src="sec.img" aspect-ratio="1.7" class="rounded-lg"></v-img>
             </div>
         </v-col>
-        <v-col cols="12" lg="8" sm="12">
+        <v-col cols="12" lg="8" sm="6" xs="12" md="6">
             <h4 class="titleSection">{{ sec.name }}</h4>
             <hr class="ma-3 divider" />
             <p>
@@ -35,15 +34,12 @@
 
 <style>
 .section {
-    background: rgb(255, 255, 255);
-    background: linear-gradient(141deg,
-            rgba(255, 255, 255, 1) 0%,
-            rgba(255, 255, 255, 1) 48%,
-            rgba(127, 219, 218, 1) 48%);
+    background-color: white;
 }
 
 .containerSection {
-    background-color: #424242;
+    background: rgb(34, 193, 195);
+    background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 223, 45, 1) 100%);
 }
 
 .titleSection {
@@ -62,7 +58,6 @@
 import {
     mapState
 } from "vuex";
-import UserInformationVue from '../components/UserInformation.vue';
 
 export default {
     name: "Sections",
@@ -70,7 +65,7 @@ export default {
         ...mapState(["sections"]),
     },
     components: {
-        UserInformationVue,
+
     },
     data() {
         return {};

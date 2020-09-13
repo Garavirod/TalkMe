@@ -13,7 +13,7 @@
 
         <v-virtual-scroll :items="messages" :item-height="80" height="300" class="mt-2">
             <template v-slot="{ item }">
-                <v-list-item>
+                <v-list-item class="ma-2">
                     <v-list-item-avatar>
                         <v-img :src="item.avatar"></v-img>
                     </v-list-item-avatar>
@@ -26,6 +26,25 @@
                 </v-list-item>
             </template>
         </v-virtual-scroll>
+        <v-divider></v-divider>
+        <v-row class="text-center">
+            <v-col cols="12">
+                <v-btn class="mx-2" fab dark color="indigo">
+                    <v-icon dark>mdi-send</v-icon>
+                </v-btn>
+                <v-btn class="mx-2" fab dark color="red" @click="isrecording = !isrecording">
+                    <v-icon dark v-if="isrecording">mdi-stop</v-icon>
+                    <v-icon dark v-else>mdi-microphone</v-icon>
+                </v-btn>
+            </v-col>
+            <v-col v-if="isrecording">
+                <v-row class="text-center">
+                    <v-col cols="12" lg="4">00</v-col>
+                    <v-col cols="12" lg="4">00</v-col>
+                    <v-col cols="12" lg="4">00</v-col>
+                </v-row>
+            </v-col>
+        </v-row>
     </v-card>
 </v-container>
 </template>
@@ -46,6 +65,7 @@ export default {
     name: "BoxMessages",
     data() {
         return {
+            isrecording: false,
             messages: [{
                     user: "Julian",
                     active: true,
