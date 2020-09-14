@@ -1,109 +1,121 @@
 <template>
-<v-navigation-drawer app>
-    <v-card max-width="500" class="mx-auto">
-        <div color="#7fdbda" class="text-center">
-            <v-card-title class="black--text ">People active now</v-card-title>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, est. Quas, officiis similique!</p>
-            <hr>
-        </div>
+<v-container>
+    <v-row class="text-center">
+        <v-col cols="12" lg="3" md="4" sm="4" xs="12" v-for="item in actives" :key="item.id">
+            <v-card>
+                <v-list-item three-line>
+                    <v-list-item-content>
+                        <div class="overline mb-4">{{item.country}}</div>
+                        <v-list-item-title class="headline mb-1">{{item.user}}</v-list-item-title>
+                        <v-list-item-subtitle>Level : {{item.level}}</v-list-item-subtitle>
+                    </v-list-item-content>
 
-        <v-list>
-            <v-list-item v-for="item in actives" :key="item.id" id="itemActive">
-                <v-list-item-icon>
-                    <v-icon v-if="item.active" color="lime">mdi-message</v-icon>
-                </v-list-item-icon>
+                    <v-list-item-avatar tile size="80" color="grey">
+                        <v-img :src="item.avatar"></v-img>
+                    </v-list-item-avatar>
+                </v-list-item>
 
-                <v-list-item-content>
-                    <v-list-item-title v-text="item.user"></v-list-item-title>
-                </v-list-item-content>
-
-                <v-list-item-avatar>
-                    <v-img :src="item.avatar"></v-img>
-                </v-list-item-avatar>
-            </v-list-item>
-        </v-list>
-    </v-card>
-
-</v-navigation-drawer>
+                <v-card-actions>
+                    <v-btn text>Choose</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-col>
+    </v-row>
+</v-container>
 </template>
-
-<style>
-#itemActive:hover {
-    background-color: rgb(221, 224, 214);
-    cursor: pointer;
-}
-
-#itemActive:active {
-    background-color: rgb(135, 221, 236);
-}
-</style>
 
 <script>
 export default {
     data: () => ({
         actives: [{
                 user: "Julian",
+                country: "Mexico",
                 active: false,
+                level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
             },
             {
                 user: "Julian",
+                country: "Spain",
                 active: true,
+                level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
             },
             {
                 user: "Julian",
+                country: "Cuba",
                 active: false,
+                level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
             },
             {
                 user: "Julian",
+                country: "Colombia",
                 active: false,
+                level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
             },
             {
                 user: "Julian",
+                country: "Argentina",
                 active: true,
+                level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
             },
             {
                 user: "Julian",
+                country: "Dinamarca",
                 active: false,
+                level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
             },
             {
                 user: "Julian",
+                country: "China",
                 active: false,
+                level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
             },
             {
                 user: "Julian",
+                country: "Mexico",
                 active: true,
+                level: "Advanced",
+                avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+            },
+            {
+                user: "Rusia",
+                country: "Mexico",
+                active: false,
+                level: "Advanced",
+                avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+            },
+            {
+                user: "Rosa",
+                country: "Brazil",
+                active: true,
+                level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
             },
             {
                 user: "Julian",
+                country: "Mexico",
                 active: false,
+                level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
             },
             {
                 user: "Julian",
+                country: "Mexico",
                 active: true,
+                level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
             },
             {
                 user: "Julian",
+                country: "Mexico",
                 active: false,
-                avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-            },
-            {
-                user: "Julian",
-                active: true,
-                avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            },
-            {
-                user: "Julian",
-                active: false,
+                level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
             },
         ],

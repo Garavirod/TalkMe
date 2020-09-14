@@ -26,7 +26,7 @@
     <v-row justify="center">
         <v-dialog v-model="dialog" persistent max-width="400">
             <v-card>
-                <v-card-title class="headline">Instrucions</v-card-title>
+                <v-card-title class="headline">Instructions</v-card-title>
                 <v-card-text>{{ instructions }}</v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>

@@ -39,17 +39,6 @@
 </SectionCard>
 </template>
 
-<style>
-.containerAudioChat {
-    background-color: #ffff;
-    /* border-radius: 10px; */
-}
-
-.sectionControls {
-    background-color: #ffff;
-}
-</style>
-
 <script>
 import SectionCard from "../components/SectionCard";
 import BoxMessages from "../components/BoxMessages";
