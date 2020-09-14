@@ -11,58 +11,34 @@
                 <v-btn icon dark @click="dialog = false">
                     <v-icon>mdi-close</v-icon>
                 </v-btn>
-                <v-toolbar-title>Settings</v-toolbar-title>
+                <v-toolbar-title>People active now</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-toolbar-items>
-                    <v-btn dark text @click="dialog = false">Save</v-btn>
-                </v-toolbar-items>
             </v-toolbar>
-            <v-list three-line subheader>
-                <v-subheader>User Controls</v-subheader>
-                <v-list-item>
-                    <v-list-item-content>
-                        <v-list-item-title>Content filtering</v-list-item-title>
-                        <v-list-item-subtitle>Set the content filtering level to restrict apps that can be downloaded</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                    <v-list-item-content>
-                        <v-list-item-title>Password</v-list-item-title>
-                        <v-list-item-subtitle>Require password for purchase or use password to restrict purchase</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-            </v-list>
-            <v-divider></v-divider>
-            <v-list three-line subheader>
-                <v-subheader>General</v-subheader>
-                <v-list-item>
-                    <v-list-item-action>
-                        <v-checkbox v-model="notifications"></v-checkbox>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>Notifications</v-list-item-title>
-                        <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                    <v-list-item-action>
-                        <v-checkbox v-model="sound"></v-checkbox>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>Sound</v-list-item-title>
-                        <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                    <v-list-item-action>
-                        <v-checkbox v-model="widgets"></v-checkbox>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>Auto-add widgets</v-list-item-title>
-                        <v-list-item-subtitle>Automatically add home screen widgets</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-            </v-list>
+
+            <v-container>
+                <v-row class="text-center">
+                    <v-col cols="12" lg="3" md="4" sm="4" xs="12" v-for="item in actives" :key="item.id">
+                        <v-card>
+                            <v-list-item three-line>
+                                <v-list-item-content>
+                                    <div class="overline mb-4">{{item.country}}</div>
+                                    <v-list-item-title class="headline mb-1">{{item.user}}</v-list-item-title>
+                                    <v-list-item-subtitle>Level : {{item.level}}</v-list-item-subtitle>
+                                </v-list-item-content>
+
+                                <v-list-item-avatar tile size="80" color="grey">
+                                    <v-img :src="item.avatar"></v-img>
+                                </v-list-item-avatar>
+                            </v-list-item>
+
+                            <v-card-actions>
+                                <v-btn text>Choose</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-col>
+                </v-row>
+            </v-container>
+
         </v-card>
     </v-dialog>
 </v-row>
@@ -73,9 +49,99 @@ export default {
     data() {
         return {
             dialog: false,
-            notifications: false,
-            sound: true,
-            widgets: false,
+            actives: [{
+                    user: "Julian",
+                    country: "Mexico",
+                    active: false,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+                },
+                {
+                    user: "Julian",
+                    country: "Spain",
+                    active: true,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+                },
+                {
+                    user: "Julian",
+                    country: "Cuba",
+                    active: false,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
+                },
+                {
+                    user: "Julian",
+                    country: "Colombia",
+                    active: false,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+                },
+                {
+                    user: "Julian",
+                    country: "Argentina",
+                    active: true,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+                },
+                {
+                    user: "Julian",
+                    country: "Dinamarca",
+                    active: false,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+                },
+                {
+                    user: "Julian",
+                    country: "China",
+                    active: false,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+                },
+                {
+                    user: "Julian",
+                    country: "Mexico",
+                    active: true,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+                },
+                {
+                    user: "Rusia",
+                    country: "Mexico",
+                    active: false,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+                },
+                {
+                    user: "Rosa",
+                    country: "Brazil",
+                    active: true,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+                },
+                {
+                    user: "Julian",
+                    country: "Mexico",
+                    active: false,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+                },
+                {
+                    user: "Julian",
+                    country: "Mexico",
+                    active: true,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+                },
+                {
+                    user: "Julian",
+                    country: "Mexico",
+                    active: false,
+                    level: "Advanced",
+                    avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+                },
+            ],
+
         }
     },
 }

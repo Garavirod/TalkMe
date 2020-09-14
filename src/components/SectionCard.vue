@@ -2,16 +2,19 @@
 <v-container fluid class="containerSections">
     <v-card>
         <!-- HEAD SECTION-->
-        <v-system-bar class="pa-3" height="70">
-            <v-row class="ma-3">
-                <v-col>
-                    <h1>{{ nameSection }}</h1>
-                </v-col>
-                <v-col>
-                    <v-btn color="#ede682" small depressed @click="dialog = !dialog">Read instructions</v-btn>
-                </v-col>
-            </v-row>
-        </v-system-bar>
+        <v-row class="ma-3">
+            <v-col cols="12" lg="6" md="6" xs="12">
+                <h1>{{ nameSection }}</h1>
+            </v-col>
+            <v-col cols="12" lg="6" md="6" xs="12">
+                <v-row class="text-center">
+                    <v-col cols="12">
+                        <v-btn color="#ede682" small depressed @click="dialog = !dialog">Read instructions</v-btn>
+                    </v-col>
+                </v-row>
+            </v-col>
+        </v-row>
+
         <!--HERE GOES THE COMPONENT-->
         <v-card-text>
             <v-sheet max-width="100%">
