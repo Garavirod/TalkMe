@@ -1,5 +1,5 @@
 <template>
-<v-container>
+<v-container class="pa-1">
     <v-row class="text-center">
         <v-col cols="12" lg="12" xs="12">
             <v-card max-width="820" class="pa-0">
@@ -30,24 +30,7 @@
                 </v-virtual-scroll>
                 <v-divider></v-divider>
                 <!--BUTTONS CONTROLS-->
-                <v-row class="text-center">
-                    <v-col cols="12">
-                        <v-btn small class="mx-2" fab dark color="indigo">
-                            <v-icon dark>mdi-send</v-icon>
-                        </v-btn>
-                        <v-btn small class="mx-2" fab dark color="red" @click="isrecording = !isrecording">
-                            <v-icon dark v-if="isrecording">mdi-stop</v-icon>
-                            <v-icon dark v-else>mdi-microphone</v-icon>
-                        </v-btn>
-                    </v-col>
-                    <v-col v-if="isrecording">
-                        <v-row class="text-center">
-                            <v-col cols="12" lg="4">00</v-col>
-                            <v-col cols="12" lg="4">00</v-col>
-                            <v-col cols="12" lg="4">00</v-col>
-                        </v-row>
-                    </v-col>
-                </v-row>
+                <AudioControls />
             </v-card>
         </v-col>
     </v-row>
@@ -66,9 +49,13 @@ audio {
 </style>
 
 <script>
+import AudioControls from "../components/AudioControls";
 export default {
     name: "BoxMessages",
     props: ["speaker"],
+    components: {
+        AudioControls,
+    },
     data() {
         return {
             isrecording: false,

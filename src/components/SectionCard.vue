@@ -1,9 +1,9 @@
 <template>
-<v-container fluid class="containerSections">
+<v-container fluid>
     <v-card>
         <!-- HEAD SECTION-->
         <v-row class="ma-3">
-            <v-col cols="12" lg="6" md="6" xs="12">
+            <v-col cols="12" lg="6" md="6" xs="12" class="text-center">
                 <h1>{{ nameSection }}</h1>
             </v-col>
             <v-col cols="12" lg="6" md="6" xs="12">
@@ -16,8 +16,8 @@
         </v-row>
 
         <!--HERE GOES THE COMPONENT-->
-        <v-card-text>
-            <v-sheet max-width="100%">
+        <v-card-text class="ma-0 pa-0">
+            <v-sheet max-width="100%" id="sheetCard">
                 <slot name="SectionContent"></slot>
             </v-sheet>
         </v-card-text>
@@ -40,23 +40,9 @@
 </template>
 
 <style>
-.containerSections {
-    background: rgb(34, 193, 195);
-    background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 223, 45, 1) 100%);
+#sheetCard {
+    background: #dddcdc;
 }
-
-.section1 {
-    background-color: aliceblue;
-    height: 100vh;
-}
-
-.cardSection {
-    margin: auto;
-}
-
-/* .headerSection2{
-    background-color: #ade498;
-} */
 </style>
 
 <script>

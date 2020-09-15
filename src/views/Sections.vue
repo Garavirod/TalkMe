@@ -38,8 +38,8 @@
 }
 
 .containerSection {
-    background: rgb(34, 193, 195);
-    background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 223, 45, 1) 100%);
+    background: rgb(34, 56, 195);
+    background: linear-gradient(0deg, rgba(34, 56, 195, 1) 0%, rgba(45, 192, 253, 1) 100%);
 }
 
 .titleSection {

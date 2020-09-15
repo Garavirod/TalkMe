@@ -20,7 +20,7 @@
                         </v-row>
                         <v-card>
                             <v-row class="text-right">
-                                <v-col cols="12" xs="12" lg="4" sm="4">
+                                <v-col cols="12" xs="12" lg="6" sm="4">
                                     <v-row class="text-center">
                                         <v-col class="mt-2">
                                             <v-avatar class="profile rounded-circle" color="grey" size="164" tile>
@@ -29,7 +29,7 @@
                                         </v-col>
                                     </v-row>
                                 </v-col>
-                                <v-col cols="12" lg="8" xs="12" sm="8">
+                                <v-col cols="12" lg="6" xs="12" sm="8">
                                     <v-list-item two-line>
                                         <v-list-item-content>
                                             <v-list-item-title><b>Username</b></v-list-item-title>

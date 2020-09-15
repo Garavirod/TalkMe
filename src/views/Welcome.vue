@@ -1,5 +1,5 @@
 <template>
-<v-container fluid class="ma-0 pa-0" id="welcomeBackground">
+<v-container fluid class="ma-0 pa-0">
     <v-row class="ma-3">
         <!--WELCOME-->
         <v-col cols="12" lg="12">
@@ -17,7 +17,7 @@
                 </v-row>
                 <v-row class="text-center">
                     <v-col cols="12">
-                        <v-btn large color="primary" to="/sections">Get start</v-btn>
+                        <v-btn large color="primary" to="/sections">Get started</v-btn>
                     </v-col>
                 </v-row>
             </v-alert>
@@ -29,13 +29,6 @@
     </v-row>
 </v-container>
 </template>
-
-<style>
-#welcomeBackground {
-    background: rgb(34, 193, 195);
-    background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 223, 45, 1) 100%);
-}
-</style>
 
 <script>
 import UserInfromationVue from "../components/UserInformation";
