@@ -15,7 +15,7 @@
             </v-col>
         </v-row>
 
-        <!--HERE GOES THE COMPONENT-->
+        <!--HERE GOES THE COMPONENT TO RENDERIZE-->
         <v-card-text class="ma-0 pa-0">
             <v-sheet max-width="100%" id="sheetCard">
                 <slot name="SectionContent"></slot>

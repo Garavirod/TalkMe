@@ -1,49 +1,57 @@
 <template>
-<SectionCard :nameSection="sectionName" :notes="true" :instructions="instructions">
-    <template v-slot:contentSection>
-       <v-row align="center" justify="center">
-         <v-col class="col-12 ma-2">
-            <v-img
-            src="https://bad.src/not/valid"
-            lazy-src="https://picsum.photos/id/11/100/60"
-            aspect-ratio="1"
-            class="grey lighten-2"
-            max-width="800"
-            max-height="320"
-          >
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-         </v-col>
-        </v-row>
+<SectionCard :nameSection="sectionName" :instructions="instructions">
+    <template v-slot:SectionContent>
+        <v-container>
+            <v-row class="text-center">
+                <v-col cols="12" lg="12" md="12">
+                    <v-card class="pa-2">
+                        <!--CONTROLS-->
+                        <v-row class="text-center">
+                            <v-col cols="12" lg="4">
+                                <v-btn small color="primary">Change picture</v-btn>
+                            </v-col>
+                            <v-col cols="12" lg="4">
+                                <v-btn small color="primary">Filters</v-btn>
+                            </v-col>
+                            <v-col cols="12" lg="4">
+                                <CluesPicture />
+                            </v-col>
+                        </v-row>
+                        <!--PICTURE-->
+                        <v-img src="https://bad.src/not/valid" lazy-src="https://picsum.photos/id/11/100/60" aspect-ratio="1" class="grey lighten-2" max-height="420">
+                            <template v-slot:placeholder>
+                                <v-row class="fill-height ma-0" align="center" justify="center">
+                                    <v-progress-circular indeterminate color="blue lighten-5"></v-progress-circular>
+                                </v-row>
+                            </template>
+                        </v-img>
+                        <!--AUDIO CONTROLS COMPONENT-->
+                        <AudioControls />
+                    </v-card>
+                </v-col>
+            </v-row>
+        </v-container>
     </template>
-    <template v-slot:extract>
-      <p>{{extract}}</p>
-    </template>
-  </SectionCard>
+</SectionCard>
 </template>
 
-
-<style>
-</style>
+<style></style>
 
 <script>
 import SectionCard from "../components/SectionCard";
+import AudioControls from "../components/AudioControls";
+import CluesPicture from "../components/CluesPicture";
 export default {
-  name: "DescribePic",
-  components: {
-    SectionCard
-  },
-  data: () => ({
-    sectionName: "Describing pictures",
-    extract:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
-    instructions:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
-    
-  })
+    name: "DescribePic",
+    components: {
+        SectionCard,
+        AudioControls,
+        CluesPicture,
+    },
+    data: () => ({
+        sectionName: "Describing pictures",
+        extract: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
+        instructions: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
+    }),
 };
 </script>
