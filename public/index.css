@@ -1,19 +1,23 @@
-#color-app-1{
+.color-app-1{
     background-color: #204051;
 }
 
 
-#color-app-2{
+.color-app-2{
     background-color: #3b6978;
 }
 
-#color-app-3{
+.color-app-3{
     background-color: #84a9ac;
 }
 
 
-#color-app-4{
+.color-app-4{
     background-color: #cae8d5;
+}
+
+.color-app-5{
+    background-color: #febf63;
 }
 
 

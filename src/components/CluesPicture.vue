@@ -2,12 +2,12 @@
 <v-row justify="center">
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" small dark v-bind="attrs" v-on="on">
+            <v-btn outlined color="#3b6978" small dark v-bind="attrs" v-on="on">
                 Clues
             </v-btn>
         </template>
         <v-card>
-            <v-toolbar dark color="primary">
+            <v-toolbar dark color="#204051">
                 <v-btn icon dark @click="dialog = false">
                     <v-icon>mdi-close</v-icon>
                 </v-btn>

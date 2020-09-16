@@ -2,7 +2,7 @@
 <!--BUTTONS CONTROLS-->
 <v-row class="text-center ma-2" id="AudioComponent">
     <v-col cols="12">
-        <v-btn small class="mx-2" fab dark color="indigo">
+        <v-btn small class="mx-2" fab dark color="#3b6978">
             <v-icon dark>mdi-send</v-icon>
         </v-btn>
         <v-btn small class="mx-2" fab dark color="red" @click="isrecording = !isrecording">

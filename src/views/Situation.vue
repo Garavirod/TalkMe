@@ -46,7 +46,7 @@
             </v-row>
             <v-row class="text-center">
                 <v-col cols="12">
-                    <v-btn color="primary">Let's begin</v-btn>
+                    <v-btn outlined color="#3b6978">Let's begin</v-btn>
                 </v-col>
             </v-row>
 

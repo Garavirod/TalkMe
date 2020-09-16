@@ -14,7 +14,7 @@
                             </v-col>
                             <v-row class="text-center">
                                 <v-col class="12" lg="12">
-                                    <v-btn small color="primary">Change extract</v-btn>
+                                    <v-btn small outlined color="#3b6978">Change extract</v-btn>
                                 </v-col>
                             </v-row>
                         </v-row>

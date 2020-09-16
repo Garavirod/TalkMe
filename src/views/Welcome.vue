@@ -3,7 +3,7 @@
     <v-row class="ma-3">
         <!--WELCOME-->
         <v-col cols="12" lg="12">
-            <v-alert border="left" colored-border color="deep-purple accent-4" elevation="2">
+            <v-alert border="left" colored-border color="#204051" elevation="2">
                 <v-row class="text-center">
                     <v-col>
                         <h1>Welcome to nameApp</h1>
@@ -17,7 +17,7 @@
                 </v-row>
                 <v-row class="text-center">
                     <v-col cols="12">
-                        <v-btn large color="primary" to="/sections">Get started</v-btn>
+                        <v-btn large outlined color="#204051" to="/sections">Get started</v-btn>
                     </v-col>
                 </v-row>
             </v-alert>

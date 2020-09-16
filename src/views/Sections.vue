@@ -25,7 +25,7 @@
                 {{ sec.description }}
             </p>
             <div class="my-2">
-                <v-btn large color="#ede682" :to="sec.path">Go</v-btn>
+                <v-btn large outlined color="#204051" :to="sec.path">Go</v-btn>
             </div>
         </v-col>
     </v-row>
@@ -35,11 +35,6 @@
 <style>
 .section {
     background-color: white;
-}
-
-.containerSection {
-    background: rgb(34, 56, 195);
-    background: linear-gradient(0deg, rgba(34, 56, 195, 1) 0%, rgba(45, 192, 253, 1) 100%);
 }
 
 .titleSection {

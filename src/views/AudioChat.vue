@@ -19,7 +19,7 @@
                             </v-card>
                             <v-row class="text-center">
                                 <v-col cols="12">
-                                    <v-btn color="primary">change</v-btn>
+                                    <v-btn outlined color="#3b6978">change</v-btn>
                                 </v-col>
                             </v-row>
                         </v-col>

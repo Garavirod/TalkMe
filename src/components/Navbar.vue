@@ -5,9 +5,9 @@
             <h1 class="fontTitle">TalkMe</h1>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-app-bar-nav-icon color="#cae8d5" @click="drawer = true"></v-app-bar-nav-icon>
-        <v-btn depressed outlined color="#cae8d5" class="ma-2" @click.prevent="dialog=!dialog">Register</v-btn>
-        <v-btn depressed outlined color="#cae8d5" @click.prevent="dialogLogin=!dialogLogin">Login</v-btn>
+        <v-app-bar-nav-icon color="#ffff" @click="drawer = true"></v-app-bar-nav-icon>
+        <v-btn depressed outlined color="#ffff" class="ma-2" @click.prevent="dialog=!dialog">Register</v-btn>
+        <v-btn depressed outlined color="#ffff" @click.prevent="dialogLogin=!dialogLogin">Login</v-btn>
     </v-app-bar>
     <!-- REGISTER-->
     <v-row justify="center">
