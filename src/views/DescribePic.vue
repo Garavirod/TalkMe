@@ -11,7 +11,7 @@
                                 <v-btn small color="primary">Change picture</v-btn>
                             </v-col>
                             <v-col cols="12" lg="4">
-                                <v-btn small color="primary">Filters</v-btn>
+                                <FliterPicture />
                             </v-col>
                             <v-col cols="12" lg="4">
                                 <CluesPicture />
@@ -41,12 +41,14 @@
 import SectionCard from "../components/SectionCard";
 import AudioControls from "../components/AudioControls";
 import CluesPicture from "../components/CluesPicture";
+import FliterPicture from "../components/FiltersPicture";
 export default {
     name: "DescribePic",
     components: {
         SectionCard,
         AudioControls,
         CluesPicture,
+        FliterPicture
     },
     data: () => ({
         sectionName: "Describing pictures",
