@@ -14,7 +14,7 @@
 <style>
 #bg-app {
     background: rgb(34, 56, 195);
-    background: linear-gradient(0deg, rgba(34, 56, 195, 1) 0%, rgba(45, 192, 253, 1) 100%);
+    background: linear-gradient(0deg, rgb(32, 64, 81) 0, rgb(202, 232, 213) 100%);
 }
 </style>
 

@@ -111,10 +111,10 @@
             #667db6);
     /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right,
-            rgba(9, 131, 212, 0.795),
-            rgba(46, 163, 241, 0.432),
-            rgba(20, 163, 240, 0.781),
-            rgba(102, 125, 182, 0.712)), url(../assets/illustration0.jpg);
+            rgba(32, 64, 81, 0.808),
+            rgba(59, 105, 120, 0.692),
+            rgba(132, 169, 172, 0.616),
+            rgba(202, 232, 213, 0.699)), url(../assets/illustration0.jpg);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -189,7 +189,7 @@
 }
 
 .text-content h3 span {
-    background-color: #ede682;
+    background-color: #84a9ac;
     color: #fff;
     border-radius: 50%;
     text-align: center;
@@ -245,7 +245,7 @@
     height: 100%;
     top: 0;
     transform: scale(0);
-    background-color: hsla(56, 75%, 72%, 0.7);
+    background-color: hsla(142, 39%, 85%, 0.801);
     /* background-color: hsla(103, 58%, 75%,0.7); */
     transition: transform 0.5s;
     display: flex;
@@ -365,7 +365,7 @@ footer {
 
 .content-foo h4 {
     color: #f2f2f2;
-    border-bottom: 3px solid #ede682;
+    border-bottom: 3px solid #febf63;
     padding-bottom: 5px;
     margin-bottom: 10px;
 }
@@ -427,6 +427,11 @@ footer {
         text-align: center;
     }
 
+    .cards .card img {
+        width: 30%;
+        height: 30%;
+    }
+
     .service-indv:nth-child(1),
     .service-indv:nth-child(2) {
         margin-bottom: 60px;
@@ -479,8 +484,8 @@ footer {
     }
 
     .cards .card img {
-        width: 55%;
-        height: 25%;
+        width: 30%;
+        height: 30%;
     }
 
     .cards .card .content-text-card {
@@ -524,27 +529,27 @@ export default {
     data: () => ({
         sections: [{
                 name: "Audio Chat",
-                img: require("../assets/illustration4.png"),
+                img: require("../assets/ilustration2.png"),
                 description: "Speak with other person who are learing too",
             },
             {
                 name: "Speaking fight",
-                img: require("../assets/fight.png"),
+                img: require("../assets/ilustration6.png"),
                 description: "Compete with others to find out who has the best pronunciation",
             },
             {
                 name: "Out laud reading",
-                img: require("../assets/reading.png"),
+                img: require("../assets/ilustration3.png"),
                 description: "Read a text out loud to improve your pronunciation",
             },
             {
                 name: "Situations",
-                img: require("../assets/situations.png"),
+                img: require("../assets/ilustration4.png"),
                 description: "Improvise in diferent random situations",
             },
             {
                 name: "Describe pictures",
-                img: require("../assets/illustration2.png"),
+                img: require("../assets/ilustration5.png"),
                 description: "Describe pictures to improve your vocabulary",
             },
         ],
