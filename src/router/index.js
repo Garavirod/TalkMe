@@ -8,7 +8,7 @@ import Reading from '../views/ReadingLoud';
 import SpeakingFight from '../views/SpeakingFight';
 import Welcome from '../views/Welcome'
 import Situations from "../views/Situations";
-
+import Situation from "../views/Situation";
 
 Vue.use(VueRouter)
 
@@ -51,6 +51,11 @@ const routes = [{
         path: '/situations',
         name:'Situations',
         component:Situations
+    },
+    {
+        path: '/situation/:id',
+        name:'Situation',
+        component:Situation
     }
 
 ]

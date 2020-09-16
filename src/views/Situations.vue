@@ -10,7 +10,7 @@
                             {{ item.situation }}
                         </v-card-title>
                         <v-card-actions>
-                            <v-btn color="primary" text>
+                            <v-btn color="primary" text :to="{ name: 'Situation', params: { id: item.id }}">
                                 Go
                             </v-btn>
                             <v-spacer></v-spacer>
