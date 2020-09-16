@@ -11,7 +11,7 @@
                 <v-btn icon dark @click="dialog = false">
                     <v-icon>mdi-close</v-icon>
                 </v-btn>
-                <v-toolbar-title>How can I describe a picure</v-toolbar-title>
+                <v-toolbar-title>How can I describe a picure ?</v-toolbar-title>
             </v-toolbar>
             <v-list three-line subheader>
                 <v-subheader>What about to say?</v-subheader>

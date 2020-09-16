@@ -7,6 +7,7 @@ import DescribePic from '../views/DescribePic';
 import Reading from '../views/ReadingLoud';
 import SpeakingFight from '../views/SpeakingFight';
 import Welcome from '../views/Welcome'
+import Situations from "../views/Situations";
 
 
 Vue.use(VueRouter)
@@ -45,6 +46,11 @@ const routes = [{
         path: '/welcome',
         name:'Welcome',
         component:Welcome
+    },
+    {
+        path: '/situations',
+        name:'Situations',
+        component:Situations
     }
 
 ]
