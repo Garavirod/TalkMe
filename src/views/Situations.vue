@@ -5,35 +5,35 @@
             <v-row>
                 <v-col cols="12" lg="4" md="3" sm="3" xs="12" v-for="item in situations" :key="item.id">
                     <v-card class="mx-auto" max-width="344">
-                        <v-img :src="item.img" height="200px"></v-img>
-
+                        <v-img :src="item.img" max-height="100%" max-width="100%" aspect-ratio="1"></v-img>
                         <v-card-title>
-                            {{item.situation}}
+                            {{ item.situation }}
                         </v-card-title>
-
                         <v-card-actions>
                             <v-btn color="primary" text>
                                 Go
                             </v-btn>
-
                             <v-spacer></v-spacer>
-
-                            <v-btn icon @click="show = !show">
-                                <v-icon>{{
-                    show ? "mdi-chevron-up" : "mdi-chevron-down"
-                  }}</v-icon>
-                            </v-btn>
                         </v-card-actions>
 
                         <v-expand-transition>
-                            <div v-show="show">
+                            <div>
                                 <v-divider></v-divider>
                                 <v-card-text>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem blanditiis sit reprehenderit voluptatibus odio soluta dolor incidunt sint vitae repellat, enim commodi, nostrum hic dicta placeat. Officia incidunt dolores voluptates!
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Autem blanditiis sit reprehenderit voluptatibus odio soluta
+                                    dolor incidunt sint vitae repellat, enim commodi, nostrum
+                                    hic dicta placeat. Officia incidunt dolores voluptates!
                                 </v-card-text>
                             </div>
                         </v-expand-transition>
                     </v-card>
+                </v-col>
+            </v-row>
+            <!--PAGINATION-->
+            <v-row class="text-center">
+                <v-col cols="12" lg="12">
+                    <Pagination />
                 </v-col>
             </v-row>
         </v-container>
@@ -43,10 +43,12 @@
 
 <script>
 import SectionCard from "../components/SectionCard";
+import Pagination from "../components/Pagination";
 export default {
     name: "Situation",
     components: {
         SectionCard,
+        Pagination,
     },
     data: () => ({
         show: false,
