@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        isLogged:true,
         sections: [{
                 name: 'Audio Chat',
                 img: require('../assets/ilustration2.png'),
@@ -41,10 +42,8 @@ export default new Vuex.Store({
                 component: ''
             }
         ],
-        // Chatlist visible
-        chatList: false,        
+             
         // Data progress user        
-
         userInfo:{
             id:1,
             username:'RodrigoGA',

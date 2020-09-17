@@ -16,6 +16,7 @@
             </v-toolbar>
             <!--CHAT LIST COMPONENT-->
             <ChatList />
+            <Pagination />
         </v-card>
     </v-dialog>
 </v-row>
@@ -23,9 +24,12 @@
 
 <script>
 import ChatList from "../components/ChatList";
+import Pagination from "../components/Pagination";
 export default {
     components: {
         ChatList,
+        Pagination,
+
     },
     data() {
         return {
