@@ -112,7 +112,7 @@
                         </v-row>
                         <v-row class="text-center">
                             <v-col cols="12">
-                                <v-btn large outlined color="#204051">Audios history</v-btn>
+                                <v-btn large outlined color="#204051" :to="{name:'Audios-History'}">Audios history</v-btn>
                             </v-col>
                         </v-row>
                     </v-col>

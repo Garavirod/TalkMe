@@ -9,6 +9,7 @@ import SpeakingFight from '../views/SpeakingFight';
 import Welcome from '../views/Welcome'
 import Situations from "../views/Situations";
 import Situation from "../views/Situation";
+import AudiosHistory from "../views/AudiosHistory";
 
 Vue.use(VueRouter)
 
@@ -56,6 +57,11 @@ const routes = [{
         path: '/situation/:id',
         name:'Situation',
         component:Situation
+    },
+    {
+        path: '/audios-history',
+        name: 'Audios-History',
+        component: AudiosHistory
     }
 
 ]
