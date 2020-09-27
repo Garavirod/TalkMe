@@ -17,41 +17,42 @@
     <v-navigation-drawer v-model="drawer" absolute temporary>
         <v-list nav dense>
             <v-list-item-group active-class="blue-grey--text text--accent-4">
-                <v-list-item>
-                    <v-list-item-icon>
-                        <v-icon>mdi-home</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-title>Home</v-list-item-title>
-                </v-list-item>
-
-                <v-list-item>
+                <v-list-item :to="{name: 'Welcome'}">
                     <v-list-item-icon>
                         <v-icon>mdi-account</v-icon>
                     </v-list-item-icon>
-                    <v-list-item-title>Account</v-list-item-title>
+                    <v-list-item-title>Profile</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item>
+                <v-list-item :to="{name: 'Sections'}">
                     <v-list-item-icon>
-                        <v-icon>mdi-home</v-icon>
+                        <v-icon>mdi-view-list</v-icon>
                     </v-list-item-icon>
-                    <v-list-item-title>Home</v-list-item-title>
+                    <v-list-item-title>Sections</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item>
+                <v-list-item :to="{name: 'Audios-History'}">
                     <v-list-item-icon>
-                        <v-icon>mdi-home</v-icon>
+                        <v-icon>mdi-database</v-icon>
                     </v-list-item-icon>
-                    <v-list-item-title>Home</v-list-item-title>
+                    <v-list-item-title>
+                        Audios history
+                    </v-list-item-title>
                 </v-list-item>
 
                 <v-list-item>
                     <v-list-item-icon>
-                        <v-icon>mdi-home</v-icon>
+                        <v-icon>mdi-account-settings</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>Settings</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item :to="{name:'Home'}">
+                    <v-list-item-icon>
+                        <v-icon>mdi-logout</v-icon>
                     </v-list-item-icon>
                     <v-list-item-title>Log out</v-list-item-title>
                 </v-list-item>
-
             </v-list-item-group>
         </v-list>
     </v-navigation-drawer>
@@ -91,7 +92,6 @@ export default {
     }),
     computed: {
         ...mapState(["isLogged"]),
-    }
-
+    },
 };
 </script>
