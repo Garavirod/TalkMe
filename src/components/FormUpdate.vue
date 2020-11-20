@@ -1,8 +1,15 @@
 <template>
   <div>
     <v-row justify="center">
-      <v-btn color="primary" class="ma-2" dark @click="dialog2 = true">
-        Open Dialog 2
+      <v-btn
+        small
+        outlined
+        color="#204051"
+        class="ma-2"
+        dark
+        @click="dialog2 = true"
+      >
+        Edit username
       </v-btn>
       <v-dialog
         v-model="dialog"
@@ -10,27 +17,44 @@
         hide-overlay
         transition="dialog-bottom-transition"
         scrollable
-      >        
+      >
       </v-dialog>
 
       <v-dialog v-model="dialog2" max-width="500px">
         <v-card>
           <v-card-title>
-            Dialog 2
+            Upadate username          
           </v-card-title>
           <v-card-text>
-            <v-btn color="primary" dark @click="dialog3 = !dialog3">
-              Update
-            </v-btn>
-            <v-select
-              :items="select"
-              label="A Select List"
-              item-value="text"
-            ></v-select>
+            <v-row class="text-center">
+              <!--Edit username-->
+              <v-col cols="12">
+                <v-text-field
+                  v-model="username"
+                  :rules="usernameRules"
+                  label="Username"
+                  required
+                >
+                </v-text-field>
+              </v-col>             
+              <!--Verify password-->
+              <v-col cols="12">
+                <v-text-field
+                  v-model="pass"                  
+                  :rules="passRules"
+                  label="Password verification"
+                  type="password"
+                  required
+                ></v-text-field>
+              </v-col>              
+            </v-row>         
           </v-card-text>
           <v-card-actions>
             <v-btn color="primary" text @click="dialog2 = false">
               Close
+            </v-btn>
+            <v-btn color="primary" text @click="dialog2 = false">
+              Update
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -76,6 +100,18 @@ export default {
       dialog2: false,
       dialog3: false,
       notifications: false,
+      username: "Garavirod",
+      usernameRules: [
+        (v) => !!v || "Username is required",
+        (v) =>
+          (v && v.length >= 8) || "Username must be more than 8 characters",
+      ],
+      pass: "",
+      passRules: [
+        (v) => !!v || "Password is required",
+        (v) =>
+          (v && v.length >= 8) || "Password must be more than 8 characters",
+      ],
       sound: true,
       widgets: false,
       items: [

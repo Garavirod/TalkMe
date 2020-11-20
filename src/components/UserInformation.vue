@@ -67,12 +67,7 @@
                       </v-list-item-content>
                     </v-list-item>
                   </v-col>
-                </v-row>
-                <v-row class="text-center">
-                  <v-col cols="12">
-                    <v-btn large outlined color="#204051">Update</v-btn>
-                  </v-col>
-                </v-row>
+                </v-row>                
                 <!--UPDATE FORM COMPONENT-->                  
                 <v-row class="text-center pa-3">
                   <v-col cols="12" lg="12">
