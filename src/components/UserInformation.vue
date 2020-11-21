@@ -70,8 +70,8 @@
                 </v-row>                
                 <!--UPDATE FORM COMPONENT-->                  
                 <v-row class="text-center pa-3">
-                  <v-col cols="12" lg="12">
-                    <FormUpdate />
+                  <v-col cols="12" lg="12">                    
+                    <FormUpdate/>                                          
                   </v-col>
                 </v-row>
               </v-card>
