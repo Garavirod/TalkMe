@@ -44,11 +44,20 @@ export default new Vuex.Store({
         ],
              
         // Data progress user        
-        userInfo:{
-            id:1,
-            email:'rodrigo@rodrigo.com',            
+        userInfo:{            
+            email:'rodrigo@rodrigo.com',
+            username:"Garavirod",                       
             country:'Mexico',
-            choosen_langages:['English','French'],
+            choosen_langages:[
+                {
+                    lang:"English",
+                    level:"B2"
+                },
+                {
+                    lang:"French",
+                    level:"A1"
+                }
+            ],
             progress_app: {victories:23,fails:3,medals:5}
         }
     },

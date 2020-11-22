@@ -26,7 +26,7 @@
             Edit password
           </v-btn>
         </v-col>
-        <v-col cols="12"> 
+        <v-col cols="12">
           <v-btn
             small
             outlined
@@ -39,7 +39,7 @@
           </v-btn>
         </v-col>
       </v-row>
-      
+
       <!--FORM USERNAME-->
       <v-dialog v-model="dialogUsername" max-width="500px">
         <v-card>
@@ -61,7 +61,7 @@
               <!--Verify password-->
               <v-col cols="12">
                 <v-text-field
-                  v-model="passauth"                  
+                  v-model="passauth"
                   label="Password authorization"
                   type="password"
                   required
@@ -73,11 +73,12 @@
             <v-btn color="primary" text @click="dialogUsername = false">
               Close
             </v-btn>
-            <v-btn 
-              color="primary" 
-              text 
+            <v-btn
+              color="primary"
+              text
               :disabled="!isValidFormUsername"
-              @click="dialogUsername = false">
+              @click="dialogUsername = false"
+            >
               Update
             </v-btn>
           </v-card-actions>
@@ -95,7 +96,7 @@
               <!--Edit username-->
               <v-col cols="12">
                 <v-text-field
-                  v-model="password1"                  
+                  v-model="password1"
                   :rules="passRules"
                   label="New password"
                   type="password"
@@ -117,7 +118,7 @@
               <!--Verify password-->
               <v-col cols="12">
                 <v-text-field
-                  v-model="passauth"                  
+                  v-model="passauth"
                   label="Password authorization"
                   type="password"
                   required
@@ -129,10 +130,12 @@
             <v-btn color="primary" text @click="dialogPassword = false">
               Close
             </v-btn>
-            <v-btn 
+            <v-btn
               color="primary"
-              :disabled="!isValidFormPass"               
-              text @click="dialogPassword = false">
+              :disabled="!isValidFormPass"
+              text
+              @click="dialogPassword = false"
+            >
               Update
             </v-btn>
           </v-card-actions>
@@ -153,28 +156,79 @@
                   v-model="country"
                   :items="states"
                   menu-props="auto"
-                  label="Select"
+                  label="Nacionality"
                   hide-details
                   prepend-icon="mdi-map"
                   single-line
                 ></v-select>
               </v-col>
               <!--Edit languages list-->
-              <v-col cols="12">
+              <v-col cols="12" lg="6" md="6" sm="12">
                 <v-select
-                  v-model="lnagList"
-                  :items="lang"
-                  :rules="langRules"
-                  chips
+                  v-model="chosenLang"
+                  :items="langList"                  
                   label="Languages list"
-                  multiple
-                  outlined
                 ></v-select>
+              </v-col>
+              <v-col cols="12" lg="6" md="6" sm="12">
+                <v-select
+                  v-model="chosenLevel"
+                  :items="levelsList"                  
+                  label="Level"
+                ></v-select>
+              </v-col>
+              <v-col>
+                <v-btn
+                  small                                    
+                  color="#204051"
+                  outlined                  
+                  text                 
+                  :disabled="!isValidLangList"  
+                  @click="addLanguageToList"                
+                >
+                  Add to my list
+                </v-btn>
+              </v-col>
+              <v-col cols="12">
+                <v-alert
+                  dense
+                  text
+                  type="success"
+                  v-if="alertVisible"
+                >
+                 <strong>{{chosenLang}}</strong> was added into your list successfuly!
+                </v-alert>
+              </v-col>
+              <!--List Level Languages-->
+              <v-col cols="12" class="customScroll">
+                   <v-alert   v-for="lan in chosen_lang" :key="lan.lang"                                                          
+                    color="#204051"
+                    border="left"
+                    elevation="2"
+                    colored-border                                       
+                  >
+                    <strong>{{lan.lang}}</strong>  with level <strong>{{lan.level}}</strong>.
+                    
+                    <v-btn
+                      class="mx-1"
+                      fab
+                      dark
+                      x-small
+                      color="#204051"
+                      elevation="1"
+                      :disabled="chosen_lang.length<2"
+                      @click="removeFromLangList(lan.lang)"
+                    >
+                      <v-icon dark>
+                        mdi-close
+                      </v-icon>
+                    </v-btn>
+                  </v-alert>                                       
               </v-col>
               <!--Verify password-->
               <v-col cols="12">
                 <v-text-field
-                  v-model="passauth"                  
+                  v-model="passauth"
                   label="Password authorization"
                   type="password"
                   required
@@ -186,11 +240,12 @@
             <v-btn color="primary" text @click="dialogLanguages = false">
               Close
             </v-btn>
-            <v-btn 
-              color="primary" 
+            <v-btn
+              color="primary"
               text
-              :disabled="!isValidFromLanguages"               
-              @click="dialogLanguages = false">
+              :disabled="!isValidFromLanguages"              
+              @click="dialogLanguages = false"
+            >
               Update
             </v-btn>
           </v-card-actions>
@@ -200,24 +255,122 @@
   </div>
 </template>
 
+<style>
+.customScroll {
+  width: 100%;
+  max-height: 200px;
+  overflow-x: scroll;
+}
+</style>
+
 <script>
 export default {
   data() {
-    return {      
+    return {
+      // Buttons modals
       dialogPassword: false,
-      dialogLanguages:false,
+      dialogLanguages: false,
       dialogUsername: false,
       notifications: false,
-      country:"Florida",
+      // Alerts
+      alertVisible:false,
+      messageAlert:"",
+      typeAlert:"",
+      iconAlert:"",
+      // Data Levels&Lang
+      country: "Florida",
+      chosen_lang: [
+        {
+          lang:"French",
+          level:"A1",
+        },
+        {
+          lang:"English",
+          level:"B2"
+        },
+        {
+          lang:"German",
+          level:"C1"
+        }
+      ],
+      chosenLang:"",
+      chosenLevel:"",
+      levelsList: ["A1", "A2", "B1", "B2", "C1", "C2"],
+      langList: ["English", "French", "German", "Spanish"],
+      states: [
+        "Alabama",
+        "Alaska",
+        "American Samoa",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Delaware",
+        "District of Columbia",
+        "Federated States of Micronesia",
+        "Florida",
+        "Georgia",
+        "Guam",
+        "Hawaii",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Marshall Islands",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Northern Mariana Islands",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Palau",
+        "Pennsylvania",
+        "Puerto Rico",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        "Vermont",
+        "Virgin Island",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming",
+      ], 
+
+      // Data Password
+      password1: "",
+      password2: "",
+
+      // Data Username
       username: "Garavirod",
       usernameRules: [
         (v) => !!v || "Username is required",
         (v) =>
           (v && v.length >= 8) || "Username must be more than 8 characters",
       ],
-      password1: "",
-      password2: "",
-      passauth:"",
+      passauth: "",
       passRules: [
         (v) => !!v || "Password is required",
         (v) =>
@@ -225,60 +378,73 @@ export default {
       ],
       passRules2: [
         (v) => !!v || "Password is required",
-        (v) => (v && v === this.password1) || "Password must be the same",        
+        (v) => (v && v === this.password1) || "Password must be the same",
       ],
-      langRules:[
-        ()=> this.lnagList.length>0 || "You must choose at least one language"
+      select: [
+        () =>
+          this.langList.length > 0 || "You must choose at least one",
       ],
       sound: true,
-      widgets: false,      
-      lang: ['Englisg', 'French', 'German', 'Spanish'],
-      lnagList: ['French'],
-      states: [
-          'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-          'Arkansas', 'California', 'Colorado', 'Connecticut',
-          'Delaware', 'District of Columbia', 'Federated States of Micronesia',
-          'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
-          'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-          'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
-          'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-          'Missouri', 'Montana', 'Nebraska', 'Nevada',
-          'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-          'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
-          'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
-          'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
-          'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
-        ],
+      widgets: false,          
+     
     };
   },
   computed: {
-    isValidFormUsername(){      
-      if(this.username.length>7 && this.passauth!=="")
-        return true;
-      else
-        return false;
+    isValidFormUsername() {
+      if (this.username.length > 7 && this.passauth !== "") return true;
+      else return false;
     },
-    isValidFormPass(){
-      if((this.password1.length>7) && (this.password2 === this.password1) && (this.passauth!==""))
+    isValidFormPass() {
+      if (
+        this.password1.length > 7 &&
+        this.password2 === this.password1 &&
+        this.passauth !== ""
+      )
         return true;
-      else 
-        return false;
+      else return false;
     },
-    isValidFromLanguages(){
-      return (this.lnagList.length!==0 && this.passauth!=="")? true: false;
+    isValidFromLanguages() {
+      return this.passauth !== "" ? true : false;
+    },
+
+    isValidLangList(){
+      if(this.chosenLang!=="" && this.chosenLevel!==""){
+        return true;        
+      }else{
+        return false;
+      }
     }
   },
   methods: {
     // updateUserName=()=>{
-
     // },
     // updatePassword=()=>{
-
     // },
     // updateLanguagesList=()=>{
-
     // }
+    removeFromLangList(lan){
+      const idx = this.chosen_lang.indexOf(
+        this.chosen_lang.filter(la=>la.lang===lan)[0]
+      );
+      this.chosen_lang.splice(idx,1);
+    },
+    addLanguageToList(){
+      const idx = this.chosen_lang.indexOf(
+        this.chosen_lang.filter(la=>la.lang===this.chosenLang)[0]
+      );
+      if(idx===-1){
+        this.chosen_lang.push({
+          lang:this.chosenLang,
+          level:this.chosenLevel
+        });
+      }
+      this.alertVisible=true;
+      setTimeout(()=>{
+        this.chosenLevel="";
+        this.chosenLang="";
+        this.alertVisible=false;
+      },3000);
+    }
   },
 };
 </script>

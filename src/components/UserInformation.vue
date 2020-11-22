@@ -37,6 +37,7 @@
                     </v-row>
                   </v-col>
                   <v-col cols="12" lg="6" xs="12" sm="8">
+                    <!--EMAIL-->
                     <v-list-item two-line>
                       <v-list-item-content>
                         <v-list-item-title><b>Email</b></v-list-item-title>
@@ -45,7 +46,17 @@
                         }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
+                    <!--USERNAME-->                    
                     <v-list-item two-line>
+                      <v-list-item-content>
+                        <v-list-item-title><b>Username</b></v-list-item-title>
+                        <v-list-item-subtitle>{{
+                          dataUser.username
+                        }}</v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>                   
+                    <!--COUNTRY-->
+                    <v-list-item two-line>                    
                       <v-list-item-content>
                         <v-list-item-title><b>Country</b></v-list-item-title>
                         <v-list-item-subtitle>{{
@@ -53,6 +64,7 @@
                         }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
+                    <!--LANGUGES-->
                     <v-list-item two-line>
                       <v-list-item-content>
                         <v-list-item-title
@@ -60,9 +72,9 @@
                         >
                         <v-list-item-subtitle
                           v-for="language in dataUser.chosen_lan"
-                          :key="language"
+                          :key="language.lang"
                         >
-                          {{ language }}
+                          {{ language.lang }} - {{language.level}}
                         </v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -198,6 +210,7 @@ export default {
     return {
       dataUser: {
         email: "",
+        username:"",        
         chosen_lan: [],
         country: "",
         victories: 0,
@@ -208,6 +221,7 @@ export default {
   },
   created() {
     this.dataUser.email = this.userInfo.email;
+    this.dataUser.username = this.userInfo.username;    
     this.dataUser.country = this.userInfo.country;
     this.dataUser.chosen_lan = this.userInfo.choosen_langages;
     this.dataUser.victories = this.userInfo.progress_app.victories;
