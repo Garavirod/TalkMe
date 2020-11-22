@@ -2,7 +2,7 @@
 <v-row justify="center">
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn outlined color="#3b6978" dark v-bind="attrs" v-on="on" small>
+            <v-btn outlined color="#204051" dark v-bind="attrs" v-on="on" small>
                 Filter by
             </v-btn>
         </template>
