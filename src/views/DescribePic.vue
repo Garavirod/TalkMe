@@ -66,8 +66,7 @@ export default {
             const key = "g9RhX8mCpp5TjdicEI4UCpckeh5zPXl7k3dckGbeE34";
             const keyword = "people";
             const limit = 10;
-            const url = `https://api.unsplash.com/search/photos?page=${limit}&query=${keyword}&client_id=${key}`;
-            // this.current_image="https://api.unsplash.com/search/photos?page=2&query=office";
+            const url = `https://api.unsplash.com/search/photos?page=${limit}&query=${keyword}&client_id=${key}`;            
             await axios.get(url)
             .then((data)=>{
                 this.current_image=data.data.results[0].urls.thumb;
