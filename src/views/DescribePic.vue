@@ -55,7 +55,7 @@
                                 <v-img :src="current_image"  aspect-ratio="1" class="grey lighten-2" max-height="500">
                                     <template>
                                         <v-row class="fill-height ma-0" align="center" justify="center">
-                                            <v-progress-circular indeterminate color="blue" v-if="preload"></v-progress-circular>
+                                            <v-progress-circular indeterminate color="#3b6978" v-if="preload"></v-progress-circular>
                                         </v-row>
                                     </template>
                                 </v-img>
@@ -107,15 +107,13 @@ export default {
             this.current_image="";
             this.preload=true;
             const key = "g9RhX8mCpp5TjdicEI4UCpckeh5zPXl7k3dckGbeE34";            
-            const limit = 12;
+            const limit = 20;
             const url = `https://api.unsplash.com/search/photos?per_page=${limit}&query=${this.kwordFilter}&client_id=${key}`;            
             await axios.get(url)
             .then((data)=>{
                 this.picturesResults = data.data.results; 
                 this.current_image= this.picturesResults[this.idxPictArray].urls.full;
                 this.preload=false;
-
-                // console.log(this.picturesResults);
             })
             .catch(err=>{
                 console.log("Error on pettition",err);
