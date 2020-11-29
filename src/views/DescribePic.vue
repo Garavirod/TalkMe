@@ -52,7 +52,7 @@
                         <!--PICTURE-->
                         <v-row class="text-center">
                             <v-col cols="12" lg="9" md="12" xs="12" sm="12" class="mx-auto">
-                                <v-img :src="current_image"  aspect-ratio="1" class="grey lighten-2" max-height="500">
+                                <v-img :src="current_image"  aspect-ratio="1" class="grey lighten-2 animate__animated animate__fadeInDown" max-height="500">
                                     <template>
                                         <v-row class="fill-height ma-0" align="center" justify="center">
                                             <v-progress-circular indeterminate color="#3b6978" v-if="preload"></v-progress-circular>
@@ -77,7 +77,6 @@
 import SectionCard from "../components/SectionCard";
 import AudioControls from "../components/AudioControls";
 import CluesPicture from "../components/CluesPicture";
-// import FliterPicture from "../components/FiltersPicture";
 import axios from "axios";
 export default {
     name: "DescribePic",    
@@ -85,7 +84,6 @@ export default {
         SectionCard,
         AudioControls,
         CluesPicture,
-        // FliterPicture
     },
     data: () => ({
         preload:true,
@@ -107,25 +105,25 @@ export default {
             this.current_image="";
             this.preload=true;
             const key = "g9RhX8mCpp5TjdicEI4UCpckeh5zPXl7k3dckGbeE34";            
-            const limit = 20;
+            const limit = 50;
             const url = `https://api.unsplash.com/search/photos?per_page=${limit}&query=${this.kwordFilter}&client_id=${key}`;            
             await axios.get(url)
-            .then((data)=>{
+            .then((data)=>{                
                 this.picturesResults = data.data.results; 
-                this.current_image= this.picturesResults[this.idxPictArray].urls.full;
-                this.preload=false;
+                this.current_image = this.picturesResults[this.idxPictArray].urls.full;
+                this.preload = false;
             })
             .catch(err=>{
                 console.log("Error on pettition",err);
             });
         },
-        changeNextPicture(){
+        changeNextPicture(){            
             if(this.idxPictArray<this.picturesResults.length-1){
-                this.idxPictArray +=1;
+                this.idxPictArray += 1;
             }else{
                 this.idxPictArray = 0;                
             }
-            this.current_image= this.picturesResults[this.idxPictArray].urls.full;
+            this.current_image = this.picturesResults[this.idxPictArray].urls.full;            
         }
     },
     created() {
