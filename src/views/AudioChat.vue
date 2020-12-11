@@ -62,15 +62,7 @@ export default {
             speaker: "Rodrigo"
         };
     },
-    // mounted() {
-    //     this.setChatList(true);
-    //     console.log(this.chatList);
-    // },
-    // beforeDestroy() {
-    //     this.setChatList(false);
-    //     console.log(this.chatList);
-    // }
-     methods: {
+    methods: {
         /* Access store methods */
         ...mapMutations(["socketConnection","socketDisconn"])
     },

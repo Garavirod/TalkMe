@@ -43,7 +43,7 @@
                             </v-card-text>
                             <!--AUDIO CONTROLS-->
                         </v-card>
-                        <AudioControls />
+                        <AudioControls :ctr_send="false" />
                     </v-card>
 
                 </v-col>

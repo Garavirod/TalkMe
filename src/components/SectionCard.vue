@@ -8,10 +8,13 @@
             </v-col>
             <v-col cols="12" lg="6" md="6" xs="12">
                 <v-row class="text-center">
-                    <v-col cols="12">
+                    <v-col cols="12" lg="6">
                         <v-btn color="#febf63" small depressed @click="dialog = !dialog">Read instructions</v-btn>
                     </v-col>
-                </v-row>
+                    <v-col cols="12" lg="6" >
+                        <v-btn  text color="#204051" outlined small depressed to="/sections">Back to sections</v-btn>
+                    </v-col>
+                </v-row>               
             </v-col>
         </v-row>
 

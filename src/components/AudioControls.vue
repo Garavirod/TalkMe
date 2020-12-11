@@ -15,7 +15,15 @@
         </v-select>
     </v-col>
     <v-col cols="12">
-        <v-btn @click="pingServer" small class="mx-2" fab dark color="#3b6978">
+        <v-btn
+            v-if="ctr_send" 
+            @click="pingServer" 
+            small 
+            class="mx-2" 
+            fab 
+            dark 
+            color="#3b6978"
+        >
             <v-icon dark>mdi-send</v-icon>
         </v-btn>
         <v-btn 
@@ -219,9 +227,6 @@ export default {
             })
         }
 
-    },
-    destroyed(){
-        
     }
 }
 </script>

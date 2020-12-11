@@ -57,16 +57,13 @@ import {
 export default {
     name: "Sections",
     computed: {
-        ...mapState(["sections", "isActiveOnChat"]),
+        ...mapState(["sections"]),
     },
     components: {
 
     },
     data() {
         return {};
-    },
-    created(){
-        console.log(this.isActiveOnChat);
     }
 };
 </script>

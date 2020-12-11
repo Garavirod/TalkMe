@@ -62,7 +62,7 @@
                             </v-col>
                         </v-row>
                         <!--AUDIO CONTROLS COMPONENT-->
-                        <AudioControls />
+                        <AudioControls :ctr_send="false" />
                     </v-card>
                 </v-col>
             </v-row>

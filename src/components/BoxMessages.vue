@@ -29,7 +29,7 @@
                 </v-virtual-scroll>
                 <v-divider></v-divider>
                 <!--BUTTONS CONTROLS-->
-                <AudioControls />
+                <AudioControls :ctr_send="true" />
             </v-card>
         </v-col>
     </v-row>
