@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import io from 'socket.io-client';
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        /* SOCKET VARIABLES */
+        socket:null,
+        endpointConn:'http://localhost:5000',
+        isActiveOnChat:false,
+        /* FLAG TO KNOW IF USER IS LOGGED */
         isLogged:false,
+        /* GENERAL INFORMATION ABOUT APP SECTIONS */
         sections: [{
                 name: 'Audio Chat',
                 img: require('../assets/ilustration2.png'),
@@ -43,7 +49,7 @@ export default new Vuex.Store({
             }
         ],
              
-        // Data progress user        
+        // DATA PROGRESS USER OBJ      
         userInfo:{            
             email:'rodrigo@rodrigo.com',
             username:"Garavirod",                       
@@ -61,11 +67,22 @@ export default new Vuex.Store({
             progress_app: {victories:23,fails:3,medals:5}
         }
     },
-    mutations: {
-        setChatList(state, value) {
-            state.chatList = value;
+    mutations: {    
+        socketConnection(state){
+            /* Initialization socket */
+            state.socket = io.connect(state.endpointConn,{
+                transports:['websocket']
+            });
+            if(state.socket.connected){
+                state.isActiveOnChat = true;
+            }
         },
-
+        socketDisconn(state){
+            /* Disconnect socket */
+            state.socket.disconnect();
+            state.socket = null;
+            state.isActiveOnChat = false;            
+        }
     },
     actions: {},
     modules: {}

@@ -57,7 +57,7 @@ import {
 export default {
     name: "Sections",
     computed: {
-        ...mapState(["sections"]),
+        ...mapState(["sections", "isActiveOnChat"]),
     },
     components: {
 
@@ -65,5 +65,8 @@ export default {
     data() {
         return {};
     },
+    created(){
+        console.log(this.isActiveOnChat);
+    }
 };
 </script>

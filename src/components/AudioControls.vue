@@ -15,7 +15,7 @@
         </v-select>
     </v-col>
     <v-col cols="12">
-        <v-btn small class="mx-2" fab dark color="#3b6978">
+        <v-btn @click="pingServer" small class="mx-2" fab dark color="#3b6978">
             <v-icon dark>mdi-send</v-icon>
         </v-btn>
         <v-btn 
@@ -66,9 +66,13 @@
 
 <script>
 import swal from 'sweetalert';
+import { mapState } from "vuex";
 export default {
     name: "AudioControls",
     props: ['ctr_send'],
+    computed:{
+        ...mapState(['socket'])
+    },
     data() {
         return {
             isrecording: false,
@@ -80,7 +84,8 @@ export default {
             min:0,
             sec:0,
             initTime:null,
-            idInterval:null,            
+            idInterval:null, 
+            recording:null,
         }
     },
     methods:{
@@ -127,8 +132,8 @@ export default {
                             // a.style = "display: none";
                             // a.href = urlParaDescargar;                            
                             // a.download = "recording_blumin.webm";
-                            let recording = document.getElementById('audioPlay');
-                            recording.src = urlParaDescargar;                            
+                            this.recording = document.getElementById('audioPlay');
+                            this.recording.src = urlParaDescargar;                            
                             // console.log(a);
                             // Hacer click en el enlace
                             // a.click();
@@ -183,10 +188,14 @@ export default {
             this.hrs = 0;
             this.min = 0;
             this.sec = 0;
+        },
+        pingServer(){
+            this.socket.emit('audio-msg','hola');
         }
     },
     created(){
-
+        
+        /* Verify supporting UserMedia */
         const hasSupport = !!(navigator.mediaDevices.getUserMedia);
         /* 
             When component were created this block verifies
@@ -210,6 +219,9 @@ export default {
             })
         }
 
+    },
+    destroyed(){
+        
     }
 }
 </script>

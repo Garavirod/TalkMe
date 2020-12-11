@@ -43,10 +43,10 @@
 import SectionCard from "../components/SectionCard";
 import BoxMessages from "../components/BoxMessages";
 import List from "../components/List";
-// import {
-//     mapMutations,
-//     mapState
-// } from "vuex";
+import {
+    mapMutations,
+    
+} from "vuex";
 export default {
     name: "AudioChat",
     components: {
@@ -62,12 +62,6 @@ export default {
             speaker: "Rodrigo"
         };
     },
-    computed: {
-        // ...mapState(["chatList"])
-    },
-    methods: {
-        // ...mapMutations(["setChatList"])
-    },
     // mounted() {
     //     this.setChatList(true);
     //     console.log(this.chatList);
@@ -76,5 +70,17 @@ export default {
     //     this.setChatList(false);
     //     console.log(this.chatList);
     // }
+     methods: {
+        /* Access store methods */
+        ...mapMutations(["socketConnection","socketDisconn"])
+    },
+    created() {
+        /* Calls for socket connection method from store */
+        this.socketConnection();
+    },
+    destroyed() {
+        /* Calls for socket connection method from store */
+        this.socketDisconn();
+    },
 };
 </script>
