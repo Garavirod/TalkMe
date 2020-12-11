@@ -1,5 +1,5 @@
 <template>
-<v-container fluid class="ma-0 pa-4 containerSection">
+<v-container fluid class="ma-0 pa-4 containerSection animate__animated animate__fadeInRight">
     <v-row class="section rounded-md ma-4 pa-2" justify="space-around" v-for="sec in sections" :key="sec.id">
         <v-col cols="12" lg="4" sm="6" xs="12" md="6">
             <div>

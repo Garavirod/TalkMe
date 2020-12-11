@@ -2,7 +2,7 @@
 <v-container fluid class="ma-0 pa-0">
     <v-row class="ma-3">
         <!--WELCOME-->
-        <v-col cols="12" lg="12">
+        <v-col cols="12" lg="12" class="animate__animated animate__fadeInDown">
             <v-alert border="left" colored-border color="#204051" elevation="2">
                 <v-row class="text-center">
                     <v-col>
@@ -23,7 +23,7 @@
             </v-alert>
         </v-col>
         <!--PERSONAL INFROMATION-->
-        <v-col cols="12" lg="12">
+        <v-col cols="12" lg="12" class="animate__animated animate__fadeInUp">
             <UserInfromationVue />
         </v-col>
     </v-row>
