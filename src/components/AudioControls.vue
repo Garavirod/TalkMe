@@ -7,11 +7,11 @@
           :items="listDevices"     
           :hint="`${itemDevice.label} ${itemDevice.devId}`"     
           item-text="label"
-          item-value="devId"
+          item-value="devId"          
           persistent-hint
           return-object
           single-line
-          label="Choose an audio devices">
+          label="Choose an audio device">
         </v-select>
     </v-col>
     <v-col cols="12">
@@ -41,13 +41,16 @@
             <v-icon dark>mdi-stop</v-icon>
         </v-btn>
     </v-col>
-    <v-col v-if="isrecording">
+    <v-col v-if="isrecording" cols="12">
         <v-row class="text-center outlined">
             <v-col cols="12" lg="4" xs="4" sm="4">{{hrs}}</v-col>
             <v-col cols="12" lg="4" xs="4" sm="4">{{min}}</v-col>
             <v-col cols="12" lg="4" xs="4" sm="4">{{sec}}</v-col>
         </v-row>
     </v-col>
+    <v-col cols="12">
+        <audio controls id="audioPlay"></audio>        
+    </v-col>    
 </v-row>
 </template>
 
@@ -55,9 +58,14 @@
 #AudioComponent {
     background: white;
 }
+
+#audioPlay{
+    width: 60%;
+}
 </style>
 
 <script>
+import swal from 'sweetalert';
 export default {
     name: "AudioControls",
     props: ['ctr_send'],
@@ -72,7 +80,7 @@ export default {
             min:0,
             sec:0,
             initTime:null,
-            idInterval:null
+            idInterval:null,            
         }
     },
     methods:{
@@ -82,8 +90,11 @@ export default {
          */
         startRecording(){            
             if(!this.listDevices.length){
-                alert("There is not devices!");            
-            }else{
+                swal("Oops!","There's no devices for recording","error");                
+            }else if(this.itemDevice.label==='' && this.itemDevice.devId===''){
+                swal("Oops!","You forgot choosing a device","warning");
+            }
+            else{
                 this.isrecording = !this.isrecording;
                 navigator.mediaDevices.getUserMedia(
                     {
@@ -106,19 +117,23 @@ export default {
                             this.stopCounting();
                             // Convertir los fragmentos a un objeto binario
                             const blobAudio = new Blob(this.audioFragments);
+                            // Empty audio fragments
                             this.audioFragments=[];
                             // Crear una URL o enlace para descargar
-                            const urlParaDescargar = URL.createObjectURL(blobAudio);
+                            const urlParaDescargar = window.URL.createObjectURL(blobAudio);
                             // Crear un elemento <a> invisible para descargar el audio
-                            let a = document.createElement("a");
-                            document.body.appendChild(a);
-                            a.style = "display: none";
-                            a.href = urlParaDescargar;
-                            a.download = "grabacion_blumin.me.webm";
+                            // let a = document.createElement("a");
+                            // document.body.appendChild(a);
+                            // a.style = "display: none";
+                            // a.href = urlParaDescargar;                            
+                            // a.download = "recording_blumin.webm";
+                            let recording = document.getElementById('audioPlay');
+                            recording.src = urlParaDescargar;                            
+                            // console.log(a);
                             // Hacer click en el enlace
-                            a.click();
+                            // a.click();
                             // Y remover el objeto
-                            window.URL.revokeObjectURL(urlParaDescargar);
+                            // window.URL.revokeObjectURL(urlParaDescargar);
                             this.isrecording = !this.isrecording;
                     });
                 })
@@ -178,7 +193,7 @@ export default {
             if the webborwoser suppotrs MediaRecorder.
          */
         if(typeof MediaRecorder === "undefined" || !hasSupport){
-            alert("Your borwser not support this tachnology, please get upload it");
+            swal("Oops!","Your borwser not support this tachnology, please get upload it","error");           
         }else{
             navigator.mediaDevices.enumerateDevices()
             .then(devices=>{

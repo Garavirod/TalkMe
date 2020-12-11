@@ -21,8 +21,7 @@
                                 <v-img :src="item.avatar"></v-img>
                             </v-list-item-avatar>
                             <v-list-item-content>
-                                <audio src="audio.ogg" controls class="ml-2">
-                                    <p>Tu navegador no implementa el elemento audio</p>
+                                <audio controls class="ml-2" id="audioBox">                                    
                                 </audio>
                             </v-list-item-content>
                         </v-list-item>
@@ -38,13 +37,17 @@
 </template>
 
 <style>
-audio {
+/* audio {
     -moz-border-radius: 7px 7px 7px 7px;
     -webkit-border-radius: 7px 7px 7px 7px;
     border-radius: 20px;
     background-color: white;
     width: 100px;
 
+} */
+
+#audioBox{
+    width: 60%;
 }
 </style>
 
