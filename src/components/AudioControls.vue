@@ -17,7 +17,7 @@
     <v-col cols="12">
         <v-btn
             v-if="ctr_send" 
-            @click="pingServer" 
+            @click="sendAudio" 
             small 
             class="mx-2" 
             fab 
@@ -94,6 +94,7 @@ export default {
             initTime:null,
             idInterval:null, 
             recording:null,
+            blobAudio:null,
         }
     },
     methods:{
@@ -129,11 +130,11 @@ export default {
                             // Detener la cuenta regresiva
                             this.stopCounting();
                             // Convertir los fragmentos a un objeto binario
-                            const blobAudio = new Blob(this.audioFragments);
+                            this.blobAudio = new Blob(this.audioFragments);
                             // Empty audio fragments
                             this.audioFragments=[];
                             // Crear una URL o enlace para descargar
-                            const urlParaDescargar = window.URL.createObjectURL(blobAudio);
+                            const urlParaDescargar = window.URL.createObjectURL(this.blobAudio);
                             // Crear un elemento <a> invisible para descargar el audio
                             // let a = document.createElement("a");
                             // document.body.appendChild(a);
@@ -197,8 +198,12 @@ export default {
             this.min = 0;
             this.sec = 0;
         },
-        pingServer(){
-            this.socket.emit('audio-msg','hola');
+        sendAudio(){
+            const mes = {
+                audio: this.blobAudio,
+                user:'Garvairod'
+            }
+            this.socket.emit('audio-msg',mes);
         }
     },
     created(){
