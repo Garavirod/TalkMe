@@ -10,14 +10,14 @@ export default new Vuex.Store({
         endpointConn:'http://localhost:5000',
         isActiveOnChat:false,
         /* FLAG TO KNOW IF USER IS LOGGED */
-        isLogged:false,
+        isLogged:true,
         /* GENERAL INFORMATION ABOUT APP SECTIONS */
         sections: [{
                 name: 'Audio Chat',
                 img: require('../assets/ilustration2.png'),
                 description: 'Speak with other person who are learing too',
-                path: '/audio-chat',
-                component: 'AudioChat'
+                path: '/people-active',
+                component: ''
             },
             {
                 name: 'Speaking fight',

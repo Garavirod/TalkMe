@@ -10,6 +10,7 @@ import Welcome from '../views/Welcome'
 import Situations from "../views/Situations";
 import Situation from "../views/Situation";
 import AudiosHistory from "../views/AudiosHistory";
+import PeopleActiveChat from '../views/PeopleActiveChat';
 
 Vue.use(VueRouter)
 
@@ -24,7 +25,7 @@ const routes = [{
         component: Sections
     },
     {
-        path: '/audio-chat',
+        path: '/audio-chat/:id',
         name: 'AudioChat',
         component: AudioChat
     },
@@ -62,6 +63,11 @@ const routes = [{
         path: '/audios-history',
         name: 'Audios-History',
         component: AudiosHistory
+    },
+    {
+        path: '/people-active',
+        name:'People-Active',
+        component: PeopleActiveChat
     }
 
 ]

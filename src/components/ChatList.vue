@@ -16,7 +16,7 @@
                 </v-list-item>
 
                 <v-card-actions>
-                    <v-btn text>Choose</v-btn>
+                    <v-btn text :to="{name:'AudioChat', params: {'id':item.uid}}">Choose</v-btn>
                 </v-card-actions>
             </v-card>
         </v-col>
@@ -33,6 +33,7 @@ export default {
                 active: false,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+                uid:'1'
             },
             {
                 user: "Julian",
@@ -40,6 +41,7 @@ export default {
                 active: true,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+                uid:'2'
             },
             {
                 user: "Julian",
@@ -47,6 +49,7 @@ export default {
                 active: false,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
+                uid:'3'
             },
             {
                 user: "Julian",
@@ -54,6 +57,7 @@ export default {
                 active: false,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+                uid:'4'
             },
             {
                 user: "Julian",
@@ -61,6 +65,7 @@ export default {
                 active: true,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+                uid:'5'
             },
             {
                 user: "Julian",
@@ -68,6 +73,7 @@ export default {
                 active: false,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+                uid:'6'
             },
             {
                 user: "Julian",
@@ -75,6 +81,7 @@ export default {
                 active: false,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+                uid:'7'
             },
             {
                 user: "Julian",
@@ -82,6 +89,7 @@ export default {
                 active: true,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+                uid:'8'
             },
             {
                 user: "Rusia",
@@ -89,6 +97,7 @@ export default {
                 active: false,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+                uid:'9'
             },
             {
                 user: "Rosa",
@@ -96,6 +105,7 @@ export default {
                 active: true,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+                uid:'10'
             },
             {
                 user: "Julian",
@@ -103,6 +113,7 @@ export default {
                 active: false,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+                uid:'11'
             },
             {
                 user: "Julian",
@@ -110,6 +121,7 @@ export default {
                 active: true,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+                uid:'12'
             },
             {
                 user: "Julian",
@@ -117,6 +129,7 @@ export default {
                 active: false,
                 level: "Advanced",
                 avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+                uid:'13'
             },
         ],
     }),
