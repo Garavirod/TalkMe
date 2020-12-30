@@ -14,60 +14,98 @@ import PeopleActiveChat from '../views/PeopleActiveChat';
 
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+    {
+        path:'*',
+        redirect: '/'
+    },
+    {
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta:{
+            isPrivate:false
+        }
     },
     {
         path: '/sections',
         name: 'Sections',
-        component: Sections
+        component: Sections,
+        meta:{
+            isPrivate:true
+        }
     },
     {
         path: '/audio-chat/:id',
         name: 'AudioChat',
-        component: AudioChat
+        component: AudioChat,
+        meta:{
+            isPrivate:true
+        }
     },
     {
         path: '/describe-pictures',
         name: 'DescribePic',
-        component: DescribePic
+        component: DescribePic,
+        meta:{
+            isPrivate:true
+        }
     },
     {
         path: '/reading',
         name: 'ReadingLoud',
-        component: Reading
+        component: Reading,
+        meta:{
+            isPrivate:true
+        }
     },
     {
         path: '/speaking-fight',
         name: 'SpeakingFight',
-        component: SpeakingFight
+        component: SpeakingFight,
+        meta:{
+            isPrivate:true
+        }
     },
     {
         path: '/welcome',
         name:'Welcome',
-        component:Welcome
+        component:Welcome,
+        meta:{
+            isPrivate:true
+        }
     },
     {
         path: '/situations',
         name:'Situations',
-        component:Situations
+        component:Situations,
+        meta:{
+            isPrivate:true
+        }
     },
     {
         path: '/situation/:id',
         name:'Situation',
-        component:Situation
+        component:Situation,
+        meta:{
+            isPrivate:true
+        }
     },
     {
         path: '/audios-history',
         name: 'Audios-History',
-        component: AudiosHistory
+        component: AudiosHistory,
+        meta:{
+            isPrivate:true
+        }
     },
     {
         path: '/people-active',
         name:'People-Active',
-        component: PeopleActiveChat
+        component: PeopleActiveChat,
+        meta:{
+            isPrivate:true
+        }
     }
 
 ]
@@ -77,5 +115,16 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
+
+// Router protection
+router.beforeEach((to, from, next) => {
+    const requiresAuth = to.matched.some ( r => r.meta.isPrivate );
+    const userLogged = false;
+    if( !userLogged && requiresAuth ){
+        next('Home');
+    }else{
+        next();
+    }
+});
 
 export default router

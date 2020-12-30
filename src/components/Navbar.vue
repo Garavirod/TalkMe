@@ -38,16 +38,9 @@
                     <v-list-item-title>
                         Audios history
                     </v-list-item-title>
-                </v-list-item>
+                </v-list-item>              
 
-                <v-list-item>
-                    <v-list-item-icon>
-                        <v-icon>mdi-account-settings</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-title>Settings</v-list-item-title>
-                </v-list-item>
-
-                <v-list-item :to="{name:'Home'}">
+                <v-list-item :to="{path:'/'}">
                     <v-list-item-icon>
                         <v-icon>mdi-logout</v-icon>
                     </v-list-item-icon>
