@@ -10,7 +10,7 @@ export default new Vuex.Store({
         endpointConn:'http://localhost:5000',
         isActiveOnChat:false,
         /* FLAG TO KNOW IF USER IS LOGGED */
-        isLogged:true,
+        isLogged:false,
         /* GENERAL INFORMATION ABOUT APP SECTIONS */
         sections: [{
                 name: 'Audio Chat',
