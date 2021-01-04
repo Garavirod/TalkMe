@@ -296,8 +296,7 @@ export default {
             }
           );
           this.dialog = false;          
-          this.$router.push('Welcome');     
-          console.log(this.userInfo);          
+          this.$router.push('Welcome');               
                     
         })
         .catch(err=>{
