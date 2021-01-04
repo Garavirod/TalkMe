@@ -58,7 +58,8 @@ export default new Vuex.Store({
             progress_app: {victories:0,fails:0,medals:0},
             online:false,
             uid:null,
-            isLogged:false,            
+            isLogged:false,
+            token:null            
         }
     },
     mutations: {    
@@ -78,7 +79,6 @@ export default new Vuex.Store({
             state.isActiveOnChat = false;            
         },
         setUserInformation(state, payload){           
-            localStorage.setItem('blumin-tkn',payload.token);
             state.userInfo.email = payload.email;
             state.userInfo.username = payload.username;
             state.userInfo.country = payload.country;
@@ -88,10 +88,12 @@ export default new Vuex.Store({
             state.userInfo.progress_app.medals = payload.medals;
             state.userInfo.uid = payload.uid;
             state.userInfo.isLogged = true;
+            state.userInfo.token = payload.token
+            // Save on storage
+            localStorage.setItem('blumin-user',JSON.stringify(state.userInfo));
         },
 
         resetUserInfromation(state){
-            localStorage.removeItem('blumin-tkn');
             state.userInfo.email = "";
             state.userInfo.username = "";
             state.userInfo.country = "";
@@ -101,6 +103,9 @@ export default new Vuex.Store({
             state.userInfo.progress_app.medals = 0;
             state.userInfo.uid = null;
             state.userInfo.isLogged = false;
+            state.userInfo.token = null;
+            // Remove from local storage
+            localStorage.removeItem('blumin-user');
         }
     },
     actions: {},

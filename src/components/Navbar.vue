@@ -6,11 +6,11 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <!--RESPOSNIVE NAVIGATIOR-->
-        <v-app-bar-nav-icon v-if="userInfo.isLogged" color="#ffff" @click="drawer = true"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon v-if="isLogged" color="#ffff" @click="drawer = true"></v-app-bar-nav-icon>
         <!-- REGISTER COMPONENT -->
-        <Register v-if="!userInfo.isLogged" />
+        <Register v-if="!isLogged" />
         <!-- LOGIN COMPONENT -->
-        <Login v-if="!userInfo.isLogged" />
+        <Login v-if="!isLogged" />
     </v-app-bar>
 
     <!--NAVIGATION RESPONSIVE-->
@@ -40,8 +40,8 @@
                     </v-list-item-title>
                 </v-list-item>              
 
-                <v-list-item :to="{path:'/'}">
-                    <v-list-item-icon>
+                <v-list-item @click="Logout">
+                    <v-list-item-icon >
                         <v-icon>mdi-logout</v-icon>
                     </v-list-item-icon>
                     <v-list-item-title>Log out</v-list-item-title>
@@ -71,9 +71,7 @@
 <script>
 import Login from "../components/Login";
 import Register from "../components/Register";
-import {
-    mapState
-} from "vuex";
+
 export default {
     name: "Navbar",
     components: {
@@ -81,10 +79,26 @@ export default {
         Register,
     },
     data: () => ({
-        drawer: false,
+        drawer: false,        
+        isLogged:false
     }),
     computed: {
-        ...mapState(["userInfo"]),
+       
     },
+    methods:{
+        Logout(){
+            localStorage.removeItem('blumin-tkn');
+            this.isLogged = false;
+            this.$router.push('Home');
+
+        },
+        verifyTokenUser(){
+            const tkn = localStorage.getItem('blumin-tkn') || null;
+            this.isLogged = (tkn) ? true: false;        
+        }
+    },
+    created(){
+        this.verifyTokenUser();
+    }
 };
 </script>

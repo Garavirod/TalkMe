@@ -12,6 +12,7 @@ import Situation from "../views/Situation";
 import AudiosHistory from "../views/AudiosHistory";
 import PeopleActiveChat from '../views/PeopleActiveChat';
 
+
 Vue.use(VueRouter)
 
 const routes = [

@@ -42,7 +42,7 @@
                       <v-list-item-content>
                         <v-list-item-title><b>Email</b></v-list-item-title>
                         <v-list-item-subtitle>{{
-                          userInfo.email
+                          dataUser.email
                         }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -51,7 +51,7 @@
                       <v-list-item-content>
                         <v-list-item-title><b>Username</b></v-list-item-title>
                         <v-list-item-subtitle>{{
-                          userInfo.username
+                          dataUser.username
                         }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>                   
@@ -60,7 +60,7 @@
                       <v-list-item-content>
                         <v-list-item-title><b>Country</b></v-list-item-title>
                         <v-list-item-subtitle>{{
-                          userInfo.country
+                          dataUser.country
                         }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -71,7 +71,7 @@
                           ><b>Choosen lenguages</b></v-list-item-title
                         >
                         <v-list-item-subtitle
-                          v-for="l in userInfo.choosen_langages"
+                          v-for="l in dataUser.chosen_lan"
                           :key="l.language"
                         >
                           {{ l.language }} - {{l.level}}
@@ -119,7 +119,7 @@
                     <p>Victories</p>
                   </v-col>
                   <v-col cols="12" sm="4" lg="4" xs="12">{{
-                    userInfo.progress_app.victories
+                    dataUser.victories
                   }}</v-col>
 
                   <!--FAILS-->
@@ -137,7 +137,7 @@
                     <p>Fails</p>
                   </v-col>
                   <v-col cols="12" sm="4" lg="4" xs="12">{{
-                    userInfo.progress_app.fails
+                    dataUser.fails
                   }}</v-col>
                   <!--MEDALS-->
                   <v-col cols="12" sm="4" lg="4" xs="12">
@@ -154,7 +154,7 @@
                     <p>Medals</p>
                   </v-col>
                   <v-col cols="12" sm="4" lg="4" xs="12">{{
-                    userInfo.progress_app.medals
+                    dataUser.medals
                   }}</v-col>
                 </v-row>
               </v-card>
@@ -196,7 +196,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import Axios from 'axios';
 import FormUpdate from "../components/FormUpdate";
 export default {
   name: "UserInformation",
@@ -204,7 +204,7 @@ export default {
     FormUpdate,
   },
   computed: {
-    ...mapState(["userInfo"]),
+
   },
   data() {
     return {
@@ -219,14 +219,28 @@ export default {
       },
     };
   },
-  // created() {
-  //   this.dataUser.email = this.userInfo.email;
-  //   this.dataUser.username = this.userInfo.username;    
-  //   this.dataUser.country = this.userInfo.country;
-  //   this.dataUser.chosen_lan = this.userInfo.choosen_langages;
-  //   this.dataUser.victories = this.userInfo.progress_app.victories;
-  //   this.dataUser.fails = this.userInfo.progress_app.fails;
-  //   this.dataUser.medals = this.userInfo.progress_app.medals;
-  // },
+
+  methods:{
+    async getUserInformation(){
+      const {uid} = JSON.parse(localStorage.getItem('blumin-tkn'));
+      await Axios.get(`${process.env.VUE_APP_API}/user-info/${uid}`)
+      .then(res => {
+        console.log(res);
+        this.dataUser.username = res.data.userInfo.username;
+        this.dataUser.email = res.data.userInfo.email;
+        this.dataUser.chosen_lan = res.data.userInfo.languages;
+        this.dataUser.country = res.data.userInfo.country;
+        this.dataUser.victories = res.data.userInfo.victories;
+        this.dataUser.fails = res.data.userInfo.fails;
+        this.dataUser.medals = res.data.userInfo.medals;
+      })
+      .catch(err => {
+        console.log(err);
+      });            
+    }
+  },
+  created() {
+    this.getUserInformation();
+  },
 };
 </script>
