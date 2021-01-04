@@ -6,11 +6,11 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <!--RESPOSNIVE NAVIGATIOR-->
-        <v-app-bar-nav-icon v-if="isLogged" color="#ffff" @click="drawer = true"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon v-if="userInfo.isLogged" color="#ffff" @click="drawer = true"></v-app-bar-nav-icon>
         <!-- REGISTER COMPONENT -->
-        <Register v-if="!isLogged" />
+        <Register v-if="!userInfo.isLogged" />
         <!-- LOGIN COMPONENT -->
-        <Login v-if="!isLogged" />
+        <Login v-if="!userInfo.isLogged" />
     </v-app-bar>
 
     <!--NAVIGATION RESPONSIVE-->
@@ -84,7 +84,7 @@ export default {
         drawer: false,
     }),
     computed: {
-        ...mapState(["isLogged"]),
+        ...mapState(["userInfo"]),
     },
 };
 </script>

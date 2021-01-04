@@ -42,7 +42,7 @@
                       <v-list-item-content>
                         <v-list-item-title><b>Email</b></v-list-item-title>
                         <v-list-item-subtitle>{{
-                          dataUser.email
+                          userInfo.email
                         }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -51,7 +51,7 @@
                       <v-list-item-content>
                         <v-list-item-title><b>Username</b></v-list-item-title>
                         <v-list-item-subtitle>{{
-                          dataUser.username
+                          userInfo.username
                         }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>                   
@@ -60,7 +60,7 @@
                       <v-list-item-content>
                         <v-list-item-title><b>Country</b></v-list-item-title>
                         <v-list-item-subtitle>{{
-                          dataUser.country
+                          userInfo.country
                         }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -71,10 +71,10 @@
                           ><b>Choosen lenguages</b></v-list-item-title
                         >
                         <v-list-item-subtitle
-                          v-for="language in dataUser.chosen_lan"
-                          :key="language.lang"
+                          v-for="l in userInfo.choosen_langages"
+                          :key="l.language"
                         >
-                          {{ language.lang }} - {{language.level}}
+                          {{ l.language }} - {{l.level}}
                         </v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -119,7 +119,7 @@
                     <p>Victories</p>
                   </v-col>
                   <v-col cols="12" sm="4" lg="4" xs="12">{{
-                    dataUser.victories
+                    userInfo.progress_app.victories
                   }}</v-col>
 
                   <!--FAILS-->
@@ -137,7 +137,7 @@
                     <p>Fails</p>
                   </v-col>
                   <v-col cols="12" sm="4" lg="4" xs="12">{{
-                    dataUser.fails
+                    userInfo.progress_app.fails
                   }}</v-col>
                   <!--MEDALS-->
                   <v-col cols="12" sm="4" lg="4" xs="12">
@@ -154,7 +154,7 @@
                     <p>Medals</p>
                   </v-col>
                   <v-col cols="12" sm="4" lg="4" xs="12">{{
-                    dataUser.medals
+                    userInfo.progress_app.medals
                   }}</v-col>
                 </v-row>
               </v-card>
@@ -219,14 +219,14 @@ export default {
       },
     };
   },
-  created() {
-    this.dataUser.email = this.userInfo.email;
-    this.dataUser.username = this.userInfo.username;    
-    this.dataUser.country = this.userInfo.country;
-    this.dataUser.chosen_lan = this.userInfo.choosen_langages;
-    this.dataUser.victories = this.userInfo.progress_app.victories;
-    this.dataUser.fails = this.userInfo.progress_app.fails;
-    this.dataUser.medals = this.userInfo.progress_app.medals;
-  },
+  // created() {
+  //   this.dataUser.email = this.userInfo.email;
+  //   this.dataUser.username = this.userInfo.username;    
+  //   this.dataUser.country = this.userInfo.country;
+  //   this.dataUser.chosen_lan = this.userInfo.choosen_langages;
+  //   this.dataUser.victories = this.userInfo.progress_app.victories;
+  //   this.dataUser.fails = this.userInfo.progress_app.fails;
+  //   this.dataUser.medals = this.userInfo.progress_app.medals;
+  // },
 };
 </script>

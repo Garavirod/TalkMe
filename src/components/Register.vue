@@ -147,6 +147,9 @@
 </template>
 
 <script>
+import axios from 'axios';
+import Swal from 'sweetalert';
+import { mapMutations, mapState } from 'vuex';
 export default {
   name: "Register",
   data: () => ({       
@@ -241,6 +244,8 @@ export default {
     ],
   }),
   methods: {    
+     ...mapMutations(['setUserInformation']),
+
     addLanguageToList() {      
       let idx = this.chosenLanguages.findIndex( obj => obj["language"] === this.chosenLang );
       if(idx === -1){
@@ -263,22 +268,49 @@ export default {
     
     },
 
-    register() {
-        console.log(this.chosenLanguages);
+    async register() {        
+        const url = `${process.env.VUE_APP_API}login/new-user`;
         const newUser = {
           "username":this.username,
           "email": this.email,
           "password": this.password,
-          "nationality": this.nationality,
+          "country": this.nationality,
           "languages": this.chosenLanguages
         };
-
-        console.log(newUser);
-        this.dialog = false;
+        // Post petition
+        axios.post(url, newUser)
+        .then(res=>{
+          Swal('Register','Account was created successfuly!','success')
+          /* Set global User infroation vuex */
+          this.setUserInformation(
+            {
+              email: res.data.user.email,
+              username: res.data.user.username,
+              country: res.data.user.country,
+              languages: res.data.user.languages,
+              victories: res.data.user.victories,
+              fails: res.data.user.fails,
+              medals: res.data.user.medals,
+              uid: res.data.user.uid,
+              token: res.data.token
+            }
+          );
+          this.dialog = false;          
+          this.$router.push('Welcome');     
+          console.log(this.userInfo);          
+                    
+        })
+        .catch(err=>{
+          Swal('Account was not created','It is probably that email alerady exist, try again with another','error')
+          console.log(err);
+        });
         
-    }
+    },
+
+   
   },
   computed: {
+    ...mapState(['userInfo']),
     isValidLangList() {
       if (this.chosenLang !== "" && this.chosenLevel !== "") {
         return true;

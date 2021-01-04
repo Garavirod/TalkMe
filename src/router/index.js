@@ -119,8 +119,8 @@ const router = new VueRouter({
 // Router protection
 router.beforeEach((to, from, next) => {
     const requiresAuth = to.matched.some ( r => r.meta.isPrivate );
-    const userLogged = true;
-    if( !userLogged && requiresAuth ){
+    const token = localStorage.getItem('blumin-tkn'); 
+    if( !token && requiresAuth ){
         next('Home');
     }else{
         next();

@@ -51,20 +51,14 @@ export default new Vuex.Store({
              
         // DATA PROGRESS USER OBJ      
         userInfo:{            
-            email:'rodrigo@rodrigo.com',
-            username:"Garavirod",                       
-            country:'Mexico',
-            choosen_langages:[
-                {
-                    lang:"English",
-                    level:"B2"
-                },
-                {
-                    lang:"French",
-                    level:"A1"
-                }
-            ],
-            progress_app: {victories:23,fails:3,medals:5}
+            email:'',
+            username:'',                       
+            country:'',
+            choosen_langages:[],
+            progress_app: {victories:0,fails:0,medals:0},
+            online:false,
+            uid:null,
+            isLogged:false,            
         }
     },
     mutations: {    
@@ -82,6 +76,31 @@ export default new Vuex.Store({
             state.socket.disconnect();
             state.socket = null;
             state.isActiveOnChat = false;            
+        },
+        setUserInformation(state, payload){           
+            localStorage.setItem('blumin-tkn',payload.token);
+            state.userInfo.email = payload.email;
+            state.userInfo.username = payload.username;
+            state.userInfo.country = payload.country;
+            state.userInfo.choosen_langages = payload.languages;
+            state.userInfo.progress_app.victories = payload.victories;
+            state.userInfo.progress_app.fails = payload.fails;
+            state.userInfo.progress_app.medals = payload.medals;
+            state.userInfo.uid = payload.uid;
+            state.userInfo.isLogged = true;
+        },
+
+        resetUserInfromation(state){
+            localStorage.removeItem('blumin-tkn');
+            state.userInfo.email = "";
+            state.userInfo.username = "";
+            state.userInfo.country = "";
+            state.userInfo.choosen_langages = "";
+            state.userInfo.progress_app.victories = 0;
+            state.userInfo.progress_app.fails = 0;
+            state.userInfo.progress_app.medals = 0;
+            state.userInfo.uid = null;
+            state.userInfo.isLogged = false;
         }
     },
     actions: {},
