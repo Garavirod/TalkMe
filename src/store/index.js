@@ -6,11 +6,10 @@ import io from 'socket.io-client';
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state: {
+    state: {        
         /* SOCKET VARIABLES */
         socket:null,
         endpointConn:'http://localhost:5000',
-        isActiveOnChat:false,
         /* FLAG TO KNOW IF USER IS LOGGED */
         isUserLogged:false,
         /* GENERAL INFORMATION ABOUT APP SECTIONS */
@@ -67,36 +66,9 @@ export default new Vuex.Store({
             state.socket.disconnect();
             state.socket = null;
             state.isActiveOnChat = false;            
-        },
-        
-        /* LOGIN USER */
-        // async login(state, payload){
-        //     const url = `${process.env.VUE_APP_API}`;
-        //     try {
-        //         const res = await Axios.post(url,payload);
-        //         const userSate = {
-        //             uid: res.data.uid,
-        //             token: res.data.token
-        //         }
-        //         localStorage.setItem('blumin-user',JSON.stringify(userSate));
-        //         state.isUserLogged = true;
-        //         return true;                             
-        //     } catch (error) {
-        //         console.log(error);
-        //         state.isUserLogged = false; 
-        //         return false;               
-                
-        //     }        
-        // },
-        
-         /* LOGOUT USER */
-        //  logout(state){
-        //     // Remove from local storage
-        //     localStorage.removeItem('blumin-tkn');
-        //     state.isUserLogged = false;             
-        // }, 
-
+        },       
         setUserActive(state,value){
+            /* Set user logged in  true or false*/
             state.isUserLogged = value;
         }
     },

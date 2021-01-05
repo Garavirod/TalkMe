@@ -148,9 +148,9 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
 import Swal from 'sweetalert';
 import Axios from 'axios';
+import { mapMutations } from 'vuex';
 export default {
   name: "Register",
   data: () => ({
@@ -242,10 +242,9 @@ export default {
       "Wyoming",
     ],
   }),
-  methods: {
-    /* vuex */
-    ...mapMutations(["setUserActive"]),
-
+  methods: {    
+    /* Axios */            
+    ...mapMutations(['setUserActive']),
     /* Template methods */
     addLanguageToList() {
       let idx = this.chosenLanguages.findIndex(
@@ -260,6 +259,8 @@ export default {
         this.chosenLanguages[idx]["level"] = this.chosenLevel;
       }
       this.alertVisible = true;
+      this.chosenLevel = "";
+      this.chosenLang = "";
       setTimeout(() => {
         this.alertVisible = false;
       }, 3000);
@@ -283,18 +284,14 @@ export default {
       };
       await Axios.post(url, newUser)
         .then((res) => {
-          const userSate = {
-            uid: res.data.uid,
-            token: res.data.token,
-          };
-          localStorage.setItem("blumin-user", JSON.stringify(userSate));
-          this.setUserActive(true);
+          localStorage.setItem("blumin-tkn", JSON.stringify(res.data.token));          
           Swal("Registration", "Account was created successfuly!", "success");
+          this.setUserActive(true);                
           this.$router.push('Welcome');
         })
         .catch((error) => {
-          console.log(error);
-          this.setUserActive(false);
+          console.log(error);   
+          this.setUserActive(false);                
           Swal(
             "Account was not created",
             "It is probably that email alerady exist or there was an error on server, try again",

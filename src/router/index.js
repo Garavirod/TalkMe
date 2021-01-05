@@ -125,7 +125,7 @@ const router = new VueRouter({
 // Router protection
 router.beforeEach((to, from, next) => {
     const requiresAuth = to.matched.some ( r => r.meta.isPrivate );
-    if(requiresAuth && !isLoggedIn()){
+    if(requiresAuth && !isLoggedIn()){    
         next('Home');
     }else{
         next();

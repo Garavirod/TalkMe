@@ -198,6 +198,7 @@
 <script>
 import Axios from 'axios';
 import FormUpdate from "../components/FormUpdate";
+import { getUserInfo } from '../helpers/utils';
 export default {
   name: "UserInformation",
   components: {
@@ -222,7 +223,9 @@ export default {
 
   methods:{
     async getUserInformation(){
-      const {uid} = JSON.parse(localStorage.getItem('blumin-tkn'));
+      /* Recover uid from token */
+      const {uid} = getUserInfo();
+      /* Http request AXIOS GET */
       await Axios.get(`${process.env.VUE_APP_API}/user-info/${uid}`)
       .then(res => {
         console.log(res);

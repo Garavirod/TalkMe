@@ -88,18 +88,18 @@ export default {
        ...mapState(['isUserLogged']),
     },
     methods:{
-        /* Methods */
+        /* Vuex */
         ...mapMutations(['setUserActive']),
         /*  Template methods */
         Logout(){
             localStorage.removeItem('blumin-tkn');
             this.setUserActive(false);
             this.$router.push('Home');
-
         },        
     },
     created(){
         this.setUserActive(isLoggedIn())
     }
+    
 };
 </script>

@@ -2,7 +2,7 @@
 import decode from 'jwt-decode';
 
 
-const getAuthToken = () => {
+export const getAuthToken = () => {
     const token = localStorage.getItem('blumin-tkn') || null;
     return token;
 };
