@@ -22,13 +22,14 @@
         <v-container>
           <v-form ref="form" v-model="valid">
             <v-row class="text-center">
-                <!-- Username -->
+              <!-- Username -->
               <v-col cols="12" lg="6">
-                <v-text-field 
-                    v-model="username"
-                    label="Username" 
-                    :rules="nameRules"
-                    required>
+                <v-text-field
+                  v-model="username"
+                  label="Username"
+                  :rules="nameRules"
+                  required
+                >
                 </v-text-field>
               </v-col>
               <!-- Email -->
@@ -53,7 +54,7 @@
                   counter
                   @click:append="showPass = !showPass"
                 ></v-text-field>
-              </v-col>             
+              </v-col>
               <!-- Nacionality -->
               <v-col cols="12" lg="6" md="12" sm="12">
                 <v-select
@@ -111,7 +112,7 @@
                   elevation="2"
                   colored-border
                 >
-                  <strong>{{l.language}}</strong> with level
+                  <strong>{{ l.language }}</strong> with level
                   <strong>{{ l.level }}</strong
                   >.
 
@@ -138,7 +139,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="#febf63" @click="dialog = false">Close</v-btn>
-        <v-btn color="#ade498" @click="register" :disabled="!valid"
+        <v-btn color="#ade498" @click="registerUser" :disabled="!valid"
           >Register</v-btn
         >
       </v-card-actions>
@@ -147,39 +148,38 @@
 </template>
 
 <script>
-import Axios from 'axios';
+import { mapMutations } from "vuex";
 import Swal from 'sweetalert';
+import Axios from 'axios';
 export default {
   name: "Register",
-  data: () => ({       
+  data: () => ({
     // Rules form
-    nameRules: [
-      (v) => !!v || "Name is required",      
-    ],
+    nameRules: [(v) => !!v || "Name is required"],
     emailRules: [
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
     passwordRules: [
       (value) => !!value || "Required.",
-      (v) => v.length >= 8 || "Min 8 characters",            
+      (v) => v.length >= 8 || "Min 8 characters",
     ],
-    nacionalityRules:[(v)=> !!v || "You must add your nationality"],
+    nacionalityRules: [(v) => !!v || "You must add your nationality"],
     // Model form
     username: "",
     password: "",
     nationality: "",
     email: "",
-    chosenLanguages: [],    
+    chosenLanguages: [],
     // data template
     dialog: false,
-    alertVisible:false,
+    alertVisible: false,
     valid: true,
-    showPass: false,    
+    showPass: false,
     chosenLang: "",
     chosenLevel: "",
     levelsList: ["A1", "A2", "B1", "B2", "C1", "C2"],
-    langList: ["English", "French", "German", "Spanish","Italian"],
+    langList: ["English", "French", "German", "Spanish", "Italian"],
     states: [
       "Alabama",
       "Alaska",
@@ -242,63 +242,66 @@ export default {
       "Wyoming",
     ],
   }),
-  methods: {    
-    addLanguageToList() {      
-      let idx = this.chosenLanguages.findIndex( obj => obj["language"] === this.chosenLang );
-      if(idx === -1){
+  methods: {
+    /* vuex */
+    ...mapMutations(["setUserActive"]),
+
+    /* Template methods */
+    addLanguageToList() {
+      let idx = this.chosenLanguages.findIndex(
+        (obj) => obj["language"] === this.chosenLang
+      );
+      if (idx === -1) {
         this.chosenLanguages.push({
-          "language": this.chosenLang,
-          "level":this.chosenLevel
+          language: this.chosenLang,
+          level: this.chosenLevel,
         });
-      }else{        
+      } else {
         this.chosenLanguages[idx]["level"] = this.chosenLevel;
-      }               
+      }
       this.alertVisible = true;
       setTimeout(() => {
         this.alertVisible = false;
       }, 3000);
     },
 
-    removeFromLangList(lan) { 
-      let idx = this.chosenLanguages.findIndex( obj => obj["language"] === lan );
-      this.chosenLanguages.splice(idx,1);
-    
+    removeFromLangList(lan) {
+      let idx = this.chosenLanguages.findIndex(
+        (obj) => obj["language"] === lan
+      );
+      this.chosenLanguages.splice(idx, 1);
     },
-
-    async register() {        
-        const url = `${process.env.VUE_APP_API}/new-user`;
-        const newUser = {
+    /* REGISTER NEW USER */
+    async registerUser() {
+      const url = `${process.env.VUE_APP_API}/new-user`;
+      const newUser = {
           "username":this.username,
           "email": this.email,
           "password": this.password,
           "country": this.nationality,
           "languages": this.chosenLanguages
-        };
-        // Post petition
-        Axios.post(url, newUser)
-        .then(res=>{
-          Swal('Register','Account was created successfuly!','success')
-          const userState = {
+      };
+      await Axios.post(url, newUser)
+        .then((res) => {
+          const userSate = {
             uid: res.data.uid,
             token: res.data.token,
           };
-          /* Save on local storage */
-          localStorage.setItem('blumin-tkn',JSON.stringify(userState));          
-          this.dialog = false;          
-          this.$router.push('Welcome');                                   
+          localStorage.setItem("blumin-user", JSON.stringify(userSate));
+          this.setUserActive(true);
+          Swal("Registration", "Account was created successfuly!", "success");
+          this.$router.push('Welcome');
         })
-        .catch(err=>{
+        .catch((error) => {
+          console.log(error);
+          this.setUserActive(false);
           Swal(
-          'Account was not created',
-          'It is probably that email alerady exist or there was an error on server, try again',
-          'error'
+            "Account was not created",
+            "It is probably that email alerady exist or there was an error on server, try again",
+            "error"
           );
-          console.log(err);          
         });
-        
     },
-
-   
   },
   computed: {
     isValidLangList() {

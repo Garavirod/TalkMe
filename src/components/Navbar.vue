@@ -6,11 +6,11 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <!--RESPOSNIVE NAVIGATIOR-->
-        <v-app-bar-nav-icon v-if="isLogged" color="#ffff" @click="drawer = true"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon v-if="isUserLogged" color="#ffff" @click="drawer = true"></v-app-bar-nav-icon>
         <!-- REGISTER COMPONENT -->
-        <Register v-if="!isLogged" />
+        <Register v-if="!isUserLogged" />
         <!-- LOGIN COMPONENT -->
-        <Login v-if="!isLogged" />
+        <Login v-if="!isUserLogged" />
     </v-app-bar>
 
     <!--NAVIGATION RESPONSIVE-->
@@ -69,8 +69,11 @@
 </style>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
 import Login from "../components/Login";
 import Register from "../components/Register";
+import { isLoggedIn } from '../helpers/utils';
+
 
 export default {
     name: "Navbar",
@@ -80,25 +83,23 @@ export default {
     },
     data: () => ({
         drawer: false,        
-        isLogged:false
     }),
     computed: {
-       
+       ...mapState(['isUserLogged']),
     },
     methods:{
+        /* Methods */
+        ...mapMutations(['setUserActive']),
+        /*  Template methods */
         Logout(){
             localStorage.removeItem('blumin-tkn');
-            this.isLogged = false;
+            this.setUserActive(false);
             this.$router.push('Home');
 
-        },
-        verifyTokenUser(){
-            const tkn = localStorage.getItem('blumin-tkn') || null;
-            this.isLogged = (tkn) ? true: false;        
-        }
+        },        
     },
     created(){
-        this.verifyTokenUser();
+        this.setUserActive(isLoggedIn())
     }
 };
 </script>

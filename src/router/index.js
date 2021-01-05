@@ -11,6 +11,8 @@ import Situations from "../views/Situations";
 import Situation from "../views/Situation";
 import AudiosHistory from "../views/AudiosHistory";
 import PeopleActiveChat from '../views/PeopleActiveChat';
+import { isLoggedIn } from '../helpers/utils';
+
 
 
 Vue.use(VueRouter)
@@ -117,15 +119,17 @@ const router = new VueRouter({
     routes
 })
 
+
+
+
 // Router protection
 router.beforeEach((to, from, next) => {
     const requiresAuth = to.matched.some ( r => r.meta.isPrivate );
-    const token = localStorage.getItem('blumin-tkn'); 
-    if( !token && requiresAuth ){
+    if(requiresAuth && !isLoggedIn()){
         next('Home');
     }else{
         next();
-    }
+    }       
 });
 
 export default router

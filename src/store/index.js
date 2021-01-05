@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import io from 'socket.io-client';
+
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -10,7 +12,7 @@ export default new Vuex.Store({
         endpointConn:'http://localhost:5000',
         isActiveOnChat:false,
         /* FLAG TO KNOW IF USER IS LOGGED */
-        isLogged:false,
+        isUserLogged:false,
         /* GENERAL INFORMATION ABOUT APP SECTIONS */
         sections: [{
                 name: 'Audio Chat',
@@ -49,18 +51,6 @@ export default new Vuex.Store({
             }
         ],
              
-        // DATA PROGRESS USER OBJ      
-        userInfo:{            
-            email:'',
-            username:'',                       
-            country:'',
-            choosen_langages:[],
-            progress_app: {victories:0,fails:0,medals:0},
-            online:false,
-            uid:null,
-            isLogged:false,
-            token:null            
-        }
     },
     mutations: {    
         socketConnection(state){
@@ -78,34 +68,36 @@ export default new Vuex.Store({
             state.socket = null;
             state.isActiveOnChat = false;            
         },
-        setUserInformation(state, payload){           
-            state.userInfo.email = payload.email;
-            state.userInfo.username = payload.username;
-            state.userInfo.country = payload.country;
-            state.userInfo.choosen_langages = payload.languages;
-            state.userInfo.progress_app.victories = payload.victories;
-            state.userInfo.progress_app.fails = payload.fails;
-            state.userInfo.progress_app.medals = payload.medals;
-            state.userInfo.uid = payload.uid;
-            state.userInfo.isLogged = true;
-            state.userInfo.token = payload.token
-            // Save on storage
-            localStorage.setItem('blumin-user',JSON.stringify(state.userInfo));
-        },
+        
+        /* LOGIN USER */
+        // async login(state, payload){
+        //     const url = `${process.env.VUE_APP_API}`;
+        //     try {
+        //         const res = await Axios.post(url,payload);
+        //         const userSate = {
+        //             uid: res.data.uid,
+        //             token: res.data.token
+        //         }
+        //         localStorage.setItem('blumin-user',JSON.stringify(userSate));
+        //         state.isUserLogged = true;
+        //         return true;                             
+        //     } catch (error) {
+        //         console.log(error);
+        //         state.isUserLogged = false; 
+        //         return false;               
+                
+        //     }        
+        // },
+        
+         /* LOGOUT USER */
+        //  logout(state){
+        //     // Remove from local storage
+        //     localStorage.removeItem('blumin-tkn');
+        //     state.isUserLogged = false;             
+        // }, 
 
-        resetUserInfromation(state){
-            state.userInfo.email = "";
-            state.userInfo.username = "";
-            state.userInfo.country = "";
-            state.userInfo.choosen_langages = "";
-            state.userInfo.progress_app.victories = 0;
-            state.userInfo.progress_app.fails = 0;
-            state.userInfo.progress_app.medals = 0;
-            state.userInfo.uid = null;
-            state.userInfo.isLogged = false;
-            state.userInfo.token = null;
-            // Remove from local storage
-            localStorage.removeItem('blumin-user');
+        setUserActive(state,value){
+            state.isUserLogged = value;
         }
     },
     actions: {},

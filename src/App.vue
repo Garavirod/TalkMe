@@ -3,11 +3,10 @@
     <Navbar />
     <v-main id="bg-app">
         <v-container fluid class="ma-0 pa-0">
-            <router-view></router-view>
+            <router-view></router-view>                   
         </v-container>
     </v-main>
-    <!-- <v-footer app v-if="false">
-  </v-footer> -->
+
 </v-app>
 </template>
 
@@ -22,8 +21,13 @@
 import Navbar from "@/components/Navbar.vue";
 export default {
     components: {
-        Navbar,
+        Navbar,        
     },
-    computed: {}
+    computed: {       
+    },
+    methods:{
+        
+    },
+
 }
 </script>
