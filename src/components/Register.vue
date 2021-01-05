@@ -59,7 +59,7 @@
               <v-col cols="12" lg="6" md="12" sm="12">
                 <v-select
                   v-model="nationality"
-                  :items="states"
+                  :items="countriesList"
                   :rules="nacionalityRules"
                   menu-props="auto"
                   label="Nacionality"
@@ -150,7 +150,7 @@
 <script>
 import Swal from 'sweetalert';
 import Axios from 'axios';
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 export default {
   name: "Register",
   data: () => ({
@@ -179,73 +179,12 @@ export default {
     chosenLang: "",
     chosenLevel: "",
     levelsList: ["A1", "A2", "B1", "B2", "C1", "C2"],
-    langList: ["English", "French", "German", "Spanish", "Italian"],
-    states: [
-      "Alabama",
-      "Alaska",
-      "American Samoa",
-      "Arizona",
-      "Arkansas",
-      "California",
-      "Colorado",
-      "Connecticut",
-      "Delaware",
-      "District of Columbia",
-      "Federated States of Micronesia",
-      "Florida",
-      "Georgia",
-      "Guam",
-      "Hawaii",
-      "Idaho",
-      "Illinois",
-      "Indiana",
-      "Iowa",
-      "Kansas",
-      "Kentucky",
-      "Louisiana",
-      "Maine",
-      "Marshall Islands",
-      "Maryland",
-      "Massachusetts",
-      "Michigan",
-      "Minnesota",
-      "Mississippi",
-      "Missouri",
-      "Montana",
-      "Nebraska",
-      "Nevada",
-      "New Hampshire",
-      "New Jersey",
-      "New Mexico",
-      "New York",
-      "North Carolina",
-      "North Dakota",
-      "Northern Mariana Islands",
-      "Ohio",
-      "Oklahoma",
-      "Oregon",
-      "Palau",
-      "Pennsylvania",
-      "Puerto Rico",
-      "Rhode Island",
-      "South Carolina",
-      "South Dakota",
-      "Tennessee",
-      "Texas",
-      "Utah",
-      "Vermont",
-      "Virgin Island",
-      "Virginia",
-      "Washington",
-      "West Virginia",
-      "Wisconsin",
-      "Wyoming",
-    ],
+    langList: ["English", "French", "German", "Spanish", "Italian"],    
   }),
   methods: {    
     /* Axios */            
-    ...mapMutations(['setUserActive']),
-    /* Template methods */
+    ...mapMutations(['setUserActive','getCountriesAPI']),
+    /* Template methods */   
     addLanguageToList() {
       let idx = this.chosenLanguages.findIndex(
         (obj) => obj["language"] === this.chosenLang
@@ -284,7 +223,7 @@ export default {
       };
       await Axios.post(url, newUser)
         .then((res) => {
-          localStorage.setItem("blumin-tkn", JSON.stringify(res.data.token));          
+          localStorage.setItem("blumin-tkn",res.data.token);         
           Swal("Registration", "Account was created successfuly!", "success");
           this.setUserActive(true);                
           this.$router.push('Welcome');
@@ -301,6 +240,9 @@ export default {
     },
   },
   computed: {
+    /* Vuex */
+    ...mapState(['countriesList']),
+    // Template computed
     isValidLangList() {
       if (this.chosenLang !== "" && this.chosenLevel !== "") {
         return true;
@@ -309,5 +251,8 @@ export default {
       }
     },
   },
+  created(){
+    this.getCountriesAPI();
+  }
 };
 </script>

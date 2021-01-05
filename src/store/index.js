@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import io from 'socket.io-client';
+import Axios from 'axios';
 
 
 Vue.use(Vuex)
@@ -12,6 +13,8 @@ export default new Vuex.Store({
         endpointConn:'http://localhost:5000',
         /* FLAG TO KNOW IF USER IS LOGGED */
         isUserLogged:false,
+        /* COUNTRIES LIST */
+        countriesList:[],
         /* GENERAL INFORMATION ABOUT APP SECTIONS */
         sections: [{
                 name: 'Audio Chat',
@@ -70,7 +73,21 @@ export default new Vuex.Store({
         setUserActive(state,value){
             /* Set user logged in  true or false*/
             state.isUserLogged = value;
-        }
+        },
+        async getCountriesAPI(state){
+            const url = 'https://restcountries.eu/rest/v2/all';
+            await Axios.get(url)
+            .then(res =>{
+                console.log(res.data);              
+                res.data.forEach(el => {
+                    state.countriesList.push(el.name);
+                    /* TODO get all languages */
+                });
+            })
+            .catch(err=>{
+              console.log(err);
+            });
+        },
     },
     actions: {},
     modules: {}
