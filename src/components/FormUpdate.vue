@@ -154,7 +154,7 @@
               <v-col cols="12">
                 <v-select
                   v-model="country"
-                  :items="states"
+                  :items="countriesList"
                   menu-props="auto"
                   label="Nacionality"
                   hide-details
@@ -166,7 +166,7 @@
               <v-col cols="12" lg="6" md="6" sm="12">
                 <v-select
                   v-model="chosenLang"
-                  :items="langList"                  
+                  :items="languagesList"                  
                   label="Languages list"
                 ></v-select>
               </v-col>
@@ -264,6 +264,7 @@
 </style>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -276,95 +277,17 @@ export default {
       alertVisible:false,
       messageAlert:"",
       typeAlert:"",
-      iconAlert:"",
-      // Data Levels&Lang
-      country: "Florida",
-      chosen_lang: [
-        {
-          lang:"French",
-          level:"A1",
-        },
-        {
-          lang:"English",
-          level:"B2"
-        },
-        {
-          lang:"German",
-          level:"C1"
-        }
-      ],
-      chosenLang:"",
-      chosenLevel:"",
-      levelsList: ["A1", "A2", "B1", "B2", "C1", "C2"],
-      langList: ["English", "French", "German", "Spanish"],
-      states: [
-        "Alabama",
-        "Alaska",
-        "American Samoa",
-        "Arizona",
-        "Arkansas",
-        "California",
-        "Colorado",
-        "Connecticut",
-        "Delaware",
-        "District of Columbia",
-        "Federated States of Micronesia",
-        "Florida",
-        "Georgia",
-        "Guam",
-        "Hawaii",
-        "Idaho",
-        "Illinois",
-        "Indiana",
-        "Iowa",
-        "Kansas",
-        "Kentucky",
-        "Louisiana",
-        "Maine",
-        "Marshall Islands",
-        "Maryland",
-        "Massachusetts",
-        "Michigan",
-        "Minnesota",
-        "Mississippi",
-        "Missouri",
-        "Montana",
-        "Nebraska",
-        "Nevada",
-        "New Hampshire",
-        "New Jersey",
-        "New Mexico",
-        "New York",
-        "North Carolina",
-        "North Dakota",
-        "Northern Mariana Islands",
-        "Ohio",
-        "Oklahoma",
-        "Oregon",
-        "Palau",
-        "Pennsylvania",
-        "Puerto Rico",
-        "Rhode Island",
-        "South Carolina",
-        "South Dakota",
-        "Tennessee",
-        "Texas",
-        "Utah",
-        "Vermont",
-        "Virgin Island",
-        "Virginia",
-        "Washington",
-        "West Virginia",
-        "Wisconsin",
-        "Wyoming",
-      ], 
-
+      iconAlert:"",                        
       // Data Password
       password1: "",
       password2: "",
-
       // Data Username
-      username: "Garavirod",
+      username: "",
+      country: "",
+      chosen_lang: [],
+      chosenLang:"",
+      chosenLevel:"",
+      // Rules
       usernameRules: [
         (v) => !!v || "Username is required",
         (v) =>
@@ -390,6 +313,9 @@ export default {
     };
   },
   computed: {
+    /* VUEX */
+    ...mapState(['countriesList','levelsList','languagesList']),
+    /* TEMPLATE */
     isValidFormUsername() {
       if (this.username.length > 7 && this.passauth !== "") return true;
       else return false;
@@ -422,6 +348,9 @@ export default {
     // },
     // updateLanguagesList=()=>{
     // }
+    /* VUEX */
+    ...mapMutations(['getCountriesAPI']),
+    /* TEMPLATE METHODOS */
     removeFromLangList(lan){
       const idx = this.chosen_lang.indexOf(
         this.chosen_lang.filter(la=>la.lang===lan)[0]
@@ -445,6 +374,9 @@ export default {
         this.alertVisible=false;
       },3000);
     }
+  },
+  created() {
+    this.getCountriesAPI();
   },
 };
 </script>

@@ -72,7 +72,7 @@
               <v-col cols="12" lg="6" md="6" sm="12">
                 <v-select
                   v-model="chosenLang"
-                  :items="langList"
+                  :items="languagesList"
                   label="Languages list"
                 ></v-select>
               </v-col>
@@ -177,9 +177,7 @@ export default {
     valid: true,
     showPass: false,
     chosenLang: "",
-    chosenLevel: "",
-    levelsList: ["A1", "A2", "B1", "B2", "C1", "C2"],
-    langList: ["English", "French", "German", "Spanish", "Italian"],    
+    chosenLevel: "",         
   }),
   methods: {    
     /* Axios */            
@@ -241,7 +239,7 @@ export default {
   },
   computed: {
     /* Vuex */
-    ...mapState(['countriesList']),
+    ...mapState(['countriesList','languagesList','levelsList']),
     // Template computed
     isValidLangList() {
       if (this.chosenLang !== "" && this.chosenLevel !== "") {
