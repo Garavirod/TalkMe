@@ -201,13 +201,13 @@
               </v-col>
               <!--List Level Languages-->
               <v-col cols="12" class="customScroll">
-                   <v-alert   v-for="lan in chosen_lang" :key="lan.lang"                                                          
+                   <v-alert   v-for="lan in chosen_lang" :key="lan.language"                                                          
                     color="#204051"
                     border="left"
                     elevation="2"
                     colored-border                                       
                   >
-                    <strong>{{lan.lang}}</strong>  with level <strong>{{lan.level}}</strong>.
+                    <strong>{{lan.language}}</strong>  with level <strong>{{lan.level}}</strong>.
                     
                     <v-btn
                       class="mx-1"
@@ -217,7 +217,7 @@
                       color="#204051"
                       elevation="1"
                       :disabled="chosen_lang.length<2"
-                      @click="removeFromLangList(lan.lang)"
+                      @click="removeFromLangList(lan.language)"
                     >
                       <v-icon dark>
                         mdi-close
@@ -287,7 +287,7 @@ export default {
       chosen_lang: [],
       chosenLang:"",
       chosenLevel:"",
-      // Rules
+      // Form rules
       usernameRules: [
         (v) => !!v || "Username is required",
         (v) =>
@@ -314,7 +314,7 @@ export default {
   },
   computed: {
     /* VUEX */
-    ...mapState(['countriesList','levelsList','languagesList']),
+    ...mapState(['countriesList','levelsList','languagesList','userInformation']),
     /* TEMPLATE */
     isValidFormUsername() {
       if (this.username.length > 7 && this.passauth !== "") return true;
@@ -377,6 +377,10 @@ export default {
   },
   created() {
     this.getCountriesAPI();
+    /* set user information */
+    this.username = this.userInformation.username;
+    this.country = this.userInformation.country;
+    this.chosen_lang = this.userInformation.chosen_lan;
   },
 };
 </script>

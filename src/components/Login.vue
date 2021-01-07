@@ -38,8 +38,8 @@ export default {
     name: "Login",
     data: () => ({
         dialogLogin: false,
-        loginEmail: "",
-        loginPass: "",
+        loginEmail: "gara12@gamail.com",
+        loginPass: "qwerty12",
     }),
     computed: {
         isEmptyForm() {

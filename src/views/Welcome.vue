@@ -31,11 +31,18 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import UserInfromationVue from "../components/UserInformation";
 export default {
     name: "Welcome",
     components: {
         UserInfromationVue
+    },
+    methods:{
+        ...mapMutations(['getUserInformation'])
+    },
+    created(){
+        this.getUserInformation();
     }
 }
 </script>

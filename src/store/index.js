@@ -2,14 +2,26 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import io from 'socket.io-client';
 import Axios from 'axios';
+import { getUserInfo } from '../helpers/utils';
 
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state: {        
+    state: {     
+        /* USER INFORMATION */   
+        userInformation: {
+            email: "",
+            username:"",        
+            chosen_lan: [],
+            country: "",
+            victories: 0,
+            fails: 0,
+            medals: 0,
+          },
         /* SOCKET VARIABLES */
         socket:null,
+        /* ENDPOINT API BLUMIN BACKEND */
         endpointConn:'http://localhost:5000',
         /* FLAG TO KNOW IF USER IS LOGGED */
         isUserLogged:false,
@@ -117,6 +129,7 @@ export default new Vuex.Store({
             state.isUserLogged = value;
         },
         async getCountriesAPI(state){
+            /* Get all nationalities from Countries REST */
             const url = 'https://restcountries.eu/rest/v2/all';
             await Axios.get(url)
             .then(res =>{
@@ -130,6 +143,25 @@ export default new Vuex.Store({
               console.log(err);
             });
         },
+
+        async getUserInformation(state){
+            /* Recover uid from token */
+            const {uid} = getUserInfo();
+            /* Http request AXIOS GET */
+            await Axios.get(`${process.env.VUE_APP_API}/user-info/${uid}`)
+            .then(res => {                
+                state.userInformation.username = res.data.userInfo.username;
+                state.userInformation.email = res.data.userInfo.email;
+                state.userInformation.chosen_lan = res.data.userInfo.languages;
+                state.userInformation.country = res.data.userInfo.country;
+                state.userInformation.victories = res.data.userInfo.victories;
+                state.userInformation.fails = res.data.userInfo.fails;
+                state.userInformation.medals = res.data.userInfo.medals;
+            })
+            .catch(err => {
+                console.log(err);
+            });   
+        }
     },
     actions: {},
     modules: {}

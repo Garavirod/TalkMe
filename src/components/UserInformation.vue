@@ -42,7 +42,7 @@
                       <v-list-item-content>
                         <v-list-item-title><b>Email</b></v-list-item-title>
                         <v-list-item-subtitle>{{
-                          dataUser.email
+                          userInformation.email
                         }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -51,7 +51,7 @@
                       <v-list-item-content>
                         <v-list-item-title><b>Username</b></v-list-item-title>
                         <v-list-item-subtitle>{{
-                          dataUser.username
+                          userInformation.username
                         }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>                   
@@ -60,7 +60,7 @@
                       <v-list-item-content>
                         <v-list-item-title><b>Country</b></v-list-item-title>
                         <v-list-item-subtitle>{{
-                          dataUser.country
+                          userInformation.country
                         }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -71,7 +71,7 @@
                           ><b>Choosen lenguages</b></v-list-item-title
                         >
                         <v-list-item-subtitle
-                          v-for="l in dataUser.chosen_lan"
+                          v-for="l in userInformation.chosen_lan"
                           :key="l.language"
                         >
                           {{ l.language }} - {{l.level}}
@@ -119,7 +119,7 @@
                     <p>Victories</p>
                   </v-col>
                   <v-col cols="12" sm="4" lg="4" xs="12">{{
-                    dataUser.victories
+                    userInformation.victories
                   }}</v-col>
 
                   <!--FAILS-->
@@ -137,7 +137,7 @@
                     <p>Fails</p>
                   </v-col>
                   <v-col cols="12" sm="4" lg="4" xs="12">{{
-                    dataUser.fails
+                    userInformation.fails
                   }}</v-col>
                   <!--MEDALS-->
                   <v-col cols="12" sm="4" lg="4" xs="12">
@@ -154,7 +154,7 @@
                     <p>Medals</p>
                   </v-col>
                   <v-col cols="12" sm="4" lg="4" xs="12">{{
-                    dataUser.medals
+                    userInformation.medals
                   }}</v-col>
                 </v-row>
               </v-card>
@@ -196,54 +196,23 @@
 </template>
 
 <script>
-import Axios from 'axios';
+import { mapState } from 'vuex';
 import FormUpdate from "../components/FormUpdate";
-import { getUserInfo } from '../helpers/utils';
 export default {
   name: "UserInformation",
   components: {
     FormUpdate,
   },
   computed: {
-
+    ...mapState(['userInformation'])
   },
   data() {
     return {
-      dataUser: {
-        email: "",
-        username:"",        
-        chosen_lan: [],
-        country: "",
-        victories: 0,
-        fails: 0,
-        medals: 0,
-      },
+      
     };
   },
-
   methods:{
-    async getUserInformation(){
-      /* Recover uid from token */
-      const {uid} = getUserInfo();
-      /* Http request AXIOS GET */
-      await Axios.get(`${process.env.VUE_APP_API}/user-info/${uid}`)
-      .then(res => {
-        console.log(res);
-        this.dataUser.username = res.data.userInfo.username;
-        this.dataUser.email = res.data.userInfo.email;
-        this.dataUser.chosen_lan = res.data.userInfo.languages;
-        this.dataUser.country = res.data.userInfo.country;
-        this.dataUser.victories = res.data.userInfo.victories;
-        this.dataUser.fails = res.data.userInfo.fails;
-        this.dataUser.medals = res.data.userInfo.medals;
-      })
-      .catch(err => {
-        console.log(err);
-      });            
-    }
-  },
-  created() {
-    this.getUserInformation();
+   
   },
 };
 </script>
