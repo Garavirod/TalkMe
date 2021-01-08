@@ -18,10 +18,10 @@ export default new Vuex.Store({
             victories: 0,
             fails: 0,
             medals: 0,
-          },
+        },
         /* SOCKET VARIABLES */
         socket:null,
-        /* ENDPOINT API BLUMIN BACKEND */
+        /* ENDPOINT SOCKET BLUMIN BACKEND */
         endpointConn:'http://localhost:5000',
         /* FLAG TO KNOW IF USER IS LOGGED */
         isUserLogged:false,
@@ -132,11 +132,9 @@ export default new Vuex.Store({
             /* Get all nationalities from Countries REST */
             const url = 'https://restcountries.eu/rest/v2/all';
             await Axios.get(url)
-            .then(res =>{
-                console.log(res.data);              
+            .then(res =>{                             
                 res.data.forEach(el => {
-                    state.countriesList.push(el.name);
-                    /* TODO get all languages */
+                    state.countriesList.push(el.name);                    
                 });
             })
             .catch(err=>{

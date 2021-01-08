@@ -1,8 +1,8 @@
 <template>
   <SectionCard :nameSection="sectionName" :notes="true" :instructions="instructions">
     <template v-slot:SectionContent>
-     <v-container>
-      <ChatList />
+     <v-container>    
+      <ChatList/>
       <Pagination/>
      </v-container>
     </template>

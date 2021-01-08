@@ -42,7 +42,7 @@ export default {
         ...mapMutations(['getUserInformation'])
     },
     created(){
-        this.getUserInformation();
+        this.getUserInformation();        
     }
 }
 </script>

@@ -381,6 +381,7 @@ export default {
     this.username = this.userInformation.username;
     this.country = this.userInformation.country;
     this.chosen_lang = this.userInformation.chosen_lan;
+    console.log(this.userInformation);
   },
 };
 </script>

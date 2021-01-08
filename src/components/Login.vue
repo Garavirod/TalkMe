@@ -70,7 +70,7 @@ export default {
                 this.setUserActive(false);          
                 Swal(
                     "Incorrect credentials",
-                    "It is probably you don't have an account or your credentails were incorrect, try again",
+                    "It is probably you don't have an account or your credentials were incorrect, try again",
                     "error"
                 );
             });
