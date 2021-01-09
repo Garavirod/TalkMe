@@ -13,7 +13,12 @@
           ></v-select>
         </v-col>
         <v-col cols="12" lg="4" md="4" sm="12">
-          <v-btn color="primary" :disabled="!isLangSelected">
+          <v-btn 
+            @click="searchSpeakers"
+            color="#3b6978" 
+            outlined 
+            :disabled="!isLangSelected"
+          >
             <v-icon right dark>
               mdi-account-search
             </v-icon>
@@ -61,6 +66,7 @@
 </template>
 
 <script>
+import Axios from 'axios';
 import { mapMutations, mapState } from "vuex";
 export default {
   data: () => ({
@@ -204,12 +210,28 @@ export default {
   },
 
   methods: {
-    /* VUEX */
+    /* +++++++++++++++++++++++++++ */
+    /* ---------- VUEX ----------- */
+    /* +++++++++++++++++++++++++++ */
+    
     ...mapMutations(["getUserInformation"]),
-    /* TEMPLATE */
+    /* +++++++++++++++++++++++++++ */
+    /* --------- TEMPLATE--------- */
+    /* +++++++++++++++++++++++++++ */
+
     genRandomIndex(length) {
       return Math.ceil(Math.random() * (length - 1));
     },
+    async searchSpeakers(){
+      const url = `${process.env.VUE_APP_API}/`;
+      await Axios.get(url)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
   },
 
   created() {
