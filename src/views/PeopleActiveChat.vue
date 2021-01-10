@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      sectionName: "People active",
+      sectionName: "Prepare your chat room",
       extract:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
       instructions:
