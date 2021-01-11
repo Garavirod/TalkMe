@@ -22,7 +22,7 @@
           <v-icon right dark>
             mdi-account-search
           </v-icon>
-          Search speakers
+          Search
         </v-btn>
       </v-col>
     </v-row>

@@ -19,6 +19,8 @@ export default new Vuex.Store({
             fails: 0,
             medals: 0,
         },
+        /* ACTIVE SIDEBAR CHATS */
+        activeChatSide:false,
         /* SOCKET VARIABLES */
         socket:null,
         /* ENDPOINT SOCKET BLUMIN BACKEND */
@@ -159,6 +161,11 @@ export default new Vuex.Store({
             .catch(err => {
                 console.log(err);
             });   
+        },
+
+        /* Active side bar chat */
+        setChatVisible(state,value){
+            state.activeChatSide = value;
         }
     },
     actions: {},
