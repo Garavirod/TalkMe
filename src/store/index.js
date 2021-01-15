@@ -19,6 +19,10 @@ export default new Vuex.Store({
             fails: 0,
             medals: 0,
         },
+        /* USER ACTIVE ON CHAT */
+        isActiveOnChat:false,
+        /* USERS ACTIVE ON CHAT LIST */
+        activeUsersOnChat:[],
         /* ACTIVE SIDEBAR CHATS */
         activeChatSide:false,
         /* SOCKET VARIABLES */
@@ -76,7 +80,7 @@ export default new Vuex.Store({
                 name: 'Audio Chat',
                 img: require('../assets/ilustration2.png'),
                 description: 'Speak with other person who are learing too',
-                path: '/people-active',
+                path: '/audio-chat',
                 component: ''
             },
             {
@@ -166,6 +170,11 @@ export default new Vuex.Store({
         /* Active side bar chat */
         setChatVisible(state,value){
             state.activeChatSide = value;
+        },
+
+        /* Users Actives on chat */
+        setActiveUsersList(state,users){
+            state.activeUsersOnChat = users;
         }
     },
     actions: {},

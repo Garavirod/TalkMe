@@ -75,6 +75,7 @@
 <script>
 import swal from 'sweetalert';
 import { mapState } from "vuex";
+import { getUserInfo } from '../helpers/utils';
 export default {
     name: "AudioControls",
     props: ['ctr_send'],
@@ -199,11 +200,13 @@ export default {
             this.sec = 0;
         },
         sendAudio(){
-            const mes = {
-                audio: this.blobAudio,
-                user:'Garvairod'
+            const {uid} = getUserInfo();
+            const audioMessage = {
+                from: uid,
+                to: '',
+                message:this.audioFragments,                
             }
-            this.socket.emit('audio-msg',mes);
+            this.socket.emit('personal-message',audioMessage);
         }
     },
     created(){

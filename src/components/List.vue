@@ -8,11 +8,11 @@
         hide-overlay
         transition="dialog-bottom-transition"
       >
-        <template v-slot:activator="{ on, attrs }">        
+        <template v-slot:activator="{ on, attrs }">
           <v-btn color="#3b6978" dark v-bind="attrs" v-on="on" fab>
             <v-icon dark>
               mdi-account-search
-            </v-icon>            
+            </v-icon>
           </v-btn>
         </template>
         <v-card>
@@ -38,10 +38,10 @@
         transition="dialog-bottom-transition"
       >
         <template v-slot:activator="{ on, attrs }">
-          <v-btn  fab color="#3b6978" dark v-bind="attrs" v-on="on">
+          <v-btn fab color="#3b6978" dark v-bind="attrs" v-on="on">
             <v-icon dark>
               mdi-message
-            </v-icon>            
+            </v-icon>
           </v-btn>
         </template>
         <v-card>
@@ -52,6 +52,8 @@
             <v-toolbar-title>My chats</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
+          <!-- MY CHATS COMPONENT -->
+          <my-chats />
         </v-card>
       </v-dialog>
     </v-col>
@@ -62,10 +64,12 @@
 import { mapMutations } from "vuex";
 import ChatList from "../components/ChatList";
 import Pagination from "../components/Pagination";
+import MyChats from "./MyChats.vue";
 export default {
   components: {
     ChatList,
     Pagination,
+    MyChats,
   },
   data() {
     return {

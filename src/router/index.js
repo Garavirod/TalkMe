@@ -10,7 +10,6 @@ import Welcome from '../views/Welcome'
 import Situations from "../views/Situations";
 import Situation from "../views/Situation";
 import AudiosHistory from "../views/AudiosHistory";
-import PeopleActiveChat from '../views/PeopleActiveChat';
 import { isLoggedIn } from '../helpers/utils';
 
 
@@ -39,7 +38,7 @@ const routes = [
         }
     },
     {
-        path: '/audio-chat/:id',
+        path: '/audio-chat',
         name: 'AudioChat',
         component: AudioChat,
         meta:{
@@ -102,14 +101,7 @@ const routes = [
             isPrivate:true
         }
     },
-    {
-        path: '/people-active',
-        name:'People-Active',
-        component: PeopleActiveChat,
-        meta:{
-            isPrivate:true
-        }
-    }
+
 
 ]
 

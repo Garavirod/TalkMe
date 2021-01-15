@@ -52,13 +52,7 @@
             <v-list-item-avatar tile size="80" color="grey">
               <v-img :src="item.avatar"></v-img>
             </v-list-item-avatar>
-          </v-list-item>
-
-          <v-card-actions>
-            <v-btn text :to="{ name: 'AudioChat', params: { id: item.uid } }"
-              >Choose</v-btn
-            >
-          </v-card-actions>
+          </v-list-item>         
         </v-card>
       </v-col>
     </v-row>
@@ -106,6 +100,9 @@
         </v-img>
       </v-col>
     </v-row>
+
+    <!-- Pagination -->
+    <pagination/>
   </v-container>
 </template>
 
@@ -116,7 +113,9 @@
 <script>
 import Axios from "axios";
 import { mapMutations, mapState } from "vuex";
+import Pagination from './Pagination.vue';
 export default {
+  components: { Pagination },
   data: () => ({
     lang: "",
     actives: [
@@ -229,7 +228,7 @@ export default {
 
   computed: {
     /* VUEX */
-    ...mapState(["userInformation"]),
+    ...mapState(["userInformation","socket"]),
     /* TEMPLATE */
     isLangSelected() {
       return this.lang === "" ? false : true;
@@ -280,10 +279,18 @@ export default {
           console.log(err);
         });
     },
+
+    async getUsersActives(){
+      this.socket.on('list-users',(data)=>{
+        console.log(data);
+      });
+    }
   },
 
   created() {
+    this.getUsersActives();
     this.getUserInformation();
+    // this.setActiveUsersList();
   },
 };
 </script>
