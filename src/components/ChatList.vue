@@ -34,26 +34,36 @@
         md="4"
         sm="4"
         xs="12"
-        v-for="item in actives"
+        v-for="item in activeUsersOnChat"
         :key="item.id"
       >
-        <v-card>
-          <v-list-item three-line>
-            <v-list-item-content>
-              <div class="overline mb-4">{{ item.country }}</div>
-              <v-list-item-title class="headline mb-1">{{
-                item.user
-              }}</v-list-item-title>
-              <v-list-item-subtitle
-                >Level : {{ item.level }}</v-list-item-subtitle
-              >
-            </v-list-item-content>
+        <v-hover>
+          <template v-slot:default="{ hover }">
+            <v-card>
+              <v-list-item three-line>
+                <v-list-item-content>
+                  <div class="overline mb-4">{{ item.country }}</div>
+                  <v-list-item-title class="headline mb-1">{{
+                    item.username
+                  }}</v-list-item-title>
+                  <v-list-item-subtitle>Level : B2</v-list-item-subtitle>
+                </v-list-item-content>
 
-            <v-list-item-avatar tile size="80" color="grey">
-              <v-img :src="item.avatar"></v-img>
-            </v-list-item-avatar>
-          </v-list-item>         
-        </v-card>
+                <v-list-item-avatar tile size="80" color="grey">
+                    <v-img
+                      src="https://cdn.vuetifyjs.com/images/lists/2.jpg"
+                    ></v-img>                  
+                </v-list-item-avatar>
+              </v-list-item>
+              <!-- fade -->
+              <v-fade-transition>
+                <v-overlay v-if="hover" absolute color="#036358">
+                  <v-btn>Send message</v-btn>
+                </v-overlay>
+              </v-fade-transition>
+            </v-card>
+          </template>
+        </v-hover>
       </v-col>
     </v-row>
     <!-- No languages -->
@@ -94,141 +104,40 @@
       <v-col cols="12" lg="9" md="12" xs="12" sm="12" class="mx-auto">
         <v-img
           :src="require('../assets/no_people_active.png')"
-          aspect-ratio="1"          
-          max-height="100%" max-width="100%"
-        >         
+          aspect-ratio="1"
+          max-height="100%"
+          max-width="100%"
+        >
         </v-img>
       </v-col>
     </v-row>
 
     <!-- Pagination -->
-    <pagination/>
+    <pagination />
   </v-container>
 </template>
 
 <style>
-  .title-people-active{ font-size: 30px;}
+.title-people-active {
+  font-size: 30px;
+}
 </style>
 
 <script>
 // import Axios from "axios";
 import { mapMutations, mapState } from "vuex";
-import Pagination from './Pagination.vue';
+import { getUserInfo } from "../helpers/utils";
+import Pagination from "./Pagination.vue";
 export default {
   components: { Pagination },
   data: () => ({
     lang: "",
-    actives: [
-      {
-        user: "Julian",
-        country: "Mexico",
-        active: false,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-        uid: "1",
-      },
-      {
-        user: "Julian",
-        country: "Spain",
-        active: true,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-        uid: "2",
-      },
-      {
-        user: "Julian",
-        country: "Cuba",
-        active: false,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-        uid: "3",
-      },
-      {
-        user: "Julian",
-        country: "Colombia",
-        active: false,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        uid: "4",
-      },
-      {
-        user: "Julian",
-        country: "Argentina",
-        active: true,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-        uid: "5",
-      },
-      {
-        user: "Julian",
-        country: "Dinamarca",
-        active: false,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-        uid: "6",
-      },
-      {
-        user: "Julian",
-        country: "China",
-        active: false,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        uid: "7",
-      },
-      {
-        user: "Julian",
-        country: "Mexico",
-        active: true,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-        uid: "8",
-      },
-      {
-        user: "Rusia",
-        country: "Mexico",
-        active: false,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        uid: "9",
-      },
-      {
-        user: "Rosa",
-        country: "Brazil",
-        active: true,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-        uid: "10",
-      },
-      {
-        user: "Julian",
-        country: "Mexico",
-        active: false,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        uid: "11",
-      },
-      {
-        user: "Julian",
-        country: "Mexico",
-        active: true,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-        uid: "12",
-      },
-      {
-        user: "Julian",
-        country: "Mexico",
-        active: false,
-        level: "Advanced",
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        uid: "13",
-      },
-    ],
+    overlay: false,
   }),
 
   computed: {
     /* VUEX */
-    ...mapState(["userInformation","socket"]),
+    ...mapState(["userInformation", "socket", "activeUsersOnChat"]),
     /* TEMPLATE */
     isLangSelected() {
       return this.lang === "" ? false : true;
@@ -261,7 +170,7 @@ export default {
     /* ---------- VUEX ----------- */
     /* +++++++++++++++++++++++++++ */
 
-    ...mapMutations(["getUserInformation"]),
+    ...mapMutations(["getUserInformation", "setActiveUsersList"]),
     /* +++++++++++++++++++++++++++ */
     /* --------- TEMPLATE--------- */
     /* +++++++++++++++++++++++++++ */
@@ -281,18 +190,19 @@ export default {
       // this.socket.emit('chosen-language', (this.lang));
     },
 
-    async getUsersActives(){       
-      this.socket.on('list-users',(data)=>{
-        console.log(data);
+    async getUsersActives() {
+      const { uid } = getUserInfo();
+      this.socket.on("list-users", (data) => {
+        const users = data.filter((user) => user.uid !== uid);
+        this.setActiveUsersList(users);
+        console.log(users);
       });
-      
-    }
+    },
   },
 
   created() {
     this.getUsersActives();
     this.getUserInformation();
-    // this.setActiveUsersList();
   },
 };
 </script>
