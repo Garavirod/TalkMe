@@ -111,7 +111,7 @@
 </style>
 
 <script>
-import Axios from "axios";
+// import Axios from "axios";
 import { mapMutations, mapState } from "vuex";
 import Pagination from './Pagination.vue';
 export default {
@@ -270,20 +270,22 @@ export default {
       return Math.ceil(Math.random() * (length - 1));
     },
     async searchSpeakers() {
-      const url = `${process.env.VUE_APP_API}/`;
-      await Axios.get(url)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      // const url = `${process.env.VUE_APP_API}/`;
+      // await Axios.get(url)
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      // this.socket.emit('chosen-language', (this.lang));
     },
 
-    async getUsersActives(){
+    async getUsersActives(){       
       this.socket.on('list-users',(data)=>{
         console.log(data);
       });
+      
     }
   },
 

@@ -2,7 +2,7 @@
 <v-container class="pa-1">
     <v-row class="text-center">
         <v-col cols="12" lg="12" xs="12">
-            <v-card max-width="820" class="pa-0">
+            <v-card  class="">
                 <!--HEAD BOX-->
                 <v-card-title class="black--text text-center">
                     <v-col class="text-center">
@@ -14,7 +14,7 @@
                 <v-card-text class="text-center">Don't forget always to be polite</v-card-text>
                 <v-divider></v-divider>
                 <!--MESSAGES-->
-                <v-virtual-scroll :items="messages" :item-height="80" height="300" class="mt-2">
+                <v-virtual-scroll :items="messages" :item-height="80" height="300" class="">
                     <template v-slot="{ item }">
                         <v-list-item class="ma-2">
                             <v-list-item-avatar>

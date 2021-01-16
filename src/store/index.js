@@ -117,8 +117,15 @@ export default new Vuex.Store({
     mutations: {    
         socketConnection(state){
             /* Initialization socket */
+            const token = localStorage.getItem('blumin-tkn');
+
             state.socket = io.connect(state.endpointConn,{
-                transports:['websocket']
+                transports:['websocket'],
+                autoConnect:true, //It always creates a new connect when it be called.
+                forceNew:true,
+                query:{ //By url 
+                    'blumin-tkn':token
+                }
             });
             if(state.socket.connected){
                 state.isActiveOnChat = true;
