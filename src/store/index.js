@@ -35,7 +35,13 @@ export default new Vuex.Store({
         countriesList:[],
         /* LEVELS LIST */
         levelsList: ["A1", "A2", "B1", "B2", "C1", "C2"],  
+        /* OPEN CHAT */
+        openchat:{
+            status:false,
+            uidChosenUser:null,
+        },
         /* LANGUAGES LIST */
+        
         languagesList:[
             'English',
             'Mandarin Chinese',
@@ -182,6 +188,12 @@ export default new Vuex.Store({
         /* Users Actives on chat */
         setActiveUsersList(state,users){
             state.activeUsersOnChat = users;
+        },
+
+        /* SET OPEN CHAT MESSAGES */
+        setOpenBoxMessages(state,payload){
+            state.openchat.status = payload.status;
+            state.openchat.uidChosenUser = payload.uid;
         }
     },
     actions: {},

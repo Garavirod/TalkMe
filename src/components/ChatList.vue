@@ -35,7 +35,7 @@
         sm="4"
         xs="12"
         v-for="item in activeUsersOnChat"
-        :key="item.id"
+        :key="item.uid"
       >
         <v-hover>
           <template v-slot:default="{ hover }">
@@ -58,7 +58,7 @@
               <!-- fade -->
               <v-fade-transition>
                 <v-overlay v-if="hover" absolute color="#036358">
-                  <v-btn>Send message</v-btn>
+                  <v-btn @click="setOpenBoxMessages({status:true, uid:item.uid})">Send message</v-btn>
                 </v-overlay>
               </v-fade-transition>
             </v-card>
@@ -170,7 +170,7 @@ export default {
     /* ---------- VUEX ----------- */
     /* +++++++++++++++++++++++++++ */
 
-    ...mapMutations(["getUserInformation", "setActiveUsersList"]),
+    ...mapMutations(["getUserInformation", "setActiveUsersList","setOpenBoxMessages"]),
     /* +++++++++++++++++++++++++++ */
     /* --------- TEMPLATE--------- */
     /* +++++++++++++++++++++++++++ */
@@ -198,6 +198,10 @@ export default {
         console.log(users);
       });
     },
+
+    chosenUser(user){
+      console.log('USER >: ',user.uid);
+    }
   },
 
   created() {
