@@ -80,7 +80,7 @@ export default {
     name: "AudioControls",
     props: ['ctr_send'],
     computed:{
-        ...mapState(['socket'])
+        ...mapState(['socket','openchat'])
     },
     data() {
         return {
@@ -133,7 +133,7 @@ export default {
                             // Convertir los fragmentos a un objeto binario
                             this.blobAudio = new Blob(this.audioFragments);
                             // Empty audio fragments
-                            this.audioFragments=[];
+                            // this.audioFragments=[];
                             // Crear una URL o enlace para descargar
                             const urlParaDescargar = window.URL.createObjectURL(this.blobAudio);
                             // Crear un elemento <a> invisible para descargar el audio
@@ -199,14 +199,15 @@ export default {
             this.min = 0;
             this.sec = 0;
         },
-        sendAudio(){
+        sendAudio: function (){                        
             const {uid} = getUserInfo();
             const audioMessage = {
-                from: uid,
-                to: '',
-                message:this.audioFragments,                
+                fromUser: uid,
+                toUser: this.openchat.uidChosenUser,
+                audioMessage:this.audioFragments,                
             }
-            this.socket.emit('personal-message',audioMessage);
+            this.audioFragments = [];
+            this.socket.emit('personal-message',audioMessage);            
         }
     },
     created(){

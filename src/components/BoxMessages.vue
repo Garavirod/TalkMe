@@ -52,12 +52,16 @@
 </style>
 
 <script>
+import { mapState } from 'vuex';
 import AudioControls from "../components/AudioControls";
 export default {
     name: "BoxMessages",
     props: ["speaker"],
     components: {
         AudioControls,
+    },
+    computed:{
+        ...mapState(['socket']),
     },
     data() {
         return {
