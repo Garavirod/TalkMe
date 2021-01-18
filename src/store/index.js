@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import io from 'socket.io-client';
 import Axios from 'axios';
-import { getUserInfo } from '../helpers/utils';
+import { getAuthToken, getUserInfo } from '../helpers/utils';
 
 
 Vue.use(Vuex)
@@ -38,7 +38,7 @@ export default new Vuex.Store({
         /* OPEN CHAT */
         openchat:{
             status:false,
-            uidChosenUser:null,
+            chosenUser:null,
         },
         /* LANGUAGES LIST */
         
@@ -165,7 +165,7 @@ export default new Vuex.Store({
             /* Recover uid from token */
             const {uid} = getUserInfo();
             /* Http request AXIOS GET */
-            await Axios.get(`${process.env.VUE_APP_API}/user-info/${uid}`)
+            await Axios.get(`${process.env.VUE_APP_API}/login/user-info/${uid}`)
             .then(res => {                
                 state.userInformation.username = res.data.userInfo.username;
                 state.userInformation.email = res.data.userInfo.email;
@@ -191,9 +191,21 @@ export default new Vuex.Store({
         },
 
         /* SET OPEN CHAT MESSAGES */
-        setOpenBoxMessages(state,payload){
-            state.openchat.status = payload.status;
-            state.openchat.uidChosenUser = payload.uid;
+        async setOpenBoxMessages(state,payload){
+            const token = getAuthToken(); //helpers
+            const url = `${process.env.VUE_APP_API}/messages/${payload.user.uid}`; //API path from eviroment
+            state.openchat.status = payload.status; //status box-messages open:true close:false
+            state.openchat.chosenUser = payload.user;
+            //Axios GET Petition
+            await Axios.get(url,{
+                headers:{
+                'blumin-tkn': token}
+            }).then( data => {
+                console.log(data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
         }
     },
     actions: {},

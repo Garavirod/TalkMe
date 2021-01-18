@@ -203,11 +203,14 @@ export default {
             const {uid} = getUserInfo();
             const audioMessage = {
                 fromUser: uid,
-                toUser: this.openchat.uidChosenUser,
+                toUser: this.openchat.chosenUser.uid,
                 audioMessage:this.audioFragments,                
             }
             this.audioFragments = [];
-            this.socket.emit('personal-message',audioMessage);            
+            this.socket.emit('personal-message',audioMessage); 
+            this.socket.on("personal-message", (datta)=>{
+                console.log("MESSAGES :>", datta);
+            })           
         }
     },
     created(){
@@ -219,7 +222,8 @@ export default {
             if the webborwoser suppotrs MediaRecorder.
          */
         if(typeof MediaRecorder === "undefined" || !hasSupport){
-            swal("Oops!","Your borwser not support this tachnology, please get upload it","error");           
+            swal("Oops!","Your borwser not support this tachnology, please get upload it","error");
+            this.$router.push("Sections");           
         }else{
             navigator.mediaDevices.enumerateDevices()
             .then(devices=>{

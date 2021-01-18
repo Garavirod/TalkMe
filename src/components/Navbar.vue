@@ -89,16 +89,18 @@ export default {
     },
     methods:{
         /* Vuex */
-        ...mapMutations(['setUserActive']),
+        ...mapMutations(['setUserActive','socketDisconn']),
         /*  Template methods */
         Logout(){
+            this.socketDisconn();
             localStorage.removeItem('blumin-tkn');
             this.setUserActive(false);
             this.$router.push('Home');
+            
         },        
     },
     created(){
-        this.setUserActive(isLoggedIn())
+        this.setUserActive(isLoggedIn());
     }
     
 };

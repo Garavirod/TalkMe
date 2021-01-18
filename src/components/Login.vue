@@ -50,7 +50,7 @@ export default {
     methods:{
         ...mapMutations(['setUserActive']),
         async Login(){            
-            const url = process.env.VUE_APP_API; //endpoint
+            const url = `${process.env.VUE_APP_API}/login/`; //endpoint
             // User data login
             const user = {
                 email:this.loginEmail,

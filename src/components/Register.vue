@@ -211,7 +211,7 @@ export default {
     },
     /* REGISTER NEW USER */
     async registerUser() {
-      const url = `${process.env.VUE_APP_API}/new-user`;
+      const url = `${process.env.VUE_APP_API}/login/new-user`;
       const newUser = {
           "username":this.username,
           "email": this.email,

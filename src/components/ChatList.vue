@@ -58,7 +58,7 @@
               <!-- fade -->
               <v-fade-transition>
                 <v-overlay v-if="hover" absolute color="#036358">
-                  <v-btn @click="setOpenBoxMessages({status:true, uid:item.uid})">Send message</v-btn>
+                  <v-btn @click="setOpenBoxMessages({status:true, user:item})">Send message</v-btn>
                 </v-overlay>
               </v-fade-transition>
             </v-card>
