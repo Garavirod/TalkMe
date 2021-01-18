@@ -43,7 +43,7 @@
           >
             <v-card>
               <v-toolbar dark color="#84a9ac">
-                <v-btn icon dark @click="setOpenBoxMessages({status:false,uid:''})">
+                <v-btn icon dark @click="setOpenBoxMessages({status:false,user:null})">
                   <v-icon>mdi-close</v-icon>
                 </v-btn>
                 <v-toolbar-title>Chatbox</v-toolbar-title>

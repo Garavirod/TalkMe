@@ -74,13 +74,13 @@
 
 <script>
 import swal from 'sweetalert';
-import { mapState } from "vuex";
+import { mapMutations, mapState } from "vuex";
 import { getUserInfo } from '../helpers/utils';
 export default {
     name: "AudioControls",
     props: ['ctr_send'],
     computed:{
-        ...mapState(['socket','openchat'])
+        ...mapState(['socket','openchat','messagesOnBox'])
     },
     data() {
         return {
@@ -99,6 +99,8 @@ export default {
         }
     },
     methods:{
+        /**VUEX */
+        ...mapMutations(['setNewMessage']),
         /* 
             This method excecutes mediaRecording start
             for recording audio.
@@ -208,8 +210,9 @@ export default {
             }
             this.audioFragments = [];
             this.socket.emit('personal-message',audioMessage); 
-            this.socket.on("personal-message", (datta)=>{
-                console.log("MESSAGES :>", datta);
+            this.socket.on("personal-message", (newMessage)=>{
+                this.setNewMessage(newMessage);
+                console.log(this.messagesOnBox);
             })           
         }
     },

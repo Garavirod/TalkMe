@@ -21,6 +21,8 @@ export default new Vuex.Store({
         },
         /* USER ACTIVE ON CHAT */
         isActiveOnChat:false,
+        /* MESSAGES ON BOX */
+        messagesOnBox: [],
         /* USERS ACTIVE ON CHAT LIST */
         activeUsersOnChat:[],
         /* ACTIVE SIDEBAR CHATS */
@@ -29,7 +31,7 @@ export default new Vuex.Store({
         socket:null,
         /* ENDPOINT SOCKET BLUMIN BACKEND */
         endpointConn:'http://localhost:5000',
-        /* FLAG TO KNOW IF USER IS LOGGED */
+        /* FLAG TO KNOW IF USER IS LOGGED IN CASE TO ACTIVATE NAVBAR CONTROLS */
         isUserLogged:false,
         /* COUNTRIES LIST */
         countriesList:[],
@@ -192,20 +194,30 @@ export default new Vuex.Store({
 
         /* SET OPEN CHAT MESSAGES */
         async setOpenBoxMessages(state,payload){
-            const token = getAuthToken(); //helpers
-            const url = `${process.env.VUE_APP_API}/messages/${payload.user.uid}`; //API path from eviroment
             state.openchat.status = payload.status; //status box-messages open:true close:false
-            state.openchat.chosenUser = payload.user;
-            //Axios GET Petition
-            await Axios.get(url,{
-                headers:{
-                'blumin-tkn': token}
-            }).then( data => {
-                console.log(data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+            if (state.openchat.status) {
+                //this block is going to be executed when user open chat box
+                //otherwise it just close boxchat
+                const token = getAuthToken(); //helpers
+                const url = `${process.env.VUE_APP_API}/messages/${payload.user.uid}`; //API path from eviroment
+                state.openchat.chosenUser = payload.user; //Asign user who user wants to talking to
+                //Axios GET Petition
+                await Axios.get(url,{
+                    headers:{
+                    'blumin-tkn': token}
+                }).then( (data) => {
+                    state.messagesOnBox = data.data.msg;
+                    console.log(state.messagesOnBox);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+                
+            }
+        },
+        /* SET NEW MESSAGE */
+        setNewMessage(state,payload){
+            state.messagesOnBox = [...state.messagesOnBox,payload];
         }
     },
     actions: {},
