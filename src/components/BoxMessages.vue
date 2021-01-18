@@ -17,13 +17,18 @@
                 <v-virtual-scroll :items="messages" :item-height="80" height="300" class="">
                     <template v-slot="{ item }">
                         <v-list-item class="ma-2">
-                            <v-list-item-avatar>
-                                <v-img :src="item.avatar"></v-img>
-                            </v-list-item-avatar>
-                            <v-list-item-content>
-                                <audio controls class="ml-2" id="audioBox">                                    
-                                </audio>
-                            </v-list-item-content>
+                            <div v-show="false">
+                                <v-list-item-avatar>
+                                    <v-img :src="item.avatar"></v-img>
+                                </v-list-item-avatar>
+                                <v-list-item-content>
+                                    <audio controls class="ml-2" id="audioBox">                                    
+                                    </audio>
+                                </v-list-item-content>
+                            </div>
+                            <v-row>
+                                <AudioCardMessage/>
+                            </v-row>
                         </v-list-item>
                     </template>
                 </v-virtual-scroll>
@@ -54,11 +59,13 @@
 <script>
 import { mapState } from 'vuex';
 import AudioControls from "../components/AudioControls";
+import AudioCardMessage from '../components/AudioCardMessage';
 export default {
     name: "BoxMessages",
     props: ["speaker"],
     components: {
         AudioControls,
+        AudioCardMessage,
     },
     computed:{
         ...mapState(['socket']),
