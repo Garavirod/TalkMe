@@ -68,7 +68,7 @@
 }
 
 #audioPlay{
-    width: 60%;
+    width: 90%;
 }
 </style>
 
