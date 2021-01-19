@@ -6,8 +6,8 @@
         class="pa-2 ma-2"
     >
         <v-card-text class="ma-0">{{who}}</v-card-text>
-        <v-card-subtitle class="ma-0">23-02-2023</v-card-subtitle>
-        <audio controls class="audio-mess"></audio>   
+        <v-card-subtitle class="ma-0">{{dateMessage.slice(0,10)}}</v-card-subtitle>
+        <audio controls class="audio-mess" :id="idMessage"></audio>   
          
     </v-card>
 </template>
@@ -23,6 +23,20 @@
 
 <script>
 export default {
-    props:['who']
+    props:['messageFragments','dateMessage','who','idMessage'],
+
+    methods:{
+        injectAucdio(){
+
+            const blobAudio = new Blob(this.messageFragments);
+            const url = window.URL.createObjectURL(blobAudio);
+            let audioElement = document.getElementById(this.idMessage);
+            audioElement.src = url;
+        }
+    },
+
+    mounted() {
+        this.injectAucdio();
+    }
 }
 </script>

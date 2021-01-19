@@ -16,9 +16,14 @@
           >
           <!--MESSAGES-->
           <v-container id="box-mess" no-gutters>
-            <v-row v-for="i in 8" :key="i" :set="j=i%2" :justify="(j !== 0 )? 'end' : 'start'">
+            <v-row v-for="m in messagesOnBox" :key="m._id"  :justify="(uidUser !== m.toUser )? 'end' : 'start'">
               <v-col cols="12" lg="6" md="8" sm="8" xs="12">
-                <AudioCardMessage :who="(j!==0)? 'You' : openchat.chosenUser.username" />
+                <AudioCardMessage 
+                  :messageFragments="m.audioMessage"
+                  :dateMessage="m.createdAt"
+                  :idMessage="m._id"
+                  :who="(uidUser !== m.toUser )? 'You' : openchat.chosenUser.username"
+                />
               </v-col>
             </v-row>
           </v-container>
@@ -47,6 +52,7 @@
 import { mapState } from "vuex";
 import AudioControls from "../components/AudioControls";
 import AudioCardMessage from "../components/AudioCardMessage";
+import {getUserInfo} from "../helpers/utils";
 export default {
   name: "BoxMessages",
   components: {
@@ -54,12 +60,17 @@ export default {
     AudioCardMessage,
   },
   computed: {
-    ...mapState(['socket','openchat']),
+    ...mapState(['socket','openchat','messagesOnBox']),
   },
   data() {
     return {
       isrecording: false,
+      uidUser:null,
     }
   },
+  created() {
+    const {uid} = getUserInfo();
+    this.uidUser = uid;
+  }
 };
 </script>
