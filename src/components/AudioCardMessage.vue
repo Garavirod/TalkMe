@@ -3,9 +3,31 @@
         elevation="10"
         outlined
         shaped
-        class="pa-2 ma-2"
+        class="pa-2 ma-2 audio-mess-card"
     >
-        <v-card-subtitle>23-02-2023</v-card-subtitle>
-        <audio controls id=""></audio>    
+        <v-card-text class="ma-0">{{who}}</v-card-text>
+        <v-card-subtitle class="ma-0">23-02-2023</v-card-subtitle>
+        <audio controls class="audio-mess"></audio>   
+         
     </v-card>
 </template>
+
+<style>
+    .audio-mess-card{
+        
+        
+    }
+
+    .audio-mess{
+        width: 90%;
+        height: 30px;
+    }
+
+
+</style>
+
+<script>
+export default {
+    props:['who']
+}
+</script>

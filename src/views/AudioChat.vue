@@ -34,15 +34,16 @@
         </v-tabs-items>
 
         <!-- CHAT BOX -->
-        <v-row justify="center">
+        <v-row justify="center" >
           <v-dialog
             v-model="openchat.status"
             fullscreen
             hide-overlay
             transition="dialog-bottom-transition"
+            
           >
-            <v-card>
-              <v-toolbar dark color="#84a9ac">
+            <v-card id="box-mess-content">
+              <v-toolbar dark color="#204051">
                 <v-btn icon dark @click="setOpenBoxMessages({status:false,user:null})">
                   <v-icon>mdi-close</v-icon>
                 </v-btn>
@@ -51,7 +52,7 @@
               </v-toolbar>              
               <v-row class="ma-2">                
                 <v-col cols="12" lg="6" md="6" sm="12" xs="12">
-                  <BoxMessages :speaker="speaker" />
+                  <BoxMessages />
                 </v-col>
                 <!-- TOPICS AND INBOX -->
                 <v-col cols="12" lg="6" md="6" sm="12" xs="12">
@@ -74,7 +75,7 @@
                           </v-card>
                           <v-row class="text-center">
                             <v-col cols="12">
-                              <v-btn outlined color="#3b6978">change</v-btn>
+                              <v-btn color="#3b6978" outlined>change</v-btn>
                             </v-col>
                           </v-row>
                         </v-col>
@@ -106,6 +107,13 @@
   </SectionCard>
 </template>
 
+<style>
+  #box-mess-content{
+    
+    background-color: #cae8d5;
+  }
+</style>
+
 <script>
 import SectionCard from "../components/SectionCard";
 import BoxMessages from "../components/BoxMessages";
@@ -131,7 +139,6 @@ export default {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
       instructions:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
-      speaker: "Rodrigo",
     };
   },
   methods: {

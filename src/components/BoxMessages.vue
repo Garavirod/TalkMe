@@ -1,150 +1,65 @@
 <template>
-<v-container class="pa-1">
+  <v-container class="pa-1" elevation="5">
     <v-row class="text-center">
-        <v-col cols="12" lg="12" xs="12">
-            <v-card  class="">
-                <!--HEAD BOX-->
-                <v-card-title class="black--text text-center">
-                    <v-col class="text-center">
-                        <h3>Box Messages</h3>
-                        <p>You are talking with</p>
-                        <p>{{speaker}}</p>
-                    </v-col>
-                </v-card-title>
-                <v-card-text class="text-center">Don't forget always to be polite</v-card-text>
-                <v-divider></v-divider>
-                <!--MESSAGES-->
-                <v-virtual-scroll :items="messages" :item-height="80" height="300" class="">
-                    <template v-slot="{ item }">
-                        <v-list-item class="ma-2">
-                            <div v-show="false">
-                                <v-list-item-avatar>
-                                    <v-img :src="item.avatar"></v-img>
-                                </v-list-item-avatar>
-                                <v-list-item-content>
-                                    <audio controls class="ml-2" id="audioBox">                                    
-                                    </audio>
-                                </v-list-item-content>
-                            </div>
-                            <v-row>
-                                <AudioCardMessage/>
-                            </v-row>
-                        </v-list-item>
-                    </template>
-                </v-virtual-scroll>
-                <v-divider></v-divider>
-                <!--BUTTONS CONTROLS-->
-                <AudioControls :ctr_send="true" />
-            </v-card>
-        </v-col>
+      <v-col cols="12" lg="12" xs="12">
+        <v-card class="pa-2">
+          <!--HEAD BOX-->
+          <v-card-title class="black--text text-center">
+            <v-col class="text-center">
+              <h3>Box Messages</h3>
+              <p>You are talking with</p>
+              <p>{{ openchat.chosenUser.username }}</p>
+            </v-col>
+          </v-card-title>
+          <v-card-text class="text-center"
+            >Don't forget always to be polite</v-card-text
+          >
+          <!--MESSAGES-->
+          <v-container id="box-mess" no-gutters>
+            <v-row v-for="i in 8" :key="i" :set="j=i%2" :justify="(j !== 0 )? 'end' : 'start'">
+              <v-col cols="12" lg="6" md="8" sm="8" xs="12">
+                <AudioCardMessage :who="(j!==0)? 'You' : openchat.chosenUser.username" />
+              </v-col>
+            </v-row>
+          </v-container>
+          <!--BUTTONS CONTROLS-->
+          <AudioControls :ctr_send="true" />
+        </v-card>
+      </v-col>
     </v-row>
-</v-container>
+  </v-container>
 </template>
 
 <style>
-/* audio {
-    -moz-border-radius: 7px 7px 7px 7px;
-    -webkit-border-radius: 7px 7px 7px 7px;
-    border-radius: 20px;
-    background-color: white;
-    width: 100px;
 
-} */
+#audioBox {
+  width: 60%;
+}
 
-#audioBox{
-    width: 60%;
+#box-mess {
+  background-color:rgb(236, 247, 247);
+  max-height: 400px;
+  overflow-y: scroll;
 }
 </style>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 import AudioControls from "../components/AudioControls";
-import AudioCardMessage from '../components/AudioCardMessage';
+import AudioCardMessage from "../components/AudioCardMessage";
 export default {
-    name: "BoxMessages",
-    props: ["speaker"],
-    components: {
-        AudioControls,
-        AudioCardMessage,
-    },
-    computed:{
-        ...mapState(['socket']),
-    },
-    data() {
-        return {
-            isrecording: false,
-            messages: [{
-                    user: "Julian",
-                    active: true,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: false,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: true,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: false,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: true,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: false,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: true,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: false,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: true,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: false,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: true,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: false,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: true,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-                },
-                {
-                    user: "Julian",
-                    active: false,
-                    avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-                },
-            ],
-        };
-    },
+  name: "BoxMessages",
+  components: {
+    AudioControls,
+    AudioCardMessage,
+  },
+  computed: {
+    ...mapState(['socket','openchat']),
+  },
+  data() {
+    return {
+      isrecording: false,
+    }
+  },
 };
 </script>
