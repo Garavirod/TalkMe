@@ -27,11 +27,12 @@ export default {
 
     methods:{
         injectAucdio(){
-            const blobAudio = new Blob(this.messageFragments);
-            const url = window.URL.createObjectURL(blobAudio);
+/*             const buff = new Buffer.from(this.messageFragments,'base64')
+            const blobAudio = new Blob(buff,{type:'audio/mp3'}); */
+            const url = window.URL.createObjectURL(this.messageFragments);
             let audioElement = document.getElementById(this.idMessage);
             audioElement.src = url;
-            console.log("Converting....",typeof(this.messageFragments));
+            /* console.log("Converting....",audioElement); */
         }
     },
    mounted() {

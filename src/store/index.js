@@ -205,8 +205,8 @@ export default new Vuex.Store({
                 await Axios.get(url,{
                     headers:{
                     'blumin-tkn': token}
-                }).then( (data) => {
-                    state.messagesOnBox = data.data.msg;
+                }).then( () => {
+                    //state.messagesOnBox = data.data.msg;
                     console.log(state.messagesOnBox);
                 })
                 .catch(err => {

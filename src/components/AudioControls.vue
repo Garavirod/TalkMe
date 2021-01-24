@@ -133,7 +133,7 @@ export default {
                             // Detener la cuenta regresiva
                             this.stopCounting();
                             // Convertir los fragmentos a un objeto binario
-                            this.blobAudio = new Blob(this.audioFragments);
+                            this.blobAudio = new Blob(this.audioFragments,{type:'audio/ogg; codecs=opus'});
                             // Empty audio fragments
                             // this.audioFragments=[];
                             // Crear una URL o enlace para descargar
@@ -203,6 +203,7 @@ export default {
         },
         sendAudio: function (){                        
             const {uid} = getUserInfo();
+            /* 
             const audioMessage = {
                 fromUser: uid,
                 toUser: this.openchat.chosenUser.uid,
@@ -213,8 +214,23 @@ export default {
             this.socket.on("personal-message", (newMessage)=>{
                 this.setNewMessage(newMessage);
                 console.log(this.messagesOnBox);
-            })           
+            })    */        
+
+            this.socket.emit('radio',this.blobAudio);
+            this.socket.on('voice',(arrayBuff)=>{
+                const blob = new Blob([arrayBuff],{ 'type' : 'audio/ogg; codecs=opus' });
+                this.setNewMessage(
+                    {
+                        _id:'qweeuquewoeuwourye',
+                        toUser:'hsdkhfkhfhkdsfh',
+                        fromUser: uid,
+                        audioMessage:blob,
+                        createdAt:'23-98-12'
+                    }
+                );
+            })
         }
+
     },
     created(){
         
