@@ -208,28 +208,13 @@ export default {
                 toUser: this.openchat.chosenUser.uid,
                 audioMessage:this.blobAudio,                                
             }
+            /* Send message through socket */
             this.socket.emit('personal-message',audioMessage); 
-
+            /* Recieve audio message */
             this.socket.on("voice-msg", (newMessage)=>{
-                console.log("THIS CAME IN >: ",newMessage);
                 this.setNewMessage(newMessage);                
                 console.log(this.messagesOnBox);
             })     
-
-            /* this.socket.emit('radio',audioMessage);
-            this.socket.on('voice',({buff})=>{
-                const blob = new Blob([buff],{ 'type' : 'audio/ogg; codecs=opus' });
-                this.setNewMessage(
-                    {
-                        _id:'qweeuquewoeuwourye',
-                        toUser:'hsdkhfkhfhkdsfh',
-                        fromUser: uid,
-                        audioMessage:blob,
-                        createdAt:'23-98-12'
-                    }
-                );
-                console.log("recived!!",buff);
-            }) */
         }
 
     },

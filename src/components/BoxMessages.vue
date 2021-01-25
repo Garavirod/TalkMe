@@ -68,6 +68,20 @@ export default {
       uidUser:null,
     }
   },
+  methods: {
+    scrollToEnd(){
+      const boxContainer = document.querySelector('#box-mess');
+      console.log('?????',boxContainer);
+      const scrollHeight = boxContainer.scrollHeight;
+      boxContainer.scrollTop = scrollHeight; 
+    }
+  },
+  mounted() {
+    this.scrollToEnd();
+  },
+  updated(){
+    this.scrollToEnd();
+  },
   created() {
     const {uid} = getUserInfo();
     this.uidUser = uid;
