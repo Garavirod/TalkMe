@@ -135,7 +135,7 @@ export default {
                             // Convertir los fragmentos a un objeto binario
                             this.blobAudio = new Blob(this.audioFragments,{type:'audio/ogg; codecs=opus'});
                             // Empty audio fragments
-                            // this.audioFragments=[];
+                            this.audioFragments=[];
                             // Crear una URL o enlace para descargar
                             const urlParaDescargar = window.URL.createObjectURL(this.blobAudio);
                             // Crear un elemento <a> invisible para descargar el audio
@@ -203,22 +203,22 @@ export default {
         },
         sendAudio: function (){                        
             const {uid} = getUserInfo();
-            /* 
             const audioMessage = {
                 fromUser: uid,
                 toUser: this.openchat.chosenUser.uid,
-                audioMessage:this.audioFragments,                
+                audioMessage:this.blobAudio,                                
             }
-            this.audioFragments = [];
             this.socket.emit('personal-message',audioMessage); 
-            this.socket.on("personal-message", (newMessage)=>{
-                this.setNewMessage(newMessage);
-                console.log(this.messagesOnBox);
-            })    */        
 
-            this.socket.emit('radio',this.blobAudio);
-            this.socket.on('voice',(arrayBuff)=>{
-                const blob = new Blob([arrayBuff],{ 'type' : 'audio/ogg; codecs=opus' });
+            this.socket.on("voice-msg", (newMessage)=>{
+                console.log("THIS CAME IN >: ",newMessage);
+                this.setNewMessage(newMessage);                
+                console.log(this.messagesOnBox);
+            })     
+
+            /* this.socket.emit('radio',audioMessage);
+            this.socket.on('voice',({buff})=>{
+                const blob = new Blob([buff],{ 'type' : 'audio/ogg; codecs=opus' });
                 this.setNewMessage(
                     {
                         _id:'qweeuquewoeuwourye',
@@ -228,7 +228,8 @@ export default {
                         createdAt:'23-98-12'
                     }
                 );
-            })
+                console.log("recived!!",buff);
+            }) */
         }
 
     },

@@ -27,12 +27,15 @@ export default {
 
     methods:{
         injectAucdio(){
-/*             const buff = new Buffer.from(this.messageFragments,'base64')
-            const blobAudio = new Blob(buff,{type:'audio/mp3'}); */
-            const url = window.URL.createObjectURL(this.messageFragments);
+            // Obtain buffer of data code base64
+            const buffer = new Buffer.from(this.messageFragments,"base64");
+            // Convert buffer to audio
+            const blobAudio = new Blob([buffer],{ 'type' : 'audio/ogg; codecs=opus' });            
+            // Create url based on blob
+            const url = window.URL.createObjectURL(blobAudio);
+            // Insert url in audio tag
             let audioElement = document.getElementById(this.idMessage);
             audioElement.src = url;
-            /* console.log("Converting....",audioElement); */
         }
     },
    mounted() {
