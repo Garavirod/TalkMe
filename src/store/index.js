@@ -41,6 +41,7 @@ export default new Vuex.Store({
         openchat:{
             status:false,
             chosenUser:null,
+            isloading:true,
         },
         /* LANGUAGES LIST */
         
@@ -197,6 +198,7 @@ export default new Vuex.Store({
         /* SET OPEN CHAT MESSAGES */
         async setOpenBoxMessages(state,payload){
             state.openchat.status = payload.status; //status box-messages open:true close:false
+            state.openchat.isloading = payload.status; //  are audio messages loading ?
             if (state.openchat.status) {
                 //this block is going to be executed when user open chat box
                 //otherwise it just close boxchat
@@ -209,6 +211,7 @@ export default new Vuex.Store({
                     'blumin-tkn': token}
                 }).then( (data) => {
                     state.messagesOnBox = data.data.msg;
+                    state.openchat.isloading = false; //messages were loaded
                     console.log(state.messagesOnBox);
                 })
                 .catch(err => {

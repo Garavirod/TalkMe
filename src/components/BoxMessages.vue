@@ -16,13 +16,25 @@
           >
           <!--MESSAGES-->
           <v-container id="box-mess" no-gutters>
-            <v-row v-for="m in messagesOnBox" :key="m._id"  :justify="(uidUser !== m.toUser )? 'end' : 'start'">
+            <v-skeleton-loader
+             v-if="this.openchat.isloading"
+              type="list-item-avatar-three-line, list-item-avatar-three-line, list-item-avatar-three-line"
+            ></v-skeleton-loader>
+            <v-row
+              v-else
+              class="animate__animated animate__fadeInDown"
+              v-for="m in messagesOnBox"
+              :key="m._id"
+              :justify="uidUser !== m.toUser ? 'end' : 'start'"
+            >
               <v-col cols="12" lg="6" md="8" sm="8" xs="12">
-                <AudioCardMessage 
+                <AudioCardMessage
                   :messageFragments="m.audioMessage"
                   :dateMessage="m.createdAt"
                   :idMessage="m._id"
-                  :who="(uidUser !== m.toUser )? 'You' : openchat.chosenUser.username"
+                  :who="
+                    uidUser !== m.toUser ? 'You' : openchat.chosenUser.username
+                  "
                 />
               </v-col>
             </v-row>
@@ -36,14 +48,14 @@
 </template>
 
 <style>
-
 #audioBox {
   width: 60%;
 }
 
 #box-mess {
-  background-color:rgb(236, 247, 247);
-  max-height: 400px;
+  background-color: rgb(236, 247, 247);
+  max-height: 300px;
+  min-height: 300px;
   overflow-y: scroll;
 }
 </style>
@@ -52,7 +64,7 @@
 import { mapState } from "vuex";
 import AudioControls from "../components/AudioControls";
 import AudioCardMessage from "../components/AudioCardMessage";
-import {getUserInfo} from "../helpers/utils";
+import { getUserInfo } from "../helpers/utils";
 export default {
   name: "BoxMessages",
   components: {
@@ -60,30 +72,30 @@ export default {
     AudioCardMessage,
   },
   computed: {
-    ...mapState(['socket','openchat','messagesOnBox']),
+    ...mapState(["socket", "openchat", "messagesOnBox"]),
   },
   data() {
     return {
       isrecording: false,
-      uidUser:null,
-    }
+      uidUser: null,
+    };
   },
   methods: {
-    scrollToEnd(){
-      const boxContainer = document.querySelector('#box-mess');
+    scrollToEnd() {
+      const boxContainer = document.querySelector("#box-mess");
       const scrollHeight = boxContainer.scrollHeight;
-      boxContainer.scrollTop = scrollHeight; 
-    }
+      boxContainer.scrollTop = scrollHeight;
+    },
   },
   mounted() {
     this.scrollToEnd();
   },
-  updated(){
+  updated() {
     this.scrollToEnd();
   },
   created() {
-    const {uid} = getUserInfo();
+    const { uid } = getUserInfo();
     this.uidUser = uid;
-  }
+  },
 };
 </script>

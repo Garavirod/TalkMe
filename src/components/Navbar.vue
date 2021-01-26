@@ -92,12 +92,10 @@ export default {
         ...mapMutations(['setUserActive','socketDisconn']),
         /*  Template methods */
         Logout(){
-            this.socketDisconn();
-            localStorage.removeItem('blumin-tkn');
-            this.setUserActive(false);
-            this.$router.push('Home');
-            console.log("socket state ", this.socket);
-            
+            this.socketDisconn(); //Desconnect socket if it exist
+            localStorage.removeItem('blumin-tkn'); //remove token from storgae
+            this.setUserActive(false); //state user active set on false.
+            this.$router.push('Home'); //Redirect to home                
         },        
     },
     created(){

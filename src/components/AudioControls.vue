@@ -17,6 +17,7 @@
     <v-col cols="12">
         <v-btn
             v-if="ctr_send" 
+            :disabled="isBufferFelt"
             @click="sendAudio" 
             small 
             class="mx-2" 
@@ -56,7 +57,7 @@
             <v-col cols="12" lg="4" xs="4" sm="4">{{sec}}</v-col>
         </v-row>
     </v-col>
-    <v-col cols="12">
+    <v-col cols="12" v-show="!isBufferFelt" class="animate__animated animate__headShake">
         <audio controls id="audioPlay"></audio>        
     </v-col>    
 </v-row>
@@ -80,7 +81,12 @@ export default {
     name: "AudioControls",
     props: ['ctr_send'],
     computed:{
-        ...mapState(['socket','openchat','messagesOnBox'])
+        /* VUEX */
+        ...mapState(['socket','openchat','messagesOnBox']),
+        /* TEMPLATE */
+        isBufferFelt(){
+            return (this.audioFragments.length === 0) ? true : false;
+        }
     },
     data() {
         return {
@@ -133,9 +139,7 @@ export default {
                             // Detener la cuenta regresiva
                             this.stopCounting();
                             // Convertir los fragmentos a un objeto binario
-                            this.blobAudio = new Blob(this.audioFragments,{type:'audio/ogg; codecs=opus'});
-                            // Empty audio fragments
-                            this.audioFragments=[];
+                            this.blobAudio = new Blob(this.audioFragments,{type:'audio/ogg; codecs=opus'});                            
                             // Crear una URL o enlace para descargar
                             const urlParaDescargar = window.URL.createObjectURL(this.blobAudio);
                             // Crear un elemento <a> invisible para descargar el audio
@@ -208,12 +212,14 @@ export default {
                 toUser: this.openchat.chosenUser.uid,
                 audioMessage:this.blobAudio,                                
             }
+            // Empty audio fragments
+            this.audioFragments=[];
             /* Send message through socket */
             this.socket.emit('personal-message',audioMessage); 
             /* Recieve audio message */
             this.socket.on("voice-msg", (newMessage)=>{
                 this.setNewMessage(newMessage);                
-                console.log(this.messagesOnBox);
+               /*  console.log(this.messagesOnBox); */
             })     
         }
 
