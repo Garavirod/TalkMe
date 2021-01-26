@@ -141,9 +141,11 @@ export default new Vuex.Store({
         },
         socketDisconn(state){
             /* Disconnect socket */
-            state.socket.disconnect();
-            state.socket = null;
-            state.isActiveOnChat = false;            
+            if(state.socket !== null){
+                state.socket.disconnect();
+                state.socket = null;
+                state.isActiveOnChat = false;            
+            }
         },       
         setUserActive(state,value){
             /* Set user logged in  true or false*/

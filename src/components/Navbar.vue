@@ -85,7 +85,7 @@ export default {
         drawer: false,        
     }),
     computed: {
-       ...mapState(['isUserLogged']),
+       ...mapState(['isUserLogged','socket']),
     },
     methods:{
         /* Vuex */
@@ -96,6 +96,7 @@ export default {
             localStorage.removeItem('blumin-tkn');
             this.setUserActive(false);
             this.$router.push('Home');
+            console.log("socket state ", this.socket);
             
         },        
     },

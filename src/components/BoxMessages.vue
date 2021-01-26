@@ -71,7 +71,6 @@ export default {
   methods: {
     scrollToEnd(){
       const boxContainer = document.querySelector('#box-mess');
-      console.log('?????',boxContainer);
       const scrollHeight = boxContainer.scrollHeight;
       boxContainer.scrollTop = scrollHeight; 
     }
