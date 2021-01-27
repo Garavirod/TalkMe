@@ -170,7 +170,7 @@ export default {
     /* ---------- VUEX ----------- */
     /* +++++++++++++++++++++++++++ */
 
-    ...mapMutations(["getUserInformation", "setActiveUsersList","setOpenBoxMessages"]),
+    ...mapMutations(["getUserInformation", "setActiveUsersList","setOpenBoxMessages","socketConnection","socketDisconn"]),
     /* +++++++++++++++++++++++++++ */
     /* --------- TEMPLATE--------- */
     /* +++++++++++++++++++++++++++ */
@@ -178,19 +178,13 @@ export default {
     genRandomIndex(length) {
       return Math.ceil(Math.random() * (length - 1));
     },
-    async searchSpeakers() {
-      // const url = `${process.env.VUE_APP_API}/`;
-      // await Axios.get(url)
-      //   .then((res) => {
-      //     console.log(res);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      // this.socket.emit('chosen-language', (this.lang));
+    searchSpeakers() {
+      this.socketDisconn();
+      this.socketConnection({chosenLang:this.lang.language});
+      this.getUsersActives();
     },
 
-    async getUsersActives() {
+    getUsersActives() {
       const { uid } = getUserInfo();
       this.socket.on("list-users", (data) => {
         const users = data.filter((user) => user.uid !== uid);
@@ -199,13 +193,10 @@ export default {
       });
     },
 
-    chosenUser(user){
-      console.log('USER >: ',user.uid);
-    }
   },
 
   created() {
-    this.getUsersActives();
+    this.setActiveUsersList([]);
     this.getUserInformation();
   },
 };

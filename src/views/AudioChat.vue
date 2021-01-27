@@ -143,14 +143,10 @@ export default {
   },
   methods: {
     /* Access store methods */
-    ...mapMutations(["socketConnection", "socketDisconn","setOpenBoxMessages"]),
+    ...mapMutations(["socketDisconn","setOpenBoxMessages"]),
   },
   computed:{
     ...mapState(["openchat"]),
-  },
-  created() {
-    /* Calls for socket connection method from store */
-    this.socketConnection();
   },
   destroyed() {
     /* Calls for socket connection method from store */

@@ -124,7 +124,7 @@ export default new Vuex.Store({
              
     },
     mutations: {    
-        socketConnection(state){
+        socketConnection(state,payload){
             /* Initialization socket */
             const token = localStorage.getItem('blumin-tkn');
 
@@ -133,7 +133,8 @@ export default new Vuex.Store({
                 autoConnect:true, //It always creates a new connect when it be called.
                 forceNew:true,
                 query:{ //By url 
-                    'blumin-tkn':token
+                    'blumin-tkn':token,
+                    'language':payload.chosenLang
                 }
             });
             if(state.socket.connected){
