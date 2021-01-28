@@ -118,7 +118,7 @@
 import SectionCard from "../components/SectionCard";
 import BoxMessages from "../components/BoxMessages";
 // import List from "../components/List";
-import { mapMutations, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 import ChatList from "../components/ChatList.vue";
 import InboxChat from "../components/InboxChat.vue";
 export default {
@@ -135,6 +135,7 @@ export default {
       mainTab: null,
       secundaryTab: null,
       sectionName: "Audio chat",
+      default:this.userInformation,
       extract:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
       instructions:
@@ -143,10 +144,20 @@ export default {
   },
   methods: {
     /* Access store methods */
-    ...mapMutations(["socketDisconn","setOpenBoxMessages"]),
+    ...mapMutations([
+      "socketDisconn",
+      "setOpenBoxMessages",
+      "getUsersActives",      
+      "getUsersActives"
+    ]),
+    ...mapActions(['getUserInformation']),
   },
   computed:{
-    ...mapState(["openchat"]),
+    ...mapState(["openchat","userInformation"]),
+  },
+
+  created() {
+      this.getUserInformation();
   },
   destroyed() {
     /* Calls for socket connection method from store */

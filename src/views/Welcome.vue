@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import UserInfromationVue from "../components/UserInformation";
 export default {
     name: "Welcome",
@@ -39,7 +39,7 @@ export default {
         UserInfromationVue
     },
     methods:{
-        ...mapMutations(['getUserInformation'])
+        ...mapActions(['getUserInformation'])
     },
     created(){
         this.getUserInformation();        

@@ -124,39 +124,40 @@ export default new Vuex.Store({
              
     },
     mutations: {    
-        socketConnection(state,payload){
+        setSocketConnection(state, lang){
             /* Initialization socket */
-            const token = localStorage.getItem('blumin-tkn');
-
+            const token = getAuthToken();
             state.socket = io.connect(state.endpointConn,{
                 transports:['websocket'],
                 autoConnect:true, //It always creates a new connect when it be called.
                 forceNew:true,
                 query:{ //By url 
                     'blumin-tkn':token,
-                    'language':payload.chosenLang
+                    'language': lang
                 }
             });
-            if(state.socket.connected){
+            if(state.socket!==null){
+                localStorage.setItem('saved-lang',lang); //save in storage for avoid los chat on reload page
                 state.isActiveOnChat = true;
-            }
+            }            
         },
         socketDisconn(state){
             /* Disconnect socket */
             if(state.socket !== null){
                 state.socket.disconnect();
                 state.socket = null;
-                state.isActiveOnChat = false;            
+                state.isActiveOnChat = false;    
+                localStorage.removeItem('saved-lang');        
             }
         },       
         setUserActive(state,value){
             /* Set user logged in  true or false*/
             state.isUserLogged = value;
         },
-        async getCountriesAPI(state){
+        getCountriesAPI(state){
             /* Get all nationalities from Countries REST */
             const url = 'https://restcountries.eu/rest/v2/all';
-            await Axios.get(url)
+            Axios.get(url)
             .then(res =>{                             
                 res.data.forEach(el => {
                     state.countriesList.push(el.name);                    
@@ -167,23 +168,14 @@ export default new Vuex.Store({
             });
         },
 
-        async getUserInformation(state){
-            /* Recover uid from token */
-            const {uid} = getUserInfo();
-            /* Http request AXIOS GET */
-            await Axios.get(`${process.env.VUE_APP_API}/login/user-info/${uid}`)
-            .then(res => {                
-                state.userInformation.username = res.data.userInfo.username;
-                state.userInformation.email = res.data.userInfo.email;
-                state.userInformation.chosen_lan = res.data.userInfo.languages;
-                state.userInformation.country = res.data.userInfo.country;
-                state.userInformation.victories = res.data.userInfo.victories;
-                state.userInformation.fails = res.data.userInfo.fails;
-                state.userInformation.medals = res.data.userInfo.medals;
-            })
-            .catch(err => {
-                console.log(err);
-            });   
+        setUserInformation(state, dataUser){
+            state.userInformation.username = dataUser.username;
+            state.userInformation.email = dataUser.email;
+            state.userInformation.chosen_lan = dataUser.languages;
+            state.userInformation.country = dataUser.country;
+            state.userInformation.victories = dataUser.victories;
+            state.userInformation.fails = dataUser.fails;
+            state.userInformation.medals = dataUser.medals;
         },
 
         /* Active side bar chat */
@@ -191,13 +183,17 @@ export default new Vuex.Store({
             state.activeChatSide = value;
         },
 
-        /* Users Actives on chat */
-        setActiveUsersList(state,users){
-            state.activeUsersOnChat = users;
+        /* Users Actives on room */
+        getUsersOnRoom: function (state){
+            const {uid} = getUserInfo();
+            state.socket.on('list-users', (data) => {
+              const users = data.filter((user) => user.uid !== uid);
+              state.activeUsersOnChat = users;
+            });
         },
 
         /* SET OPEN CHAT MESSAGES */
-        async setOpenBoxMessages(state,payload){
+        setOpenBoxMessages(state,payload){
             state.openchat.status = payload.status; //status box-messages open:true close:false
             state.openchat.isloading = payload.status; //  are audio messages loading ?
             if (state.openchat.status) {
@@ -207,7 +203,7 @@ export default new Vuex.Store({
                 const url = `${process.env.VUE_APP_API}/messages/${payload.user.uid}`; //API path from eviroment
                 state.openchat.chosenUser = payload.user; //Asign user who user wants to talking to
                 //Axios GET Petition
-                await Axios.get(url,{
+                Axios.get(url,{
                     headers:{
                     'blumin-tkn': token}
                 }).then( (data) => {
@@ -224,8 +220,20 @@ export default new Vuex.Store({
         /* SET NEW MESSAGE */
         setNewMessage(state,payload){
             state.messagesOnBox = [...state.messagesOnBox,payload];
-        }
+        },
+
+        setUsersActives(state,users) {      
+            state.activeUsersOnChat = users;            
+        },
     },
-    actions: {},
+    actions: {
+        getUserInformation: async function ({commit}){
+             /* Recover uid from token */
+             const {uid} = getUserInfo();
+             /* Http request AXIOS GET */
+            const res = await Axios.get(`${process.env.VUE_APP_API}/login/user-info/${uid}`);           
+            commit('setUserInformation',res.data.userInfo);           
+        },       
+    },
     modules: {}
 })
