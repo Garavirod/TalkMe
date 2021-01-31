@@ -218,8 +218,8 @@ export default {
             this.socket.emit('personal-message',audioMessage); 
             /* Recieve audio message */
             this.socket.on("voice-msg", (newMessage)=>{
-                this.setNewMessage(newMessage);                
-               /*  console.log(this.messagesOnBox); */
+                this.setNewMessage(newMessage.message);
+                console.log(newMessage.inbox);
             })     
         }
 
