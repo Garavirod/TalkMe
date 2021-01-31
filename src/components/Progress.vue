@@ -21,6 +21,6 @@
 
 <script>
 export default {
-    props = ['text','isVisible'],   
+    props : ['text','isVisible'],   
 }
 </script>

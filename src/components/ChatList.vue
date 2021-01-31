@@ -26,6 +26,10 @@
       </v-col>
     </v-row>
 
+    <!-- Progress -->
+        <Progress text="Joinning room" :isVisible="setProgress"/>
+    <!-- end proigress -->
+
     <!-- Alert no languages -->
     <v-row v-if="userInformation.chosen_lan.length === 0">
       <v-col cols="12">
@@ -65,7 +69,7 @@
           max-height="510"
         >
         </v-img>
-      </v-col>
+      </v-col>      
       <!-- No results -->
       <v-col
         v-else-if="wasSearched === true && activeUsersOnChat.length === 0"
@@ -136,19 +140,22 @@
 <script>
 // import Axios from "axios";
 import { mapMutations, mapState } from "vuex";
-/* import { getUserInfo } from "../helpers/utils"; */
+import { getUserInfo } from "../helpers/utils";
 import Pagination from "./Pagination.vue";
+import Progress from './Progress.vue';
 export default {
-  components: { Pagination },
+  components: { Pagination, Progress },
   data: () => ({
     lang: "",
     overlay: false,
     wasSearched: false,
+    setProgress:false,
+    activeUsersOnChat:[]
   }),
 
   computed: {
     /* VUEX */
-    ...mapState(["userInformation", "socket", "activeUsersOnChat"]),
+    ...mapState(["userInformation", "socket"]),
     /* TEMPLATE */
     isLangSelected() {
       return this.lang === "" ? false : true;
@@ -187,7 +194,6 @@ export default {
       "setOpenBoxMessages",
       "setSocketConnection",
       "socketDisconn",
-      "getUsersOnRoom",
     ]),
     /* +++++++++++++++++++++++++++ */
     /* --------- TEMPLATE--------- */
@@ -199,6 +205,7 @@ export default {
 
     /* Search speaker about language  */
     searchSpeakers() {
+      this.setProgress = true;    //Show progress
       /* If soicket is null it's the first connection */
       if (this.socket === null) {
         this.lang = this.userInformation.chosen_lan[0].language;
@@ -216,6 +223,7 @@ export default {
 
     /* Recover last name room if user refres browser */
     savedLanguageRoom() {
+      this.setProgress = true; //show progress
       /* Recover last room name from storage */
       this.lang = localStorage.getItem("saved-lang") || null;
       /* if there exist set connection in that room */
@@ -225,6 +233,16 @@ export default {
         this.getUsersOnRoom();
         this.wasSearched = true;
       }
+    },
+
+     /* Users Actives on room */
+    getUsersOnRoom: function (){                
+        const {uid} = getUserInfo();
+        this.socket.on('list-users', (data) => {
+          const users = data.filter((user) => user.uid !== uid);
+          this.activeUsersOnChat = users;
+          this.setProgress = false;
+        });
     },
   },
   created() {

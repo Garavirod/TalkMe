@@ -23,8 +23,7 @@ export default new Vuex.Store({
         isActiveOnChat:false,
         /* MESSAGES ON BOX */
         messagesOnBox: [],
-        /* USERS ACTIVE ON CHAT LIST */
-        activeUsersOnChat:[],
+
         /* ACTIVE SIDEBAR CHATS */
         activeChatSide:false,
         /* SOCKET VARIABLES */
@@ -183,18 +182,7 @@ export default new Vuex.Store({
         /* Active side bar chat */
         setChatVisible(state,value){
             state.activeChatSide = value;
-        },
-
-        /* Users Actives on room */
-        getUsersOnRoom: function (state){     
-            state.setProgress = true;       
-            const {uid} = getUserInfo();
-            state.socket.on('list-users', (data) => {
-              const users = data.filter((user) => user.uid !== uid);
-              state.activeUsersOnChat = users;
-              state.setProgress = false;
-            });
-        },
+        },       
 
         /* SET OPEN CHAT MESSAGES */
         setOpenBoxMessages(state,payload){
@@ -224,10 +212,6 @@ export default new Vuex.Store({
         /* SET NEW MESSAGE */
         setNewMessage(state,payload){
             state.messagesOnBox = [...state.messagesOnBox,payload];
-        },
-
-        setUsersActives(state,users) {      
-            state.activeUsersOnChat = users;            
         },
     },
     actions: {
