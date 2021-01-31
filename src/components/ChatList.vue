@@ -103,13 +103,10 @@
                   <v-list-item-title class="headline mb-1">{{
                     item.username
                   }}</v-list-item-title>
-                  <v-list-item-subtitle>Level : B2</v-list-item-subtitle>
+                  <v-list-item-subtitle>Level : {{getLevel(item.languages,lang)}}</v-list-item-subtitle>
                 </v-list-item-content>
-
-                <v-list-item-avatar tile size="80" color="grey">
-                  <v-img
-                    src="https://cdn.vuetifyjs.com/images/lists/2.jpg"
-                  ></v-img>
+                <v-list-item-avatar tile size="80" color="#204051">
+                  <span class="white--text headline">{{item.username.substring(0,3)}}</span>                
                 </v-list-item-avatar>
               </v-list-item>
 
@@ -159,28 +156,7 @@ export default {
     /* TEMPLATE */
     isLangSelected() {
       return this.lang === "" ? false : true;
-    },
-    items() {
-      const namesLength = this.names.length;
-      const surnamesLength = this.surnames.length;
-      const colorsLength = this.colors.length;
-
-      return Array.from(
-        {
-          length: 10000,
-        },
-        () => {
-          const name = this.names[this.genRandomIndex(namesLength)];
-          const surname = this.surnames[this.genRandomIndex(surnamesLength)];
-
-          return {
-            color: this.colors[this.genRandomIndex(colorsLength)],
-            fullName: `${name} ${surname}`,
-            initials: `${name[0]} ${surname[0]}`,
-          };
-        }
-      );
-    },
+    },   
   },
 
   methods: {
@@ -199,8 +175,9 @@ export default {
     /* --------- TEMPLATE--------- */
     /* +++++++++++++++++++++++++++ */
 
-    genRandomIndex(length) {
-      return Math.ceil(Math.random() * (length - 1));
+    getLevel(langList,chosen){      
+      const lan = langList.find(l => l["language"] === chosen);
+      return lan.level;
     },
 
     /* Search speaker about language  */
@@ -223,11 +200,11 @@ export default {
 
     /* Recover last name room if user refres browser */
     savedLanguageRoom() {
-      this.setProgress = true; //show progress
       /* Recover last room name from storage */
       this.lang = localStorage.getItem("saved-lang") || null;
       /* if there exist set connection in that room */
       if (this.lang !== null) {
+        this.setProgress = true; //show progress
         console.log("there something");
         this.setSocketConnection(this.lang);
         this.getUsersOnRoom();

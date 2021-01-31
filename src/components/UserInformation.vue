@@ -25,13 +25,11 @@
                       <v-col class="mt-2">
                         <v-avatar
                           class="profile rounded-circle"
-                          color="grey"
+                          color="#204051"
                           size="164"
                           tile
                         >
-                          <v-img
-                            src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"
-                          ></v-img>
+                          <span class="white--text headline">{{userInformation.username.substring(0,3)}}</span>   
                         </v-avatar>
                       </v-col>
                     </v-row>
