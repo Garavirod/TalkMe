@@ -43,6 +43,8 @@ export default new Vuex.Store({
             chosenUser:null,
             isloading:true,
         },
+        /* Progres */
+        setProgress: false,
         /* LANGUAGES LIST */
         
         languagesList:[
@@ -184,11 +186,13 @@ export default new Vuex.Store({
         },
 
         /* Users Actives on room */
-        getUsersOnRoom: function (state){
+        getUsersOnRoom: function (state){     
+            state.setProgress = true;       
             const {uid} = getUserInfo();
             state.socket.on('list-users', (data) => {
               const users = data.filter((user) => user.uid !== uid);
               state.activeUsersOnChat = users;
+              state.setProgress = false;
             });
         },
 

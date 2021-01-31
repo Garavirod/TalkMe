@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <!-- SELECT -->
     <v-row class="text-center">
       <v-col cols="12" lg="8" md="8" sm="12">
         <v-select
@@ -9,7 +10,7 @@
           item-text="language"
           item-value="language"
           single-line
-          return-object          
+          return-object
         ></v-select>
       </v-col>
       <v-col cols="12" lg="4" md="4" sm="12">
@@ -19,24 +20,21 @@
           outlined
           :disabled="!isLangSelected"
         >
-          <v-icon right dark>
-            mdi-account-search
-          </v-icon>
+          <v-icon right dark> mdi-account-search </v-icon>
           Search
         </v-btn>
       </v-col>
     </v-row>
-     <!-- No languages -->
+
+    <!-- Alert no languages -->
     <v-row v-if="userInformation.chosen_lan.length === 0">
       <v-col cols="12">
         <v-alert text color="error">
-          <h3 class="headline">
-            Oops!
-          </h3>
+          <h3 class="headline">Empty List!</h3>
           <br />
           <div>
             It seems to be your languages list is empty, you will not be able to
-            enter on audio chat till you add languages to your list.
+            enter on audio chat till you add some languages to your list.
           </div>
 
           <v-divider class="my-4 error" style="opacity: 0.22"></v-divider>
@@ -56,9 +54,34 @@
         </v-alert>
       </v-col>
     </v-row>
-    <!-- People active -->
-    <v-row v-else-if="activeUsersOnChat.length !== 0">
+
+    <!-- Search speaker image -->
+    <v-row class="text-center" v-else>
+      <!-- It has not been searchd -->
+      <v-col cols="12" class="mx-auto" v-if="wasSearched === false">
+        <v-img
+          :src="require('../assets/search_people.png')"
+          aspect-ratio="1"
+          max-height="510"
+        >
+        </v-img>
+      </v-col>
+      <!-- No results -->
       <v-col
+        v-else-if="wasSearched === true && activeUsersOnChat.length === 0"
+        cols="12"
+        class="mx-auto"
+      >
+        <v-img
+          :src="require('../assets/no_people_active.png')"
+          aspect-ratio="1"
+          max-height="510"
+        >
+        </v-img>
+      </v-col>
+      <!-- People active in room-->
+      <v-col
+        v-else
         cols="12"
         lg="3"
         md="4"
@@ -80,39 +103,25 @@
                 </v-list-item-content>
 
                 <v-list-item-avatar tile size="80" color="grey">
-                    <v-img
-                      src="https://cdn.vuetifyjs.com/images/lists/2.jpg"
-                    ></v-img>                  
+                  <v-img
+                    src="https://cdn.vuetifyjs.com/images/lists/2.jpg"
+                  ></v-img>
                 </v-list-item-avatar>
               </v-list-item>
-              <!-- fade -->
+
               <v-fade-transition>
                 <v-overlay v-if="hover" absolute color="#036358">
-                  <v-btn @click="setOpenBoxMessages({status:true, user:item})">Send message</v-btn>
+                  <v-btn
+                    @click="setOpenBoxMessages({ status: true, user: item })"
+                    >Send message</v-btn
+                  >
                 </v-overlay>
               </v-fade-transition>
             </v-card>
           </template>
-        </v-hover>
+        </v-hover>        
       </v-col>
     </v-row>
-   
-    <!-- No people active -->
-    <v-row class="text-center" v-else>
-      <v-col cols="12">
-        <h3 class="title-people-active">No people active</h3>
-      </v-col>
-      <v-col cols="12" lg="9" md="12" xs="12" sm="12" class="mx-auto">
-        <v-img
-          :src="require('../assets/no_people_active.png')"
-          aspect-ratio="1"
-          max-height="100%"
-          max-width="100%"
-        >
-        </v-img>
-      </v-col>
-    </v-row>
-
     <!-- Pagination -->
     <pagination />
   </v-container>
@@ -134,6 +143,7 @@ export default {
   data: () => ({
     lang: "",
     overlay: false,
+    wasSearched: false,
   }),
 
   computed: {
@@ -171,16 +181,14 @@ export default {
     /* ---------- VUEX ----------- */
     /* +++++++++++++++++++++++++++ */
 
-    ...mapMutations(
-      [
-        "getUserInformation", 
-        "setActiveUsersList",
-        "setOpenBoxMessages",
-        "setSocketConnection",
-        "socketDisconn",
-        "getUsersOnRoom"
-      ]
-    ),
+    ...mapMutations([
+      "getUserInformation",
+      "setActiveUsersList",
+      "setOpenBoxMessages",
+      "setSocketConnection",
+      "socketDisconn",
+      "getUsersOnRoom",
+    ]),
     /* +++++++++++++++++++++++++++ */
     /* --------- TEMPLATE--------- */
     /* +++++++++++++++++++++++++++ */
@@ -188,37 +196,43 @@ export default {
     genRandomIndex(length) {
       return Math.ceil(Math.random() * (length - 1));
     },
-    
+
     /* Search speaker about language  */
     searchSpeakers() {
       /* If soicket is null it's the first connection */
-      if(this.socket === null){
-        this.lang = this.userInformation.chosen_lan[0].language;        
+      if (this.socket === null) {
+        this.lang = this.userInformation.chosen_lan[0].language;
         this.setSocketConnection(this.lang);
-      }else{
+      } else {
         /* there is already a socket connection */
-         this.socket.emit('searchspeaker',this.lang.language);// change room
-         //save in storage, in case user referes browser
-         localStorage.setItem('saved-lang',this.lang.language); 
+        this.socket.emit("searchspeaker", this.lang.language); // change room
+        //save in storage, in case user referes browser
+        localStorage.setItem("saved-lang", this.lang.language);
       }
       /* Get all user actives in the room based on language */
-      this.getUsersOnRoom();   
+      this.getUsersOnRoom();
+      this.wasSearched = true;
     },
 
     /* Recover last name room if user refres browser */
-    savedLanguageRoom(){
+    savedLanguageRoom() {
       /* Recover last room name from storage */
-      this.lang = localStorage.getItem('saved-lang') || null;
+      this.lang = localStorage.getItem("saved-lang") || null;
       /* if there exist set connection in that room */
-      if(this.lang !== null){
+      if (this.lang !== null) {
         console.log("there something");
         this.setSocketConnection(this.lang);
-        this.getUsersOnRoom();  
+        this.getUsersOnRoom();
+        this.wasSearched = true;
       }
-    }
+    },
   },
   created() {
     this.savedLanguageRoom();
   },
 };
+
+
 </script>
+
+
