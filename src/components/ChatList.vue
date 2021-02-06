@@ -91,29 +91,29 @@
         md="4"
         sm="4"
         xs="12"
-        v-for="item in activeUsersOnChat"
-        :key="item.uid"
+        v-for="user in activeUsersOnChat"
+        :key="user.uid"
       >
         <v-hover>
           <template v-slot:default="{ hover }">
             <v-card>
               <v-list-item three-line>
                 <v-list-item-content>
-                  <div class="overline mb-4">{{ item.country }}</div>
+                  <div class="overline mb-4">{{ user.country }}</div>
                   <v-list-item-title class="headline mb-1">{{
-                    item.username
+                    user.username
                   }}</v-list-item-title>
-                  <v-list-item-subtitle>Level : {{getLevel(item.languages,lang)}}</v-list-item-subtitle>
+                  <v-list-item-subtitle>Level : {{getLevel(user.languages,lang)}}</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-avatar tile size="80" color="#204051">
-                  <span class="white--text headline">{{item.username.substring(0,3)}}</span>                
+                  <span class="white--text headline">{{user.username.substring(0,3)}}</span>                
                 </v-list-item-avatar>
               </v-list-item>
 
               <v-fade-transition>
                 <v-overlay v-if="hover" absolute color="#036358">
                   <v-btn
-                    @click="setOpenBoxMessages({ status: true, user: item })"
+                    @click="openChatBox(user)"
                     >Send message</v-btn
                   >
                 </v-overlay>
@@ -136,7 +136,7 @@
 
 <script>
 // import Axios from "axios";
-import { mapMutations, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 import { getUserInfo } from "../helpers/utils";
 import Pagination from "./Pagination.vue";
 import Progress from './Progress.vue';
@@ -164,16 +164,19 @@ export default {
     /* ---------- VUEX ----------- */
     /* +++++++++++++++++++++++++++ */
 
-    ...mapMutations([
-      "getUserInformation",
-      "setActiveUsersList",
-      "setOpenBoxMessages",
+    ...mapMutations([      
       "setSocketConnection",
-      "socketDisconn",
+      "setStatusChatBoxVisible"
     ]),
+
+    ...mapActions(["loadMessagesOnBox"]),
     /* +++++++++++++++++++++++++++ */
     /* --------- TEMPLATE--------- */
     /* +++++++++++++++++++++++++++ */
+    async openChatBox(user){
+      this.setStatusChatBoxVisible(true); //open box mexases
+      await this.loadMessagesOnBox(user); // Load messages on box      
+    },
 
     getLevel(langList,chosen){      
       const lan = langList.find(l => l["language"] === chosen);

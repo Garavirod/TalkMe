@@ -36,15 +36,14 @@
         <!-- CHAT BOX -->
         <v-row justify="center" >
           <v-dialog
-            v-model="openchat.status"
+            v-model="isOpenChatBox"
             fullscreen
             hide-overlay
-            transition="dialog-bottom-transition"
-            
+            transition="dialog-bottom-transition"            
           >
             <v-card id="box-mess-content">
               <v-toolbar dark color="#204051">
-                <v-btn icon dark @click="setOpenBoxMessages({status:false,user:null})">
+                <v-btn icon dark @click="closeChatBox()">
                   <v-icon>mdi-close</v-icon>
                 </v-btn>
                 <v-toolbar-title>Chatbox</v-toolbar-title>
@@ -143,17 +142,24 @@ export default {
     };
   },
   methods: {
-    /* Access store methods */
+    /* +++++++++++++++++++++++++++ */
+    /* ---------- VUEX ----------- */
+    /* +++++++++++++++++++++++++++ */
     ...mapMutations([
-      "socketDisconn",
-      "setOpenBoxMessages",
-      "getUsersActives",      
-      "getUsersActives"
+      "socketDisconn",                 
+      "setUserForChating",
+      "setStatusChatBoxVisible"
     ]),
     ...mapActions(['getUserInformation']),
+    /* +++++++++++++++++++++++++++ */
+    /* --------- TEMPLATE--------- */
+    /* +++++++++++++++++++++++++++ */
+    closeChatBox(){
+      this.setStatusChatBoxVisible(false);     
+    }
   },
   computed:{
-    ...mapState(["openchat","userInformation"]),
+    ...mapState(["userInformation","isOpenChatBox"]),
   },
 
   created() {

@@ -23,7 +23,6 @@ export default new Vuex.Store({
         isActiveOnChat:false,
         /* MESSAGES ON BOX */
         messagesOnBox: [],
-
         /* ACTIVE SIDEBAR CHATS */
         activeChatSide:false,
         /* SOCKET VARIABLES */
@@ -36,16 +35,15 @@ export default new Vuex.Store({
         countriesList:[],
         /* LEVELS LIST */
         levelsList: ["A1", "A2", "B1", "B2", "C1", "C2"],  
-        /* OPEN CHAT */
-        openchat:{
-            status:false,
-            chosenUser:null,
-            isloading:true,
-        },
+        /* CHOSEN USER FOR CHATING */
+        chosenUserForChating:null,
+        /* IS OPEN CHATBOX */
+        isOpenChatBox: false,
+        /* IS LOADING CHAT BOX*/
+        isLoadingChatBox :false,
         /* Progres */
         setProgress: false,
-        /* LANGUAGES LIST */
-        
+        /* LANGUAGES LIST */        
         languagesList:[
             'English',
             'Mandarin Chinese',
@@ -182,36 +180,30 @@ export default new Vuex.Store({
         /* Active side bar chat */
         setChatVisible(state,value){
             state.activeChatSide = value;
-        },       
-
-        /* SET OPEN CHAT MESSAGES */
-        setOpenBoxMessages(state,payload){
-            state.openchat.status = payload.status; //status box-messages open:true close:false
-            state.openchat.isloading = payload.status; //  are audio messages loading ?
-            if (state.openchat.status) {
-                //this block is going to be executed when user open chat box
-                //otherwise it just close boxchat
-                const token = getAuthToken(); //helpers
-                const url = `${process.env.VUE_APP_API}/messages/${payload.user.uid}`; //API path from eviroment
-                state.openchat.chosenUser = payload.user; //Asign user who user wants to talking to
-                //Axios GET Petition
-                Axios.get(url,{
-                    headers:{
-                    'blumin-tkn': token}
-                }).then( (data) => {
-                    state.messagesOnBox = data.data.msg;
-                    state.openchat.isloading = false; //messages were loaded
-                    console.log(state.messagesOnBox);
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-                
-            }
         },
-        /* SET NEW MESSAGE */
-        setNewMessage(state,payload){
-            state.messagesOnBox = [...state.messagesOnBox,payload];
+        
+        setStatusChatBoxVisible(state,value){
+            state.isOpenChatBox = value;
+        },
+
+        setIsLoadingChatBox(state,value){
+            state.isLoadingChatBox = value;
+        },
+
+        setUserForChating(state,user){
+            state.chosenUserForChating = user;
+        },
+                                       
+        /* SET MESSAGES ON BOX */
+        setMessagesOnBox(state,messages){            
+            state.messagesOnBox = messages;            
+        },
+
+        setNewMessage(state,newMessage){
+            /* console.log("Esto llegó ",newMessage); */
+            if(!state.messagesOnBox.includes(newMessage)){
+                state.messagesOnBox = state.messagesOnBox.concat(newMessage);
+            }
         },
     },
     actions: {
@@ -221,7 +213,25 @@ export default new Vuex.Store({
              /* Http request AXIOS GET */
             const res = await Axios.get(`${process.env.VUE_APP_API}/login/user-info/${uid}`);           
             commit('setUserInformation',res.data.userInfo);           
-        },       
+        },  
+        
+        loadMessagesOnBox: async function ({commit},user){
+            commit('setIsLoadingChatBox',true);
+            commit('setUserForChating',user);
+            const token = getAuthToken(); //helpers
+            const url = `${process.env.VUE_APP_API}/messages/${user.uid}`; //API path from eviroment
+            try{
+                const data = await Axios.get(url,{
+                    headers:{'blumin-tkn': token}
+                });
+                if (data){
+                    commit('setMessagesOnBox',data.data.msg);                    
+                    commit('setIsLoadingChatBox',false);//messages were loaded                    
+                }
+            }catch(err){
+                console.log("Error on loading messages >: ",err);
+            }      
+        }
     },
     modules: {}
 })

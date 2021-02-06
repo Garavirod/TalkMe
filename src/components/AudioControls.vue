@@ -82,7 +82,7 @@ export default {
     props: ['ctr_send'],
     computed:{
         /* VUEX */
-        ...mapState(['socket','openchat','messagesOnBox']),
+        ...mapState(['socket','chosenUserForChating','messagesOnBox']),
         /* TEMPLATE */
         isBufferFelt(){
             return (this.audioFragments.length === 0) ? true : false;
@@ -102,6 +102,15 @@ export default {
             idInterval:null, 
             recording:null,
             blobAudio:null,
+            sentMessage : false,
+        }
+    },
+    watch:{
+        sentMessage: function () {
+            /* Recieve audio message */
+            this.socket.on("voice-msg", (newMessage)=>{
+                this.setNewMessage(newMessage.message);                
+            })
         }
     },
     methods:{
@@ -209,18 +218,15 @@ export default {
             const {uid} = getUserInfo();
             const audioMessage = {
                 fromUser: uid,
-                toUser: this.openchat.chosenUser.uid,
+                toUser: this.chosenUserForChating.uid,
                 audioMessage:this.blobAudio,                                
             }
             // Empty audio fragments
             this.audioFragments=[];
+            this.blobAudio = null;
             /* Send message through socket */
             this.socket.emit('personal-message',audioMessage); 
-            /* Recieve audio message */
-            this.socket.on("voice-msg", (newMessage)=>{
-                this.setNewMessage(newMessage.message);
-                console.log(newMessage.inbox);
-            })     
+            this.sentMessage = !this.sentMessage;     
         }
 
     },

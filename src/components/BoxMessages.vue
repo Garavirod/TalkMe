@@ -8,7 +8,7 @@
             <v-col class="text-center">
               <h3>Box Messages</h3>
               <p>You are talking with</p>
-              <p>{{ openchat.chosenUser.username }}</p>
+              <p>{{ chosenUserForChating.username }}</p>
             </v-col>
           </v-card-title>
           <v-card-text class="text-center"
@@ -16,10 +16,12 @@
           >
           <!--MESSAGES-->
           <v-container id="box-mess" no-gutters>
+            <!-- Skeleton is loading messages -->
             <v-skeleton-loader
-             v-if="this.openchat.isloading"
+             v-if="isLoadingChatBox"
               type="list-item-avatar-three-line, list-item-avatar-three-line, list-item-avatar-three-line"
             ></v-skeleton-loader>
+            <!-- End skeleton -->
             <v-row
               v-else
               class="animate__animated animate__fadeInDown"
@@ -33,9 +35,9 @@
                   :dateMessage="m.createdAt"
                   :idMessage="m._id"
                   :who="
-                    uidUser !== m.toUser ? 'You' : openchat.chosenUser.username
+                    uidUser !== m.toUser ? 'You' : chosenUserForChating.username
                   "
-                />
+                />                
               </v-col>
             </v-row>
           </v-container>
@@ -72,7 +74,7 @@ export default {
     AudioCardMessage,
   },
   computed: {
-    ...mapState(["socket", "openchat", "messagesOnBox"]),
+    ...mapState(["socket", "isLoadingChatBox", "messagesOnBox","chosenUserForChating"]),
   },
   data() {
     return {
