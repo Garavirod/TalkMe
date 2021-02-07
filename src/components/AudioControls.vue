@@ -109,7 +109,8 @@ export default {
         sentMessage: function () {
             /* Recieve audio message */
             this.socket.on("voice-msg", (newMessage)=>{
-                this.setNewMessage(newMessage.message);                
+                this.setNewMessage(newMessage.message); 
+                console.log('INBOX', newMessage.inbox);               
             })
         }
     },

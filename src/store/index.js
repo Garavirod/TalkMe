@@ -41,6 +41,8 @@ export default new Vuex.Store({
         isOpenChatBox: false,
         /* IS LOADING CHAT BOX*/
         isLoadingChatBox :false,
+        /* INBOX */
+        inboxUserHistory:[],
         /* Progres */
         setProgress: false,
         /* LANGUAGES LIST */        
@@ -205,6 +207,11 @@ export default new Vuex.Store({
                 state.messagesOnBox = state.messagesOnBox.concat(newMessage);
             }
         },
+
+        setInboxHistory(state,inbox){
+            state.inboxUserHistory = inbox;
+        },
+    
     },
     actions: {
         getUserInformation: async function ({commit}){
@@ -231,6 +238,25 @@ export default new Vuex.Store({
             }catch(err){
                 console.log("Error on loading messages >: ",err);
             }      
+        },
+        getInboxUser: async function ({commit}){
+            const {uid} = getUserInfo();
+            commit('setIsLoadingChatBox',true);
+            const token = getAuthToken(); //helpers
+            const url = `${process.env.VUE_APP_API}/messages/inbox/${uid}`; //API path from eviroment
+            try{
+                const data = await Axios.get(url,{
+                    headers:{'blumin-tkn': token}
+                });
+                if (data){
+                    console.log(data.data.inbox);
+                    commit('setInboxHistory',data.data.inbox);                    
+                    commit('setIsLoadingChatBox',false);//messages were loaded                    
+                }
+            }catch(err){
+                console.log("Error on loading messages >: ",err);
+            }
+
         }
     },
     modules: {}
