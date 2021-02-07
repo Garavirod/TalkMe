@@ -103,7 +103,7 @@
                   <v-list-item-title class="headline mb-1">{{
                     user.username
                   }}</v-list-item-title>
-                  <v-list-item-subtitle>Level : {{getLevel(user.languages,lang)}}</v-list-item-subtitle>
+                  <v-list-item-subtitle>Level : B2</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-avatar tile size="80" color="#204051">
                   <span class="white--text headline">{{user.username.substring(0,3)}}</span>                
@@ -137,7 +137,6 @@
 <script>
 // import Axios from "axios";
 import { mapActions, mapMutations, mapState } from "vuex";
-import { getUserInfo } from "../helpers/utils";
 import Pagination from "./Pagination.vue";
 import Progress from './Progress.vue';
 export default {
@@ -145,14 +144,17 @@ export default {
   data: () => ({
     lang: "",
     overlay: false,
-    wasSearched: false,
-    setProgress:false,
-    activeUsersOnChat:[]
   }),
 
   computed: {
     /* VUEX */
-    ...mapState(["userInformation", "socket"]),
+    ...mapState([
+        "userInformation", 
+        "socket",
+        "activeUsersOnChat",
+        "setProgress",
+        "wasSearched"
+      ]),
     /* TEMPLATE */
     isLangSelected() {
       return this.lang === "" ? false : true;
@@ -166,10 +168,12 @@ export default {
 
     ...mapMutations([      
       "setSocketConnection",
-      "setStatusChatBoxVisible"
+      "setStatusChatBoxVisible",
+      "setProgressValue",
+      "setWasSearched"
     ]),
 
-    ...mapActions(["loadMessagesOnBox"]),
+    ...mapActions(["loadMessagesOnBox","getUsersOnRoom"]),
     /* +++++++++++++++++++++++++++ */
     /* --------- TEMPLATE--------- */
     /* +++++++++++++++++++++++++++ */
@@ -185,7 +189,7 @@ export default {
 
     /* Search speaker about language  */
     searchSpeakers() {
-      this.setProgress = true;    //Show progress
+      this.setProgressValue(true);   //Show progress
       /* If soicket is null it's the first connection */
       if (this.socket === null) {
         this.lang = this.userInformation.chosen_lan[0].language;
@@ -198,35 +202,9 @@ export default {
       }
       /* Get all user actives in the room based on language */
       this.getUsersOnRoom();
-      this.wasSearched = true;
+      this.setWasSearched(true);
     },
 
-    /* Recover last name room if user refres browser */
-    savedLanguageRoom() {
-      /* Recover last room name from storage */
-      this.lang = localStorage.getItem("saved-lang") || null;
-      /* if there exist set connection in that room */
-      if (this.lang !== null) {
-        this.setProgress = true; //show progress
-        console.log("there something");
-        this.setSocketConnection(this.lang);
-        this.getUsersOnRoom();
-        this.wasSearched = true;
-      }
-    },
-
-     /* Users Actives on room */
-    getUsersOnRoom: function (){                
-        const {uid} = getUserInfo();
-        this.socket.on('list-users', (data) => {
-          const users = data.filter((user) => user.uid !== uid);
-          this.activeUsersOnChat = users;
-          this.setProgress = false;
-        });
-    },
-  },
-  created() {
-    this.savedLanguageRoom();
   },
 };
 

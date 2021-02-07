@@ -43,8 +43,12 @@ export default new Vuex.Store({
         isLoadingChatBox :false,
         /* INBOX */
         inboxUserHistory:[],
+        /* USER ON CHATROOM */
+        activeUsersOnChat:[],
         /* Progres */
         setProgress: false,
+        /* WAS SEARCHED AROOM BEFORE */
+        wasSearched :false,
         /* LANGUAGES LIST */        
         languagesList:[
             'English',
@@ -211,6 +215,19 @@ export default new Vuex.Store({
         setInboxHistory(state,inbox){
             state.inboxUserHistory = inbox;
         },
+
+
+        setUsersActivesOnChat(state,users){
+            state.activeUsersOnChat = users;
+        },
+
+        setProgressValue(state,value){
+            state.setProgress = value;
+        },
+
+        setWasSearched(state,value){
+            state.wasSearched = value;
+        },
     
     },
     actions: {
@@ -257,7 +274,30 @@ export default new Vuex.Store({
                 console.log("Error on loading messages >: ",err);
             }
 
-        }
+        },
+        getUsersOnRoom: function ({commit,state}){
+            const {uid} = getUserInfo();
+            state.socket.on('list-users', (data) => {
+                const users = data.filter((user) => user.uid !== uid);
+                commit('setUsersActivesOnChat',users);
+                commit('setProgressValue',false);    
+                console.log('im hereee!', state.activeUsersOnChat);            
+
+            });
+        },    
+
+        savedLanguageRoom: function ({commit,dispatch}) {
+            /* Recover last room name from storage */
+            const lang = localStorage.getItem("saved-lang") || null;
+            /* if there exist set connection in that room */
+            if (lang !== null) {
+              console.log("there is a language saved!");
+              commit('setProgressValue',true); //show progress
+              commit('setSocketConnection',lang);
+              commit('setWasSearched',true);
+              dispatch('getUsersOnRoom');
+            }
+          },
     },
     modules: {}
 })

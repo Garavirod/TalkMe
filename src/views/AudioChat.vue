@@ -141,6 +141,18 @@ export default {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
     };
   },
+  watch:{
+    mainTab:function(){
+      if(this.mainTab === "tab-1"){
+        console.log("Cambie a 1");
+        this.savedLanguageRoom();
+
+      }else if(this.mainTab === "tab-2"){
+        console.log("Cambie a 2");
+        this.getInboxUser();
+      }
+    }
+  },
   methods: {
     /* +++++++++++++++++++++++++++ */
     /* ---------- VUEX ----------- */
@@ -150,7 +162,7 @@ export default {
       "setUserForChating",
       "setStatusChatBoxVisible"
     ]),
-    ...mapActions(['getUserInformation']),
+    ...mapActions(['getUserInformation','savedLanguageRoom','getInboxUser']),
     /* +++++++++++++++++++++++++++ */
     /* --------- TEMPLATE--------- */
     /* +++++++++++++++++++++++++++ */

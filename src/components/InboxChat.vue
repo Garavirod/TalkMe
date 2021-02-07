@@ -38,19 +38,21 @@ export default {
     
   }),
   computed: {
-    ...mapState(["inboxUserHistory", "isLoadingChatBox"]),
+    ...mapState(["isLoadingChatBox", "socket","inboxUserHistory"]),
   },
   methods: {
     ...mapActions(["getInboxUser","loadMessagesOnBox"]),    
-    ...mapMutations(['setStatusChatBoxVisible']),
+    ...mapMutations(['setStatusChatBoxVisible','setSocketConnection']),
 
     async openChatBox(user){
       this.setStatusChatBoxVisible(true); //open box mexases
-      await this.loadMessagesOnBox(user); // Load messages on box      
+      await this.loadMessagesOnBox(user); // Load messages on box 
+      if (this.socket === null) {
+        console.log("no hya conexion te conectare");
+        this.setSocketConnection(user.language);
+      }
     },
   },
-  created() {
-    this.getInboxUser();
-  },
+
 };
 </script>
