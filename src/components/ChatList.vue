@@ -194,17 +194,22 @@ export default {
 
     /* Search speaker about language  */
     searchSpeakers() {
-      this.setProgressValue(true);   //Show progress
-      this.setChosenLanguage(this.lang.language);
-      console.log("Seleccionado ",this.chosenLanguage);
+     
       /* If soicket is null it's the first connection */
       if (this.socket === null) {
-        this.setSocketConnection({lang:this.chosenLanguage, isTemporal:false});
+        this.setProgressValue(true);   //Show progress
+        this.setSocketConnection({lang:this.lang.language, isTemporal:false});
       } else {
         /* there is already a socket connection */
-        this.socket.emit("searchspeaker", this.chosenLanguage); // change room
-        //save in storage, in case user referes browser
-        localStorage.setItem("saved-lang", this.chosenLanguage);
+        if(this.lang.language !== this.chosenLanguage){
+           this.setProgressValue(true);   //Show progress
+          this.setChosenLanguage(this.lang.language);
+          this.socket.emit("searchspeaker", this.chosenLanguage); // change room
+          //save in storage, in case user referes browser
+          localStorage.setItem("saved-lang", this.chosenLanguage);
+        }else{
+          console.log("You already there!!");
+        }
       }
       /* Get all user actives in the room based on language */
       this.getUsersOnRoom();

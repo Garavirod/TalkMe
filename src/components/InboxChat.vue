@@ -52,11 +52,11 @@ export default {
         this.setWasSearched(true);
         this.setSocketConnection({lang:user.language, isTemporal:false});
       }else{        
-        console.log("connection already exist...");
+        console.log("connection already exist...",this.socket);
         if(user.language !== this.chosenLanguage){
           this.socketDisconn(true); //don' remove prev lang from storage
           this.setSocketConnection({lang:user.language, isTemporal:true});          
-          console.log("this is chosen ",this.socket);
+          console.log("this is your temp socket ",this.socket);
         }
       }
     },
