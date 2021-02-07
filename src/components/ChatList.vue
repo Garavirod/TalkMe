@@ -103,7 +103,7 @@
                   <v-list-item-title class="headline mb-1">{{
                     user.username
                   }}</v-list-item-title>
-                  <v-list-item-subtitle>Level : B2</v-list-item-subtitle>
+                  <v-list-item-subtitle>{{getLevel(user.languages)}}</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-avatar tile size="80" color="#204051">
                   <span class="white--text headline">{{user.username.substring(0,3)}}</span>                
@@ -153,7 +153,8 @@ export default {
         "socket",
         "activeUsersOnChat",
         "setProgress",
-        "wasSearched"
+        "wasSearched",
+        "chosenLanguage"
       ]),
     /* TEMPLATE */
     isLangSelected() {
@@ -170,7 +171,8 @@ export default {
       "setSocketConnection",
       "setStatusChatBoxVisible",
       "setProgressValue",
-      "setWasSearched"
+      "setWasSearched",
+      "setChosenLanguage",
     ]),
 
     ...mapActions(["loadMessagesOnBox","getUsersOnRoom"]),
@@ -182,23 +184,27 @@ export default {
       await this.loadMessagesOnBox(user); // Load messages on box      
     },
 
-    getLevel(langList,chosen){      
-      const lan = langList.find(l => l["language"] === chosen);
-      return lan.level;
+    getLevel(langList){   
+      const k = langList;
+      console.log(k);   
+      //console.log("chosen language ", this.chosenLanguage);
+      //const lan = langList.find(l => l["language"] === this.chosenLanguage);
+      return this.chosenLanguage //lan.level;
     },
 
     /* Search speaker about language  */
     searchSpeakers() {
       this.setProgressValue(true);   //Show progress
+      this.setChosenLanguage(this.lang.language);
+      console.log("Seleccionado ",this.chosenLanguage);
       /* If soicket is null it's the first connection */
       if (this.socket === null) {
-        this.lang = this.userInformation.chosen_lan[0].language;
-        this.setSocketConnection(this.lang);
+        this.setSocketConnection({lang:this.chosenLanguage, isTemporal:false});
       } else {
         /* there is already a socket connection */
-        this.socket.emit("searchspeaker", this.lang.language); // change room
+        this.socket.emit("searchspeaker", this.chosenLanguage); // change room
         //save in storage, in case user referes browser
-        localStorage.setItem("saved-lang", this.lang.language);
+        localStorage.setItem("saved-lang", this.chosenLanguage);
       }
       /* Get all user actives in the room based on language */
       this.getUsersOnRoom();

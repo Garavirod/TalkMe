@@ -145,8 +145,15 @@ export default {
     mainTab:function(){
       if(this.mainTab === "tab-1"){
         console.log("Cambie a 1");
-        this.savedLanguageRoom();
-
+        const lang = localStorage.getItem("saved-lang") || null;
+        if(lang !== null){
+          console.log("there is a language saved!");
+          if(this.socket === null){
+            this.savedLanguageRoom(lang);
+          }else{
+            this.getUsersOnRoom();
+          }
+        }
       }else if(this.mainTab === "tab-2"){
         console.log("Cambie a 2");
         this.getInboxUser();
@@ -160,18 +167,21 @@ export default {
     ...mapMutations([
       "socketDisconn",                 
       "setUserForChating",
-      "setStatusChatBoxVisible"
+      "setStatusChatBoxVisible",      
     ]),
-    ...mapActions(['getUserInformation','savedLanguageRoom','getInboxUser']),
+    ...mapActions(['getUserInformation','savedLanguageRoom','getInboxUser','getUsersOnRoom']),
     /* +++++++++++++++++++++++++++ */
     /* --------- TEMPLATE--------- */
     /* +++++++++++++++++++++++++++ */
-    closeChatBox(){
+    closeChatBox(isTempConn=false){
+      if(isTempConn){
+        this.socket.disconnect();
+      }
       this.setStatusChatBoxVisible(false);     
     }
   },
   computed:{
-    ...mapState(["userInformation","isOpenChatBox"]),
+    ...mapState(["userInformation","isOpenChatBox","socket"]),
   },
 
   created() {

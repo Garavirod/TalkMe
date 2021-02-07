@@ -49,6 +49,8 @@ export default new Vuex.Store({
         setProgress: false,
         /* WAS SEARCHED AROOM BEFORE */
         wasSearched :false,
+        /* CHOSEN LANGUAGE */
+        chosenLanguage :"",
         /* LANGUAGES LIST */        
         languagesList:[
             'English',
@@ -129,7 +131,8 @@ export default new Vuex.Store({
              
     },
     mutations: {    
-        setSocketConnection(state, lang){
+        setSocketConnection(state, payload){
+            
             /* Initialization socket */
             const token = getAuthToken();
             state.socket = io.connect(state.endpointConn,{
@@ -138,23 +141,35 @@ export default new Vuex.Store({
                 forceNew:true,
                 query:{ //By url 
                     'blumin-tkn':token,
-                    'language': lang
+                    'language': payload.lang
                 }
             });
             if(state.socket!==null){
-                localStorage.setItem('saved-lang',lang); //save in storage for avoid los chat on reload page
+                if(payload.isTemporal === false){
+                    localStorage.setItem('saved-lang',payload.lang); //save in storage for avoid los chat on reload page
+                }
+                state.chosenLanguage = payload.lang;
                 state.isActiveOnChat = true;
-            }            
+            }    
+            console.log('Connected...',state.socket);        
         },
-        socketDisconn(state){
+        socketDisconn(state,isTemporal=false){
             /* Disconnect socket */
             if(state.socket !== null){
                 state.socket.disconnect();
                 state.socket = null;
-                state.isActiveOnChat = false;    
-                localStorage.removeItem('saved-lang');        
+                state.isActiveOnChat = false;
+                console.log("Diconnecting...");
+                if(isTemporal===false){
+                    state.activeUsersOnChat=[];
+                    state.wasSearched=false;
+                    console.log('Removing localstorage...');
+                    localStorage.removeItem('saved-lang');        
+                }    
             }
-        },       
+        },     
+        
+
         setUserActive(state,value){
             /* Set user logged in  true or false*/
             state.isUserLogged = value;
@@ -228,6 +243,10 @@ export default new Vuex.Store({
         setWasSearched(state,value){
             state.wasSearched = value;
         },
+
+        setChosenLanguage(state,value){
+            state.chosenLanguage = value;
+        },
     
     },
     actions: {
@@ -286,17 +305,12 @@ export default new Vuex.Store({
             });
         },    
 
-        savedLanguageRoom: function ({commit,dispatch}) {
-            /* Recover last room name from storage */
-            const lang = localStorage.getItem("saved-lang") || null;
-            /* if there exist set connection in that room */
-            if (lang !== null) {
-              console.log("there is a language saved!");
-              commit('setProgressValue',true); //show progress
-              commit('setSocketConnection',lang);
-              commit('setWasSearched',true);
-              dispatch('getUsersOnRoom');
-            }
+        savedLanguageRoom: function ({commit,dispatch},lang) {
+            commit('setProgressValue',true); //show progress
+            commit('setSocketConnection',{lang:lang,isTemporal:false});
+            commit('setChosenLanguage',lang);
+            commit('setWasSearched',true);
+            dispatch('getUsersOnRoom');
           },
     },
     modules: {}

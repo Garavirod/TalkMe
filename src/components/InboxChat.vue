@@ -38,18 +38,26 @@ export default {
     
   }),
   computed: {
-    ...mapState(["isLoadingChatBox", "socket","inboxUserHistory"]),
+    ...mapState(["isLoadingChatBox", "socket","inboxUserHistory","chosenLanguage"]),
   },
   methods: {
     ...mapActions(["getInboxUser","loadMessagesOnBox"]),    
-    ...mapMutations(['setStatusChatBoxVisible','setSocketConnection']),
+    ...mapMutations(['setStatusChatBoxVisible','setSocketConnection','socketDisconn','setWasSearched']),
 
     async openChatBox(user){
       this.setStatusChatBoxVisible(true); //open box mexases
       await this.loadMessagesOnBox(user); // Load messages on box 
       if (this.socket === null) {
-        console.log("no hya conexion te conectare");
-        this.setSocketConnection(user.language);
+        console.log("There wasn't connection, connecting....");
+        this.setWasSearched(true);
+        this.setSocketConnection({lang:user.language, isTemporal:false});
+      }else{        
+        console.log("connection already exist...");
+        if(user.language !== this.chosenLanguage){
+          this.socketDisconn(true); //don' remove prev lang from storage
+          this.setSocketConnection({lang:user.language, isTemporal:true});          
+          console.log("this is chosen ",this.socket);
+        }
       }
     },
   },
