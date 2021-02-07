@@ -148,11 +148,7 @@ export default {
         const lang = localStorage.getItem("saved-lang") || null;
         if(lang !== null){
           console.log("there is a language saved!");
-          if(this.socket === null){
-            this.savedLanguageRoom(lang);
-          }else{
-            this.getUsersOnRoom();
-          }
+          this.savedLanguageRoom(lang);
         }
       }else if(this.mainTab === "tab-2"){
         console.log("Cambie a 2");

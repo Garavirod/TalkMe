@@ -163,6 +163,7 @@ export default new Vuex.Store({
                 if(isTemporal===false){
                     state.activeUsersOnChat=[];
                     state.wasSearched=false;
+                    state.chosenLanguage = "";
                     console.log('Removing localstorage...');
                     localStorage.removeItem('saved-lang');        
                 }    
@@ -300,12 +301,13 @@ export default new Vuex.Store({
                 const users = data.filter((user) => user.uid !== uid);
                 commit('setUsersActivesOnChat',users);
                 commit('setProgressValue',false);    
-                console.log('im hereee!', state.activeUsersOnChat);            
+                console.log('getting users on room!', state.activeUsersOnChat);            
 
             });
         },    
 
         savedLanguageRoom: function ({commit,dispatch},lang) {
+            commit('socketDisconn');
             commit('setProgressValue',true); //show progress
             commit('setSocketConnection',{lang:lang,isTemporal:false});
             commit('setChosenLanguage',lang);

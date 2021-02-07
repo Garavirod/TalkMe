@@ -24,6 +24,9 @@
           Search
         </v-btn>
       </v-col>
+      <v-col cols="12">
+        <h3 v-if="this.chosenLanguage !== '' ">Chosen language : {{this.chosenLanguage}}</h3>
+      </v-col>
     </v-row>
 
     <!-- Progress -->
@@ -76,10 +79,12 @@
         cols="12"
         class="mx-auto"
       >
+        <h1 class="text-center mb-2">No people active</h1>
+        
         <v-img
           :src="require('../assets/no_people_active.png')"
           aspect-ratio="1"
-          max-height="510"
+          max-height="600"
         >
         </v-img>
       </v-col>
@@ -139,6 +144,7 @@
 import { mapActions, mapMutations, mapState } from "vuex";
 import Pagination from "./Pagination.vue";
 import Progress from './Progress.vue';
+import swal from 'sweetalert';
 export default {
   components: { Pagination, Progress },
   data: () => ({
@@ -202,13 +208,13 @@ export default {
       } else {
         /* there is already a socket connection */
         if(this.lang.language !== this.chosenLanguage){
-           this.setProgressValue(true);   //Show progress
+          this.setProgressValue(true);   //Show progress
           this.setChosenLanguage(this.lang.language);
           this.socket.emit("searchspeaker", this.chosenLanguage); // change room
           //save in storage, in case user referes browser
           localStorage.setItem("saved-lang", this.chosenLanguage);
         }else{
-          console.log("You already there!!");
+          swal('Status petition',`You are already in ${this.chosenLanguage} room`,'warning');
         }
       }
       /* Get all user actives in the room based on language */
