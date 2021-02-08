@@ -17,7 +17,7 @@
     <v-col cols="12">
         <v-btn
             v-if="ctr_send"
-            v-show="isBufferFelt" 
+            :disabled="isBufferFelt" 
             @click="sendAudio" 
             small 
             class="mx-2" 
@@ -57,7 +57,7 @@
             <v-col cols="12" lg="4" xs="4" sm="4">{{sec}}</v-col>
         </v-row>
     </v-col>
-    <v-col cols="12" v-show="isBufferFelt" class="animate__animated animate__headShake">
+    <v-col cols="12" v-show="!isBufferFelt" class="animate__animated animate__headShake">
         <audio controls id="audioPlay"></audio>        
     </v-col>    
 </v-row>
@@ -85,7 +85,7 @@ export default {
         ...mapState(['socket','chosenUserForChating','messagesOnBox']),
         /* TEMPLATE */
         isBufferFelt(){
-            return (this.audioFragments.length === 0) ?false : true;
+            return (this.audioFragments.length === 0) ? true : false;
         }
     },
     data() {
@@ -102,18 +102,18 @@ export default {
             idInterval:null, 
             recording:null,
             blobAudio:null,
-            sentMessage : false,
+            sentMessage:false,
+            
         }
-    },
-    watch:{
-        sentMessage: function () {
-            /* Recieve audio message */
+    },    
+  /*   watch:{
+        sentMessage:function (){
+            // Recieve audio message
             this.socket.on("voice-msg", (newMessage)=>{
-                this.setNewMessage(newMessage.message); 
-                console.log('INBOX', newMessage.inbox);               
+                this.setNewMessage(newMessage.message);                              
             })
         }
-    },
+    }, */
     methods:{
         /**VUEX */
         ...mapMutations(['setNewMessage']),
@@ -136,11 +136,14 @@ export default {
                         }
                     }
                 ).then(stream=>{
+                    if(this.audioFragments.length > 0){
+                            this.audioFragments = [];
+                    }
                     this.mediaRecorder = new MediaRecorder(stream);
                     this.mediaRecorder.start();
                     this.startCounting();
                     this.mediaRecorder.addEventListener("dataavailable", (e) => {  
-                        /* If audio lasts one minute and controls are in audio chat */
+                        /* If audio lasts one minute and controls are in audio chat */                        
                         if(this.min === 1 && this.ctr_send === true){
                             this.stopRecording();
                         }                      
@@ -153,9 +156,7 @@ export default {
                             // Detener la cuenta regresiva
                             this.stopCounting();
                             // Convertir los fragmentos a un objeto binario
-                            this.blobAudio = new Blob(this.audioFragments,{type:'audio/ogg; codecs=opus'}); 
-                            // Empty audio fragments
-                            this.audioFragments=[];                     
+                            this.blobAudio = new Blob(this.audioFragments,{type:'audio/ogg; codecs=opus'});                             
                             // Crear una URL o enlace para descargar
                             const urlAudio = window.URL.createObjectURL(this.blobAudio);
                             this.recording = document.getElementById('audioPlay');
@@ -217,12 +218,19 @@ export default {
                 toUser: this.chosenUserForChating.uid,
                 audioMessage:this.blobAudio,                                
             }
-
+            // empty fragments
+            this.audioFragments=[];  
             /* Send message through socket */
-            this.socket.emit('personal-message',audioMessage); 
-            this.sentMessage = !this.sentMessage;     
+            this.socket.emit('personal-message',audioMessage);
+            this.sentMessage = ! this.sentMessage;             
+                
         }
 
+    },
+    mounted(){
+        this.socket.on("voice-msg", (newMessage)=>{                
+                this.setNewMessage(newMessage.message);                              
+        })
     },
     created(){
         
