@@ -16,8 +16,8 @@
     </v-col>
     <v-col cols="12">
         <v-btn
-            v-if="ctr_send" 
-            :disabled="isBufferFelt"
+            v-if="ctr_send"
+            v-show="isBufferFelt" 
             @click="sendAudio" 
             small 
             class="mx-2" 
@@ -57,7 +57,7 @@
             <v-col cols="12" lg="4" xs="4" sm="4">{{sec}}</v-col>
         </v-row>
     </v-col>
-    <v-col cols="12" v-show="!isBufferFelt" class="animate__animated animate__headShake">
+    <v-col cols="12" v-show="isBufferFelt" class="animate__animated animate__headShake">
         <audio controls id="audioPlay"></audio>        
     </v-col>    
 </v-row>
@@ -85,7 +85,7 @@ export default {
         ...mapState(['socket','chosenUserForChating','messagesOnBox']),
         /* TEMPLATE */
         isBufferFelt(){
-            return (this.audioFragments.length === 0) ? true : false;
+            return (this.audioFragments.length === 0) ?false : true;
         }
     },
     data() {
@@ -139,7 +139,11 @@ export default {
                     this.mediaRecorder = new MediaRecorder(stream);
                     this.mediaRecorder.start();
                     this.startCounting();
-                    this.mediaRecorder.addEventListener("dataavailable", (e) => {                        
+                    this.mediaRecorder.addEventListener("dataavailable", (e) => {  
+                        /* If audio lasts one minute and controls are in audio chat */
+                        if(this.min === 1 && this.ctr_send === true){
+                            this.stopRecording();
+                        }                      
                         this.audioFragments.push(e.data);
                     });
 
@@ -149,22 +153,13 @@ export default {
                             // Detener la cuenta regresiva
                             this.stopCounting();
                             // Convertir los fragmentos a un objeto binario
-                            this.blobAudio = new Blob(this.audioFragments,{type:'audio/ogg; codecs=opus'});                            
+                            this.blobAudio = new Blob(this.audioFragments,{type:'audio/ogg; codecs=opus'}); 
+                            // Empty audio fragments
+                            this.audioFragments=[];                     
                             // Crear una URL o enlace para descargar
-                            const urlParaDescargar = window.URL.createObjectURL(this.blobAudio);
-                            // Crear un elemento <a> invisible para descargar el audio
-                            // let a = document.createElement("a");
-                            // document.body.appendChild(a);
-                            // a.style = "display: none";
-                            // a.href = urlParaDescargar;                            
-                            // a.download = "recording_blumin.webm";
+                            const urlAudio = window.URL.createObjectURL(this.blobAudio);
                             this.recording = document.getElementById('audioPlay');
-                            this.recording.src = urlParaDescargar;                            
-                            // console.log(a);
-                            // Hacer click en el enlace
-                            // a.click();
-                            // Y remover el objeto
-                            // window.URL.revokeObjectURL(urlParaDescargar);
+                            this.recording.src = urlAudio;                            
                             this.isrecording = !this.isrecording;
                     });
                 })
@@ -222,9 +217,7 @@ export default {
                 toUser: this.chosenUserForChating.uid,
                 audioMessage:this.blobAudio,                                
             }
-            // Empty audio fragments
-            this.audioFragments=[];
-            this.blobAudio = null;
+
             /* Send message through socket */
             this.socket.emit('personal-message',audioMessage); 
             this.sentMessage = !this.sentMessage;     
