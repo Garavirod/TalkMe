@@ -2,7 +2,7 @@
 <div>
     <v-app-bar app absolute color="#3b6978" id="navbar-app" elevate-on-scroll scroll-target="#scrolling-techniques-7">
         <v-toolbar-title>
-            <h1 class="fontTitle">NameApp</h1>
+            <h1 class="fontTitle">Blumin</h1>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <!--RESPOSNIVE NAVIGATIOR-->

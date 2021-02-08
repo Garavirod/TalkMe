@@ -28,7 +28,7 @@ export default new Vuex.Store({
         /* SOCKET VARIABLES */
         socket:null,
         /* ENDPOINT SOCKET BLUMIN BACKEND */
-        endpointConn:'http://localhost:5000',
+        endpointConn:process.env.VUE_APP_SOCKET,
         /* FLAG TO KNOW IF USER IS LOGGED IN CASE TO ACTIVATE NAVBAR CONTROLS */
         isUserLogged:false,
         /* COUNTRIES LIST */

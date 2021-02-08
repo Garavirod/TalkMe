@@ -6,7 +6,7 @@
             <v-alert border="left" colored-border color="#204051" elevation="2">
                 <v-row class="text-center">
                     <v-col>
-                        <h1>Welcome to nameApp</h1>
+                        <h1>Welcome to Blumin!</h1>
                     </v-col>
                 </v-row>
                 <v-row>
