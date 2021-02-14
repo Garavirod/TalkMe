@@ -228,14 +228,9 @@ export default {
 
     },
     mounted(){
-        try {
-            this.socket.on("voice-msg", (newMessage)=>{                
-                    this.setNewMessage(newMessage.message);                              
-            })
-            
-        } catch (error) {
-            console.log("Not on audio chat...");
-        }
+        this.socket?.on("voice-msg", (newMessage)=>{                
+                this.setNewMessage(newMessage.message);                              
+        })
     },
     created(){
         
