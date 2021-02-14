@@ -57,7 +57,7 @@
             <v-col cols="12" lg="4" xs="4" sm="4">{{sec}}</v-col>
         </v-row>
     </v-col>
-    <v-col cols="12" v-show="!isBufferFelt" class="animate__animated animate__headShake">
+    <v-col cols="12" v-show="!isBufferFelt" class="animate_animated animate_headShake">
         <audio controls id="audioPlay"></audio>        
     </v-col>    
 </v-row>
