@@ -31,14 +31,14 @@
                     <v-list-item-title>Sections</v-list-item-title>
                 </v-list-item>
 
-                <v-list-item :to="{name: 'Audios-History'}">
+                <!-- <v-list-item :to="{name: 'Audios-History'}">
                     <v-list-item-icon>
                         <v-icon>mdi-database</v-icon>
                     </v-list-item-icon>
                     <v-list-item-title>
                         Audios history
                     </v-list-item-title>
-                </v-list-item>              
+                </v-list-item>  -->             
 
                 <v-list-item @click="Logout">
                     <v-list-item-icon >
