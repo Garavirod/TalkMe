@@ -23,11 +23,5 @@ export default {
     components: {
         Navbar,     
     },
-    computed: {               
-    },
-    methods:{
-        
-    },
-
 }
 </script>

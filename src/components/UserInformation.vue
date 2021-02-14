@@ -11,10 +11,7 @@
               <v-row>
                 <v-col cols="12">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Hic debitis labore velit numquam sit eveniet praesentium
-                    harum vel ratione nemo possimus incidunt, officia doloribus
-                    voluptatibus animi optio reiciendis! Ipsa, beatae.
+                    In this panel you can see the information you provided, if you want you can update your data, such as username, nationality or add or remove languages to your list.
                   </p>
                 </v-col>
               </v-row>
@@ -79,11 +76,11 @@
                   </v-col>
                 </v-row>                
                 <!--UPDATE FORM COMPONENT-->                  
-                <v-row class="text-center pa-3">
+               <!--  <v-row class="text-center pa-3">
                   <v-col cols="12" lg="12">                    
                     <FormUpdate/>                                          
                   </v-col>
-                </v-row>
+                </v-row> -->
               </v-card>
             </v-col>
             <!--PROGRESS-->
@@ -93,10 +90,7 @@
               <v-row>
                 <v-col cols="12">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Hic debitis labore velit numquam sit eveniet praesentium
-                    harum vel ratione nemo possimus incidunt, officia doloribus
-                    voluptatibus animi optio reiciendis! Ipsa, beatae.
+                    Here you can see your performance
                   </p>
                 </v-col>
               </v-row>
@@ -157,7 +151,7 @@
                 </v-row>
               </v-card>
               <!--HISTORY-->
-              <v-row>
+             <!--  <v-row>
                 <v-col cols="12">
                   <h2>Saved records</h2>
                   <hr />
@@ -173,8 +167,8 @@
                     </v-col>
                   </v-row>
                 </v-col>
-              </v-row>
-              <v-row class="text-center">
+              </v-row> -->
+              <!-- <v-row class="text-center">
                 <v-col cols="12">
                   <v-btn
                     large
@@ -184,7 +178,7 @@
                     >Audios history</v-btn
                   >
                 </v-col>
-              </v-row>
+              </v-row> -->
             </v-col>
           </v-row>
         </v-col>
@@ -195,11 +189,11 @@
 
 <script>
 import { mapState } from 'vuex';
-import FormUpdate from "../components/FormUpdate";
+/* import FormUpdate from "../components/FormUpdate"; */
 export default {
   name: "UserInformation",
   components: {
-    FormUpdate,
+   /*  FormUpdate, */
   },
   computed: {
     ...mapState(['userInformation'])

@@ -69,6 +69,9 @@
                 ></v-select>
               </v-col>
               <!--Languages list-->
+              <v-col cols="12">
+                <h4><b>Add languages to your list</b></h4>
+              </v-col>
               <v-col cols="12" lg="6" md="6" sm="12">
                 <v-select
                   v-model="chosenLang"
@@ -151,6 +154,7 @@
 import Swal from 'sweetalert';
 import Axios from 'axios';
 import { mapMutations, mapState } from 'vuex';
+import swal from 'sweetalert';
 export default {
   name: "Register",
   data: () => ({
@@ -219,22 +223,26 @@ export default {
           "country": this.nationality,
           "languages": this.chosenLanguages
       };
-      await Axios.post(url, newUser)
-        .then((res) => {
-          localStorage.setItem("blumin-tkn",res.data.token);         
-          Swal("Registration", "Account was created successfuly!", "success");
-          this.setUserActive(true);                
-          this.$router.push('Welcome');
-        })
-        .catch((error) => {
-          console.log(error);   
-          this.setUserActive(false);                
-          Swal(
-            "Account was not created",
-            "It is probably that email alerady exist or there was an error on server, try again",
-            "error"
-          );
-        });
+      if(this.chosenLanguages.length === 0){
+        swal("Oops!","You forgot adding lenguages to your list", "warning");
+      }else{
+        await Axios.post(url, newUser)
+          .then((res) => {
+            localStorage.setItem("blumin-tkn",res.data.token);         
+            Swal("Registration", "Account was created successfuly!", "success");
+            this.setUserActive(true);                
+            this.$router.push('Welcome');
+          })
+          .catch((error) => {
+            console.log(error);   
+            this.setUserActive(false);                
+            Swal(
+              "Account was not created",
+              "It is probably that email alerady exist or there was an error on server, try again",
+              "error"
+            );
+          });
+      }
     },
   },
   computed: {

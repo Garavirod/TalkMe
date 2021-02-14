@@ -11,23 +11,21 @@
     </header>
     <main>
         <section class="about-us">
-            <h2 class="title">What is Talk-me ?</h2>
+            <h2 class="title">What is Blumin ?</h2>
             <div class="container-about-us">
                 <img src="../assets/ilustration1.png" alt class="image-about-us" />
                 <div class="text-content">
-                    <h3><span>1</span>The best prodcuts</h3>
+                    <h3><span>1</span>The best place where you can test your speaking habilities</h3>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa ut
-                        minima sequi ipsam, sed accusantium quia assumenda fugiat dolorem
-                        repudiandae? Natus, impedit adipisci dolorem ducimus eaque
-                        explicabo consequuntur maxime repellendus.
+                        Blumin is a web application where you can test your "speaking" skills according to the language you are learning.
                     </p>
-                    <h3><span>2</span>The best technology</h3>
+                    <h3><span>2</span>Many sections you can improve your speking skills</h3>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa ut
-                        minima sequi ipsam, sed accusantium quia assumenda fugiat dolorem
-                        repudiandae? Natus, impedit adipisci dolorem ducimus eaque
-                        explicabo consequuntur maxime repellendus.
+                        Blumin offers 4 sections in which you can practice your pronunciation, Russian, English or whatever language you are learning.
+                    </p>
+                    <h3><span>3</span>Record your voice</h3>
+                    <p>
+                        Record your voice to hear your performance.
                     </p>
                 </div>
             </div>
@@ -64,20 +62,21 @@
     </main>
     <footer>
         <div class="container-footer">
-            <div class="content-foo">
+            <!-- <div class="content-foo">
                 <h4>Phone</h4>
                 <p>1234567898</p>
-            </div>
+            </div> -->
             <div class="content-foo">
-                <h4>Email</h4>
-                <p>qwerty@gmail.com</p>
+                <h4>Find me on github</h4>
+                <p>https://github.com/Garavirod/TalkMe</p>
             </div>
-            <div class="content-foo">
+           <!--  <div class="content-foo">
                 <h4>Location</h4>
                 <p>1234567898</p>
-            </div>
+            </div> -->
         </div>
-        <h2 class="final-title">&copy; Garavirod | Rodrigo García</h2>
+        <h2 class="final-title">Sitio desarrollado por: </h2>
+        <h2 class="final-title">&copy; Garavirod |  Rodrigo García Ávila</h2>
     </footer>
 </v-container>
 </template>
@@ -531,11 +530,6 @@ export default {
                 name: "Audio Chat",
                 img: require("../assets/ilustration2.png"),
                 description: "Speak with other person who are learing too",
-            },
-            {
-                name: "Speaking fight",
-                img: require("../assets/ilustration6.png"),
-                description: "Compete with others to find out who has the best pronunciation",
             },
             {
                 name: "Out laud reading",

@@ -228,9 +228,11 @@ export default {
 
     },
     mounted(){
-        this.socket.on("voice-msg", (newMessage)=>{                
-                this.setNewMessage(newMessage.message);                              
-        })
+        if(this.socket !== null){
+            this.socket.on("voice-msg", (newMessage)=>{                
+                    this.setNewMessage(newMessage.message);                              
+            })
+        }
     },
     created(){
         

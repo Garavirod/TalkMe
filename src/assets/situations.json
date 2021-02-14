@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "situation": "Car robbery",
+        "description": "A neighbor is at your door and accuses you of having been an accomplice in the theft of his car, which was yesterday, you have a minute to argue that he is wrong."
+    },
+    {
+        "id": 2,
+        "situation": "Convincing your mom",
+        "description": "Your mother has found out that you failed the school year, she threatened to remove you from school, you have to convince her not to do it."
+    },
+    {
+        "id": 3,
+        "situation": "Study math",
+        "description": "Your best friend has asked you to help him study math, but you want to be alone, try to explain to him that you can't without hurting his feelings."
+    },
+    {
+        "id":4,
+        "situation":"The Intelligen Robot T-222",
+        "description":"You have just invented an intelligent robot (T-222) that helps with housework, you are in front of 6 investors you have to convince them to invest in your project."
+    }
+]

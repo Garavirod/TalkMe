@@ -10,9 +10,11 @@
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-col>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos illum, dignissimos accusantium, quasi alias expedita nulla repellat iure eligendi corrupti aut natus nemo! Quia, modi excepturi! Labore dicta a corporis.</p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi obcaecati animi eos accusamus alias ut, mollitia in ullam nobis sit porro nulla voluptates doloremque dignissimos, molestiae voluptatibus est exercitationem itaque!</p>
+                    <v-col class="text-center">
+                       <p>Welcome to Blumin the application in which you can test your speaking skills about the language you are learning.</p>
+                       <p>
+                        Blumin offers you 4 sections within which you can practice your knowledge about the language you are learning, mainly speaking.</p>
+
                     </v-col>
                 </v-row>
                 <v-row class="text-center">

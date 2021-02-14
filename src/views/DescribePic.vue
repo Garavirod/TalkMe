@@ -93,7 +93,7 @@ export default {
         idxPictArray:0,
         sectionName: "Describing pictures",
         extract: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
-        instructions: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
+        instructions: "In this section you will test your vocabulary, verbs and object description.",
     }),
     computed:{
         validFilterField(){

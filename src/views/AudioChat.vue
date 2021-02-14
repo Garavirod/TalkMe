@@ -137,8 +137,7 @@ export default {
       default:this.userInformation,
       extract:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
-      instructions:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tempora, quia consequatur sequi rem quidem maiores adipisci, quis iusto veniam rerum, placeat dolore delectus earum ratione. Inventore ullam veritatis quae.",
+      instructions:"Audio chat allows you to converse with other people around the world who are learning the same language as you, just select a language from your list of languages and join a room."
     };
   },
   watch:{

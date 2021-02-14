@@ -98,14 +98,7 @@ export default new Vuex.Store({
                 description: 'Speak with other person who are learing too',
                 path: '/audio-chat',
                 component: ''
-            },
-            {
-                name: 'Speaking fight',
-                img: require('../assets/ilustration6.png'),
-                description: 'Compete with others to find out who has the best pronunciation',
-                path: '/speaking-fight',
-                component: ''
-            },
+            },            
             {
                 name: 'Out laud reading',
                 img: require('../assets/ilustration3.png'),

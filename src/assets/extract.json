@@ -1,0 +1,32 @@
+[
+    {
+        "id":1,
+        "title":"The Oblong Box",
+        "author":"Edgar Allan Poe",
+        "text":"For the first three or four days we had fine weather, although the wind was dead ahead; having chopped round to the northward, immediately upon our losing sight of the coast. The passengers were, consequently, in high spirits and disposed to be social. I MUST except, however, Wyatt and his sisters, who behaved stiffly, and, I could not help thinking, uncourteously to the rest of the party. Wyatt's conduct I did not so much regard. He was gloomy, even beyond his usual habit—in fact he was MOROSE—but in him I was prepared for eccentricity. For the sisters, however, I could make no excuse. They secluded themselves in their staterooms during the greater part of the passage, and absolutely refused, although I repeatedly urged them, to hold communication with any person on board."
+    },
+    {
+        "id":2,
+        "title":"A study in scarlet",
+        "author":"Arthur Conan Doyle",
+        "text":"I had neither kith nor kin in England, and was therefore as free as air--or as free as an income of eleven shillings and sixpence a day will permit a man to be. Under such circumstances I naturally gravitated to London, that great cesspool into which all the loungers and idlers of the Empire are irresistibly drained. There I stayed for some time at a private hotel in the Strand, leading a comfortless, meaningless existence, and spending such money as I had, considerably more freely than I ought. So alarming did the state of my finances become, that I soon realized that I must either leave the metropolis and rusticate somewhere in the country, or that I must make a complete alteration in my style of living. Choosing the latter alternative, I began by making up my mind to leave the hotel, and take up my quarters in some less pretentious and less expensive domicile."
+    },
+    {
+        "id":3,
+        "title":"Alice in wonderland",
+        "author":"Lewis Carroll",
+        "text":"Down, down, down. There was nothing else to do, so Alice soon began talking again. `Dinah'll miss me very much to-night, I should think!' (Dinah was the cat.) `I hope they'll remember her saucer of milk at tea-time. Dinah my dear! I wish you were down here with me! There are no mice in the air, I'm afraid, but you might catch a bat, and that's very like a mouse, you know. But do cats eat bats, I wonder?' And here Alice began to get rather sleepy, and went on saying to herself, in a dreamy sort of way, `Do cats eat bats? Do cats eat bats?' and sometimes, `Do bats eat cats?' for, you see, as she couldn't answer either question, it didn't much matter which way she put it. She felt that she was dozing off, and had just begun to dream that she was walking hand in hand with Dinah, and saying to her very earnestly, `Now, Dinah, tell me the truth: did you ever eat a bat?' when suddenly, thump! thump! down she came upon a heap of sticks and dry leaves, and the fall was over."
+    },
+    {
+        "id":4,
+        "title":"For Whom the Bell Tolls",
+        "author":"Ernest Hemingway",
+        "text":"The young man, whose name was Robert Jordan, was extremely hungry and he was worried. He was often hungry but he was not usually worried because he did not give any importance to what happened to himself and he knew from experience how simple it was to move behind the enemy lines in all this country. It was as simple to move behind them as it was to cross through them, if you had a good guide. It was only giving importance to what happened to you if you were caught that made it difficult; that and deciding whom to trust. You had to trust the people you worked with completely or not at all, and you had to make decisions about the trusting. He was not worried about any of that. But there were other things. This Anselmo had been a good guide and he could travel wonderfully in the mountains. Robert Jordan could walk well enough himself and he knew from following him since before daylight that the old man could walk him to death. Robert Jordan trusted the man, Anselmo, so far, in everything except judgment. He had not yet had an opportunity to test his judgment, and, anyway, the judgment was his own responsibility. No, he did not worry about Anselmo and the problem of the bridge was no more difficult than many other problems. He knew how to blow any sort of bridge that you could name and he had blown them of all sizes and constructions. There was enough explosive and all equipment in the two packs to blow this bridge properly even if it were twice as big as Anselmo re¬ported it, as he remembered it when he had walked over it on his way to La Granja on a walking trip in 1933, and as Golz had read him the description of it night before last in that upstairs room in the house outside of the Escorial."
+    },
+    {
+        "id":5,
+        "title":"The Autobiography of Alice B. Toklas",
+        "author":"Gertrude Stein",
+        "text":"I led in my childhood and youth the gently bred existence of my class and kind. I had some intellectual adventures at this period but very quiet ones. When I was about nineteen years of age I was a great admirer of Henry James. I felt that The Awkward Age would make a very remarkable play and I wrote to Henry James suggesting that I dramatise it. I had from him a delightful letter on the subject and then, when I felt my inadequacy, rather blushed for myself and did not keep the letter. Perhaps at that time I did not feel that I was justified in preserving it, at any rate it no longer exists. Up to my twentieth year I was seriously interested in music. I studied and practised assiduously but shortly then it seemed futile, my mother had died and there was no unconquerable sadness, but there was no real interest that led me on. In the story Ada in Geography and Plays Gertrude Stein has given a very good description of me as I was at that time."
+    }
+]
