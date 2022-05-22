@@ -144,7 +144,7 @@ export default new Vuex.Store({
                 state.chosenLanguage = payload.lang;
                 state.isActiveOnChat = true;
             }    
-            console.log('Connected...',state.socket);        
+            //console.log('Connected...',state.socket);        
         },
         socketDisconn(state,isTemporal=false){
             /* Disconnect socket */
@@ -152,12 +152,12 @@ export default new Vuex.Store({
                 state.socket.disconnect();
                 state.socket = null;
                 state.isActiveOnChat = false;
-                console.log("Diconnecting...");
+                //console.log("Diconnecting...");
                 if(isTemporal===false){
                     state.activeUsersOnChat=[];
                     state.wasSearched=false;
                     state.chosenLanguage = "";
-                    console.log('Removing localstorage...');
+                    //console.log('Removing localstorage...');
                     localStorage.removeItem('saved-lang');        
                 }    
             }
@@ -170,12 +170,12 @@ export default new Vuex.Store({
         },
         getCountriesAPI(state){
             /* Get all nationalities from Countries REST */
-            const url = 'https://restcountries.eu/rest/v2/all';
+            const url = 'https://restcountries.com/v3.1/all';
             Axios.get(url)
-            .then(res =>{                             
-                res.data.forEach(el => {
-                    state.countriesList.push(el.name);                    
-                });
+            .then(res =>{   
+                state.countriesList = res.data
+                .map((item) => item.name.common)
+                .sort((a,b) => a.localeCompare(b));                                                      
             })
             .catch(err=>{
               console.log(err);
@@ -279,7 +279,7 @@ export default new Vuex.Store({
                     headers:{'blumin-tkn': token}
                 });
                 if (data){
-                    console.log(data.data.inbox);
+                    //console.log(data.data.inbox);
                     commit('setInboxHistory',data.data.inbox);                    
                     commit('setIsLoadingChatBox',false);//messages were loaded                    
                 }
@@ -294,7 +294,7 @@ export default new Vuex.Store({
                 const users = data.filter((user) => user.uid !== uid);
                 commit('setUsersActivesOnChat',users);
                 commit('setProgressValue',false);    
-                console.log('getting users on room!', state.activeUsersOnChat);            
+                //console.log('getting users on room!', state.activeUsersOnChat);            
 
             });
         },    

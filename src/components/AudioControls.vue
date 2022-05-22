@@ -227,10 +227,12 @@ export default {
         }
 
     },
-    mounted(){
-        this.socket.on("voice-msg", (newMessage)=>{                
-                this.setNewMessage(newMessage.message);                              
-        })
+    mounted(){       
+        if(this.$route.name === 'AudioChat'){            
+            this.socket.on("voice-msg", (newMessage)=>{                
+                    this.setNewMessage(newMessage.message);                              
+            })
+        }
     },
     created(){
         

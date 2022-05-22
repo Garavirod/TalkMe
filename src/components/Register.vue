@@ -64,8 +64,7 @@
                   menu-props="auto"
                   label="Nacionality"
                   hide-details
-                  prepend-icon="mdi-map"
-                  single-line
+                  prepend-icon="mdi-map"                  
                 ></v-select>
               </v-col>
               <!--Languages list-->

@@ -3,7 +3,7 @@
     <header id="header-index">
         <section class="textos-header">
             <h1>Improve your english speaking skills</h1>
-            <h2>With a powerfull web applicaction</h2>
+            <h2>With <strong>blumin</strong> the best site to practice.</h2>
         </section>
         <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#ffff" fill-opacity="1" d="M0,96L60,128C120,160,240,224,360,213.3C480,203,600,117,720,112C840,107,960,181,1080,202.7C1200,224,1320,192,1380,176L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" />

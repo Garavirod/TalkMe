@@ -143,14 +143,14 @@ export default {
   watch:{
     mainTab:function(){
       if(this.mainTab === "tab-1"){
-        console.log("Cambie a 1");
+        //console.log("Cambie a 1");
         const lang = localStorage.getItem("saved-lang") || null;
         if(lang !== null){
-          console.log("there is a language saved!");
+          //console.log("there is a language saved!");
           this.savedLanguageRoom(lang);
         }
       }else if(this.mainTab === "tab-2"){
-        console.log("Cambie a 2");
+        //console.log("Cambie a 2");
         this.getInboxUser();
       }
     }

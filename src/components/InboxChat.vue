@@ -48,15 +48,15 @@ export default {
       this.setStatusChatBoxVisible(true); //open box mexases
       await this.loadMessagesOnBox(user); // Load messages on box 
       if (this.socket === null) {
-        console.log("There wasn't connection, connecting....");
+        //console.log("There wasn't connection, connecting....");
         this.setWasSearched(true);
         this.setSocketConnection({lang:user.language, isTemporal:false});
       }else{        
-        console.log("connection already exist...",this.socket);
+        //console.log("connection already exist...",this.socket);
         if(user.language !== this.chosenLanguage){
           this.socketDisconn(true); //don' remove prev lang from storage
           this.setSocketConnection({lang:user.language, isTemporal:true});          
-          console.log("this is your temp socket ",this.socket);
+          //console.log("this is your temp socket ",this.socket);
         }
       }
     },
